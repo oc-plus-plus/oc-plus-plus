@@ -472,13 +472,13 @@ class Security extends \Opencart\System\Engine\Controller {
 				foreach ($lines as $line_id => $line) {
 					$status = true;
 
-					if (strpos($line, 'define(\'HTTP_SERVER') !== false) {
+					if (str_contains($line, 'define(\'HTTP_SERVER')) {
 						$output .= 'define(\'HTTP_SERVER\', \'' . substr(HTTP_SERVER, 0, strrpos(HTTP_SERVER, '/admin/')) . '/' . $name . '/\');' . "\n";
 
 						$status = false;
 					}
 
-					if (strpos($line, 'define(\'DIR_APPLICATION') !== false) {
+					if (str_contains($line, 'define(\'DIR_APPLICATION')) {
 						$output .= 'define(\'DIR_APPLICATION\', DIR_OPENCART . \'' . $name . '/\');' . "\n";
 
 						$status = false;
