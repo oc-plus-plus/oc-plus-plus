@@ -1,0 +1,15 @@
+{
+  "name": "batumibiz/oc4",
+  "description": "OpenCart",
+  "type": "project",
+  "license": "GPL-3.0-or-later",
+  "config": {
+    "vendor-dir": "www/system/storage/vendor/"
+  },
+  "require": {
+    "php": ">=8.0.2",
+    "aws/aws-sdk-php": "^3.336.13",
+    "scssphp/scssphp": "^1.10.0",
+    "twig/twig": "^3.18.0"
+  }
+}
