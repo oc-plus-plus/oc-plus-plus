@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - [#14746](https://github.com/opencart/opencart/issues/14746) Various bugs with sku, upc, ean, jan, isbn, mpn.
 - [#15185](https://github.com/opencart/opencart/pull/15185) Fix viewing embedded Youtube video.
 - [#14740](https://github.com/opencart/opencart/pull/14740) Renamed total function as they had an incorrect name.
+- [#14736](https://github.com/opencart/opencart/pull/14736) Fix disabled products design same as other table lists.
 
 ### Security
 - Nothing
