@@ -13,8 +13,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
   introduced a custom oc_glob() helper function to emulate native glob functionality.
 
 ### Changed
-- Refactored the codebase to replace all glob() calls using the GLOB_BRACE flag with oc_glob() emulator to ensure compatibility with Alpine Linux and other musl-based environments where GLOB_BRACE is unavailable.
+- Refactored the codebase to replace all `glob()` calls using the `GLOB_BRACE` flag with `oc_glob()` emulator to ensure compatibility with Alpine Linux and other musl-based environments where `GLOB_BRACE` is unavailable.
 - [0a8b25a](https://github.com/opencart/opencart/commit/0a8b25aaedae97e1b21784263527941448724693) - Added some additional form text.
+- [8996eb3](https://github.com/opencart/opencart/commit/8996eb371620c3c7a453872d39a3a815562690f3) - Improved `admin/controller/marketplace/installer.php`.
 
 ### Deprecated
 - Nothing
@@ -28,8 +29,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - [#14740](https://github.com/opencart/opencart/pull/14740) - Renamed total function as they had an incorrect name.
 - [#14736](https://github.com/opencart/opencart/pull/14736) - Fix disabled products design same as other table lists.
 - [#14739](https://github.com/opencart/opencart/issues/14739) - After creating multiple folders, the root directory images are not displayed.
-- [#14744](https://github.com/opencart/opencart/issues/14744) - BUG in product settlement
-- [#14731](https://github.com/opencart/opencart/issues/14731) - In additional Stores Cookie Policy is not selectable
+- [#14744](https://github.com/opencart/opencart/issues/14744) - BUG in product settlement.
+- [#14731](https://github.com/opencart/opencart/issues/14731) - In additional Stores Cookie Policy is not selectable.
 
 ### Security
 - Nothing
