@@ -29,6 +29,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - [#14736](https://github.com/opencart/opencart/pull/14736) - Fix disabled products design same as other table lists.
 - [#14739](https://github.com/opencart/opencart/issues/14739) - After creating multiple folders, the root directory images are not displayed.
 - [#14744](https://github.com/opencart/opencart/issues/14744) - BUG in product settlement
+- [#14731](https://github.com/opencart/opencart/issues/14731) - In additional Stores Cookie Policy is not selectable
 
 ### Security
 - Nothing
