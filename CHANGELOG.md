@@ -39,8 +39,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - [#14878](https://github.com/opencart/opencart/issues/14878) - Wrong column used in topic layout methods (`article_id` instead of `topic_id`)
 - Fix deprecation warning on PHP 8.4.
 - [#14867](https://github.com/opencart/opencart/pull/14867) - Fix autoloader: one namespace can contain classes from different folders.
-- [#14882](https://github.com/opencart/opencart/issues/14882) - Undefined array key "payment_zones"
-
+- [#14882](https://github.com/opencart/opencart/issues/14882) - Undefined array key "payment_zones".
+- [#14759](https://github.com/opencart/opencart/pull/14759) - Checkout cart page lists wrong item totals.
 
 ### Security
 - Nothing
