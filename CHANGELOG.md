@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - [#14753](https://github.com/opencart/opencart/pull/14753) - Retrieve more in depth files from extension directory for permission.
 - [062ba0e](https://github.com/opencart/opencart/commit/062ba0ee243cc707b51b95e56b69b7f07cda5f7f), [85e8ddb](https://github.com/opencart/opencart/commit/85e8ddb82916cc48a4dcb30fcfcd4a1a9ea9add0) - `partially used` - Updated language methods.
 - [#14790](https://github.com/opencart/opencart/pull/14790) - Updated `catalog/language/en-gb/default.php`, added `text_all`.
+- [#14820](https://github.com/opencart/opencart/pull/14820) - Event list: always allow for viewing event details.
 
 ### Removed
 - `aws/aws-sdk-php` package as unused.
