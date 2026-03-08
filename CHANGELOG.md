@@ -5,6 +5,10 @@ Detailed changes can see in the [repository log].
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+### Note regarding sources
+Entries accompanied by a reference link indicate code borrowed or adapted from external sources.  
+Entries without a reference link were developed exclusively within the [batumibiz/oc4](https://github.com/batumibiz/oc4) repository.
+
 
 ## [Unreleased]
 
@@ -42,6 +46,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - [#14867](https://github.com/opencart/opencart/pull/14867) - Fix autoloader: one namespace can contain classes from different folders.
 - [#14882](https://github.com/opencart/opencart/issues/14882) - Undefined array key "payment_zones".
 - [#14759](https://github.com/opencart/opencart/pull/14759) - Checkout cart page lists wrong item totals.
+- [#14843](https://github.com/opencart/opencart/pull/14843) - Fix autoloader in storeInstance to ensure proper class loading.
 
 ### Security
 - Nothing
