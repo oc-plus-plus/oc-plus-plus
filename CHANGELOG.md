@@ -15,6 +15,7 @@ Entries without a reference link were developed exclusively within the [batumibi
 ### Added
 - Emulation of `GLOB_BRACE` for Alpine/musl environments:  
   introduced a custom `oc_glob()` helper function to emulate native glob functionality.
+- [#14857](https://github.com/opencart/opencart/pull/14857), [#14858](https://github.com/opencart/opencart/pull/14858), [#14859](https://github.com/opencart/opencart/pull/14859) - Add manufacturer filter
 
 ### Changed
 - Updated dependencies.
