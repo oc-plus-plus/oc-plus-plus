@@ -27,6 +27,7 @@ Entries without a reference link were developed exclusively within the [batumibi
 - [#14790](https://github.com/opencart/opencart/pull/14790) - Updated `catalog/language/en-gb/default.php`, added `text_all`.
 - [#14820](https://github.com/opencart/opencart/pull/14820) - Event list: always allow for viewing event details.
 - [#14818](https://github.com/opencart/opencart/pull/14818) - Safest one just in case the product options are empty.
+- [#14780](https://github.com/opencart/opencart/pull/14780) - Admin Filter Improvements
 
 ### Removed
 - `aws/aws-sdk-php` package as unused.
@@ -53,7 +54,7 @@ Entries without a reference link were developed exclusively within the [batumibi
 - [#14438](https://github.com/opencart/opencart/issues/14438) - WYSIWYG misconfiguration in ADMIN page for product edit.
 - [#14758](https://github.com/opencart/opencart/issues/14758) - Unnecessary parameter
 - [#14756](https://github.com/opencart/opencart/pull/14756) - Order files are not displaying in the admin order details page.
-- [#14764](https://github.com/opencart/opencart/issues/14764) - Admin login as customer not working
+- [#14764](https://github.com/opencart/opencart/issues/14764) - Admin login as customer not working.
 
 ### Security
 - Nothing
