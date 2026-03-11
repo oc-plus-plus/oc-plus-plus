@@ -61,8 +61,9 @@ Entries without a reference link were developed exclusively within the [batumibi
 - [#14756](https://github.com/opencart/opencart/pull/14756) - Order files are not displaying in the admin order details page.
 - [#14764](https://github.com/opencart/opencart/issues/14764) - Admin login as customer not working.
 - [#14886](https://github.com/opencart/opencart/pull/14886) - Fix Admin Filter Submit logout.
-- [#14895](https://github.com/opencart/opencart/issues/14895) - Should use array_merge
-- [#forum](https://forum.opencart.com/viewtopic.php?t=235946#p880856) - Error when deleting a product from Wishlist
+- [#14895](https://github.com/opencart/opencart/issues/14895) - Should use array_merge.
+- [#forum](https://forum.opencart.com/viewtopic.php?t=235946#p880856) - Error when deleting a product from Wishlist.
+- [#14845](https://github.com/opencart/opencart/issues/14845) - Missing language definition in `account/forgotten.php`.
 
 ### Security
 - Nothing
