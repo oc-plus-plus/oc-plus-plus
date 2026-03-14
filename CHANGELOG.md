@@ -65,7 +65,6 @@ Entries without a reference link were developed exclusively within the [batumibi
 - [#forum](https://forum.opencart.com/viewtopic.php?t=235946#p880856) - Error when deleting a product from Wishlist.
 - [#14845](https://github.com/opencart/opencart/issues/14845) - Missing language definition in `account/forgotten.php`.
 - [#14887](https://github.com/opencart/opencart/issues/14887) - `Product::addReport()`: Argument #1 must be of type `int`, `string` given.
-- [#14852](https://github.com/opencart/opencart/issues/14852) - Wrong language in the URL should redirect to default language.
 - [#14755](https://github.com/opencart/opencart/issues/14755) - Wrong total on cart page
 - [#14903](https://github.com/opencart/opencart/pull/14903) - Fixed `getTotals()`.
 - [#14803](https://github.com/opencart/opencart/issues/14803) - Admin order notes are visible to the customer
