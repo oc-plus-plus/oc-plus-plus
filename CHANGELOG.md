@@ -67,6 +67,7 @@ Entries without a reference link were developed exclusively within the [batumibi
 - [#14887](https://github.com/opencart/opencart/issues/14887) - `Product::addReport()`: Argument #1 must be of type `int`, `string` given.
 - [#14852](https://github.com/opencart/opencart/issues/14852) - Wrong language in the URL should redirect to default language.
 - [#14755](https://github.com/opencart/opencart/issues/14755) - Wrong total on cart page
+- [#14903](https://github.com/opencart/opencart/pull/14903) - Fixed `getTotals()`.
 
 ### Security
 - Nothing
