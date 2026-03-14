@@ -64,6 +64,7 @@ Entries without a reference link were developed exclusively within the [batumibi
 - [#14895](https://github.com/opencart/opencart/issues/14895) - Should use array_merge.
 - [#forum](https://forum.opencart.com/viewtopic.php?t=235946#p880856) - Error when deleting a product from Wishlist.
 - [#14845](https://github.com/opencart/opencart/issues/14845) - Missing language definition in `account/forgotten.php`.
+- [#14887](https://github.com/opencart/opencart/issues/14887) - `Product::addReport()`: Argument #1 must be of type `int`, `string` given
 
 ### Security
 - Nothing
