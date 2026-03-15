@@ -31,6 +31,68 @@ All code changes in this project originate from the official [OpenCart 4.1.0.3] 
 - Other temporary branches may be created as needed for specific tasks or features.
 
 
+## Local Development with Docker
+
+> [!IMPORTANT]
+>
+> **For Windows Users:**
+> It is **strongly recommended** to use the WSL 2 (Windows Subsystem for Linux) backend for Docker Desktop.
+> **You should clone this project _inside_ your WSL distribution (e.g., Ubuntu 24.04) for best performance.**
+> Access your project via `\\wsl$\Ubuntu-24.04\home\youruser\opencart` from Windows Explorer if needed.
+> Without WSL 2, file system performance will be extremely slow, making the application nearly unusable.
+> Docker Desktop will typically prompt you to enable WSL 2 during installation.
+
+### Using Make
+- Start all services
+    ```bash
+    make up
+    ```
+- Stop all services
+    ```bash
+    make down
+    ```
+- Dump database: the dump will be saved to `.docker/db-import/dump.sql`
+    ```bash
+    make db-dump
+    ```
+- Restore a saved database dump
+    ```bash
+    make db-restore
+    ```
+
+### Or using Docker CLI
+- Start all services
+    ```bash
+    docker-compose up -d
+    ```
+
+### Docker Environment
+
+The project environment will be available at the +following addresses:
+- **Storefront**: https://localhost
+- **Administration**: https://localhost/admin
+  - Login: `admin`
+  - Password: `admin`
+- **Mailpit** (Email Testing): http://localhost:8025
+- **Logs**: all service logs (Web server, PHP, etc.) are accessible in the `.docker/log` directory for easy debugging.
+
+> [!NOTE]
+>
+> **No Installation Required**. Once the Docker services are up and running, you get a fully functional OpenCart instance immediately.
+
+#### Important: SSL Configuration
+The project is configured to use **SSL (HTTPS)** by default. To prevent browser connection errors, please choose one of the following options:
+- **Install CA Certificate**: Import the CA certificate located at `.docker/web/ssl/ca.crt` into your operating system's trusted store.
+- **Or use Custom Certificates**: Replace the existing `.docker/web/ssl/localhost.crt` and `.docker/web/ssl/localhost.key` with your own generated certificates for localhost.
+
+#### Disabling SSL:
+If you prefer to use standard HTTP, you can disable SSL by modifying the following configuration files:
+- `www/config.php`: change `https` to `http` on line 6.
+- `www/admin/config.php`: change `https` to `http` on lines 6 and 7.
+
+After these changes, the store will be accessible via http://localhost.
+
+
 ## Credits & Sources
 To ensure transparency and acknowledge the work of the community, direct links to original sources or discussions
 are provided in the [CHANGELOG](https://github.com/batumibiz/oc4/blob/main/CHANGELOG.md) for any borrowed or ported code.
