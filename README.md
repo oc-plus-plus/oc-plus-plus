@@ -1,5 +1,6 @@
 # OpenCart 4.1.0.3++
-This project is a collection of improvements and fixes for [OpenCart 4.1.0.3].
+This project is a collection of improvements and fixes for [OpenCart 4.1.0.3].  
+The [CHANGELOG.md](https://github.com/batumibiz/oc4/blob/main/CHANGELOG.md) file contains a comprehensive list of all modifications, including direct links to original sources, pull requests, and issue reports.
 
 ### Why this repository exists
 To provide a stable, production-ready environment by backporting essential fixes while strictly avoiding the breaking changes found in the official development branches.
@@ -68,7 +69,7 @@ All code changes in this project originate from the official [OpenCart 4.1.0.3] 
 
 ### Docker Environment
 
-The project environment will be available at the +following addresses:
+The project environment will be available at the following addresses:
 - **Storefront**: https://localhost
   - Login: `user@example.com`
   - Password: `testuser`
@@ -88,13 +89,38 @@ The project is configured to use **SSL (HTTPS)** by default. To prevent browser 
 - **Install CA Certificate**: Import the CA certificate located at `.docker/web/ssl/ca.crt` into your operating system's trusted store.
 - **Or use Custom Certificates**: Replace the existing `.docker/web/ssl/localhost.crt` and `.docker/web/ssl/localhost.key` with your own generated certificates for `localhost`.
 
-### Disabling SSL:
+### Disabling SSL
 If you prefer to use standard HTTP, you can disable SSL by modifying the following configuration files:
 - `www/config.php`: change `https` to `http` on line 6.
 - `www/admin/config.php`: change `https` to `http` on lines 6 and 7.
 
-After these changes, the store will be accessible via http://localhost.
+After these changes, the store will be accessible via http://localhost
 
+### Profiling with XDebug
+You can perform detailed profiling using XDebug to analyze the performance of all subsystems and identify bottlenecks. To enable this, follow these steps:
+
+#### Preparation:
+1. **Enable XDebug Settings**: uncomment lines 2-6 in the configuration file `.docker/web/config/xdebug.ini`.
+2. **Rebuild Containers**: run the following command:
+   ```bash
+   make down && make build && make up
+   ```
+3. **Browser Extension**: you will need a browser extension to trigger profiling (e.g., [Xdebug Helper](https://chromewebstore.google.com/detail/xdebug-helper-by-jetbrain/aoelhdemabeimdhedkidlnbkfhnhgnhm) or similar).
+4. L**og Location**: detailed profiling logs will be saved in the `.docker/log/xdebug` folder
+5. **Analysis Tools**: To analyze the generated logs, use specialized software such as:  
+   [PhpStorm](https://www.jetbrains.com/phpstorm/), [PHP Profiler for VS Code](https://marketplace.visualstudio.com/items?itemName=DEVSENSE.profiler-php-vscode), [KCachegrind](https://kcachegrind.github.io/html/Home.html), [WinCacheGrind](https://sourceforge.net/projects/wincachegrind/), or similar tools.
+
+#### Step-by-Step Example
+Assuming the preparation steps above are completed...
+1. Open the desired page in your browser (e.g., Homepage: https://localhost).
+2. Refresh the page 2–3 times to "warm up" the cache.
+3. In your **Xdebug Helper** extension, select the "Profile" mode.
+4. **Profiling**: refresh the page **only once**.
+5. In the extension, switch back to "Disable".
+6. The detailed profiling log will be available at:  
+   `.docker/log/xdebug/cachegrind.out.XX.gz`
+
+You can now open this file in your preferred analysis tool to inspect the performance data.
 
 ## Credits & Sources
 To ensure transparency and acknowledge the work of the community, direct links to original sources or discussions
