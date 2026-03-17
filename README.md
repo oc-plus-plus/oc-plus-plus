@@ -84,6 +84,13 @@ The project environment will be available at the following addresses:
 > **No Installation Required**  
 > Once the Docker services are up and running, you get a fully functional OpenCart instance immediately.
 
+> [!IMPORTANT]
+>
+> **Environment Compatibility**  
+> The main Docker container is based on Alpine Linux.
+> Please note that GLOB_BRACE is not supported in the Alpine/musl environment.
+> Avoid using this flag in your extensions. As a built-in workaround, you can use the oc_glob() emulator provided in this repository.
+
 ### Important: SSL Configuration
 The project is configured to use **SSL (HTTPS)** by default. To prevent browser connection errors, please choose one of the following options:
 - **Install CA Certificate**: Import the CA certificate located at `.docker/web/ssl/ca.crt` into your operating system's trusted store.
