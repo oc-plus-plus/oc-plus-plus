@@ -1,6 +1,6 @@
 # OpenCart 4.1.0.3++
 This project is a collection of improvements and fixes for [OpenCart 4.1.0.3].  
-The [CHANGELOG.md](https://github.com/batumibiz/oc4/blob/main/CHANGELOG.md) file contains a comprehensive list of all modifications, including direct links to original sources, pull requests, and issue reports.
+The [CHANGELOG] file contains a comprehensive list of all modifications, including direct links to original sources, pull requests, and issue reports.
 
 ### Why this repository exists
 To provide a stable, production-ready environment by backporting essential fixes while strictly avoiding the breaking changes found in the official development branches.
@@ -131,13 +131,13 @@ You can now open this file in your preferred analysis tool to inspect the perfor
 
 ## Credits & Sources
 To ensure transparency and acknowledge the work of the community, direct links to original sources or discussions
-are provided in the [CHANGELOG](https://github.com/batumibiz/oc4/blob/main/CHANGELOG.md) for any borrowed or ported code.
+are provided in the [CHANGELOG] for any borrowed or ported code.
 
 Modifications without a specific link were developed within this repository.
 
 
 ## License
-GNU General Public License version 3 ([GPLv3](https://github.com/batumibiz/oc4/blob/main/LICENSE))
+[GNU General Public License v.3]
 
 
 ## Links
@@ -148,3 +148,5 @@ GNU General Public License version 3 ([GPLv3](https://github.com/batumibiz/oc4/b
 
 
 [OpenCart 4.1.0.3]: https://github.com/opencart/opencart/releases/tag/4.1.0.3
+[CHANGELOG]: https://github.com/opencart-lts/oc4/blob/main/CHANGELOG.md
+[GNU General Public License v.3]: https://github.com/opencart-lts/oc4/blob/main/LICENSE
