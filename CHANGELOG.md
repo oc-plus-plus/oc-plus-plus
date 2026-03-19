@@ -68,6 +68,7 @@ Entries without a reference link were developed exclusively within the [batumibi
 - [#14755](https://github.com/opencart/opencart/issues/14755) - Wrong total on cart page
 - [#14903](https://github.com/opencart/opencart/pull/14903) - Fixed `getTotals()`.
 - [#14803](https://github.com/opencart/opencart/issues/14803) - Admin order notes are visible to the customer
+- The zone name was not displayed in the list
 
 ### Security
 - Nothing
