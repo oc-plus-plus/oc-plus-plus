@@ -1,4 +1,10 @@
 # OpenCart 4.1.0.3++
+
+> [!IMPORTANT]
+> **Integration in Progress:** The verified fixes from this repository are currently being merged into the official OpenCart **4.x.x.x** branch.
+> You can track the progress in the [PR #15315](https://github.com/opencart/opencart/pull/15315)
+
+
 This project is a collection of improvements and fixes for [OpenCart 4.1.0.3].  
 The [CHANGELOG] file contains a comprehensive list of all modifications, including direct links to original sources, pull requests, and issue reports.
 
