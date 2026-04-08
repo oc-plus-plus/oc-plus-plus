@@ -79,6 +79,7 @@ Entries without a reference link were developed exclusively within the [batumibi
 - Error: Opencart\Admin\Model\Catalog\Product::getDiscounts(): Argument #1 ($product_id) must be of type int
 - [#15319](https://github.com/opencart/opencart/issues/15319) - getReviewsByProductId(): Argument 2 ($start) must be of type int
 - Error: Invalid session ID
+- Undefined variable `$price_status` in `catalog/controller/api/cart.php`.
 
 ### Security
 - Nothing
