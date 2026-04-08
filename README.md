@@ -22,22 +22,6 @@ The OpenCart 4.1.0.3++ designation signifies that this repository is a "plus-plu
 This ensures a robust, production-ready core that remains a drop-in replacement for any 4.1.0.3-compatible environment.
 
 
-## Versioning & Branching Strategy
-To maintain clarity and project stability, OpenCart 4.1.0.3++ follows an absolute versioning system ($v1$, $v2$, etc.).
-All code changes in this project originate from the official [OpenCart 4.1.0.3] release.
-
-### Branch Workflow:
-- `release` (Stable): contains production-ready, stable code.
-    Release tags are applied here, making it easy to track changes and diffs between project versions.
-- `main` (Development): The primary branch where verified improvements and fixes are accumulated.
-  While generally stable, this branch may contain bugs that require further refinement.
-  **Core functionality must remain operational at all times**.
-- `develop` (Feature/Testing): A temporary branch for unverified or experimental code.
-  General stability is not guaranteed. Once the code is stabilized, it is moved to `main` via **squash merge**,
-  and the `develop` branch is deleted.
-- Other temporary branches may be created as needed for specific tasks or features.
-
-
 ## Local Development with Docker
 
 > [!IMPORTANT]
@@ -133,6 +117,22 @@ Assuming the preparation steps above are completed...
    `.docker/log/xdebug/cachegrind.out.XX.gz`
 
 You can now open this file in your preferred analysis tool to inspect the performance data.
+
+### Static Analysis
+To maintain high code quality and prevent hidden regressions, we use PHPStan.
+It is highly recommended to run this check before submitting any changes.
+
+#### Prerequisites:
+- PHP 8.4
+- Composer
+
+#### Run the analysis
+Simply execute the following command in your terminal:
+   ```bash
+   composer static-analysis
+   ```
+Note: You can also run it directly using `php tools/phpstan.phar` if needed.
+
 
 ## Credits & Sources
 To ensure transparency and acknowledge the work of the community, direct links to original sources or discussions
