@@ -123,8 +123,8 @@ To maintain high code quality and prevent hidden regressions, we use PHPStan.
 It is highly recommended to run this check before submitting any changes.
 
 #### Prerequisites:
-- PHP 8.4
-- Composer
+- PHP 8.4 (default, but versions 8.1 – 8.4 are supported)
+- Composer (optional)
 
 #### Run the analysis
 Simply execute the following command in your terminal:
