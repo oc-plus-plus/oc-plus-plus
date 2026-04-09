@@ -13,6 +13,5 @@ parameters:
         - ./www/system/storage/cache/
     tmpDir: .cache
     ignoreErrors:
-        - '# always exists and is not #'
         - '#^Constant [A-Z_]+ not found\.$#'
         - '#^Variable \$\S+ might not be defined\.$#'
