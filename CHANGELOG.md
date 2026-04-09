@@ -33,12 +33,14 @@ Entries without a reference link were developed exclusively within the [batumibi
 - Improved Category and Product search for the Admin panel.
 - Reduced the size of the "Delete" buttons on the 'Links' tab of the product form.
 - Updated dependencies.
-- Improved cache cleanup
 - Improved session handler
+- Improved cache cleanup
+- Improved .css refresh
 
 ### Removed
 - [d342547](https://github.com/opencart/opencart/commit/d34254714d6d08995851f8fec2ea58987ff2e0ae) - `upload/system/helper/filter.php` as unused.
 - `aws/aws-sdk-php` package as unused.
+- `bootstrap-icons` as unused.
 
 ### Fixed
 - [#14438](https://github.com/opencart/opencart/issues/14438) - WYSIWYG misconfiguration in ADMIN page for product edit.
