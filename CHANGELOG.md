@@ -33,10 +33,12 @@ Entries without a reference link were developed exclusively within the [batumibi
 - Refactored the codebase to replace all `glob()` calls using the `GLOB_BRACE` flag with `oc_glob()` emulator to ensure compatibility with Alpine Linux and other musl-based environments where `GLOB_BRACE` is unavailable.
 - Improved Category and Product search for the Admin panel.
 - Reduced the size of the "Delete" buttons on the 'Links' tab of the product form.
-- Updated dependencies.
+- `scssphp/scssphp` package updated to version `2.1`
+- `twig/twig` package updated to version `3.24`
 - Improved session handler
 - Improved cache cleanup
 - Improved .css refresh
+
 
 ### Removed
 - [d342547](https://github.com/opencart/opencart/commit/d34254714d6d08995851f8fec2ea58987ff2e0ae) - `upload/system/helper/filter.php` as unused.
