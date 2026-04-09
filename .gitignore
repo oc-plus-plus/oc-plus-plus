@@ -20,7 +20,8 @@
 !/www/system/storage/upload/index.html
 
 # CSS Files
-/www/catalog/view/stylesheet/stylesheet.css
+/www/admin/view/stylesheet/*.css
+/www/catalog/view/stylesheet/*.css
 
 # Docker files
 /.docker/log/apache/*
