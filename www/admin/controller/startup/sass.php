@@ -14,33 +14,33 @@ class Sass extends \Opencart\System\Engine\Controller {
 	 * @return void
 	 */
 	public function index(): void {
-		$files = glob(DIR_APPLICATION . 'view/stylesheet/*.scss');
+		$path = DIR_APPLICATION . 'view/stylesheet/';
+        $files = glob($path . '*.scss');
 
 		if ($files) {
 			foreach ($files as $file) {
-				// Get the filename
-				$filename = basename($file, '.scss');
+				$basename = basename($file, '.scss');
+				$stylesheet = $path . $basename . '.css';
+				$stylesheetMin = $path . $basename . '.min.css';
 
-				$stylesheet = DIR_APPLICATION . 'view/stylesheet/' . $filename . '.css';
-
+                // Compiling a regular .css file
 				if (!is_file($stylesheet) || !$this->config->get('developer_sass')) {
 					$scss = new \ScssPhp\ScssPhp\Compiler();
-					$scss->setImportPaths(DIR_APPLICATION . 'view/stylesheet/');
+					$scss->setImportPaths($path);
 
-					$output = $scss->compileString('@import "' . $filename . '.scss"')->getCss();
-
-					$handle = fopen($stylesheet, 'w');
-
-					flock($handle, LOCK_EX);
-
-					fwrite($handle, $output);
-
-					fflush($handle);
-
-					flock($handle, LOCK_UN);
-
-					fclose($handle);
+					$output = $scss->compileString('@import "' . $basename . '.scss"')->getCss();
+                    file_put_contents($stylesheet, $output, LOCK_EX);
 				}
+
+                // Compiling the minified .min.css file
+                if (!is_file($stylesheetMin) || !$this->config->get('developer_sass')) {
+                    $scss = new \ScssPhp\ScssPhp\Compiler();
+                    $scss->setImportPaths($path);
+                    $scss->setOutputStyle(\ScssPhp\ScssPhp\OutputStyle::COMPRESSED);
+
+                    $output = $scss->compileString('@import "' . $basename . '.scss"')->getCss();
+                    file_put_contents($stylesheetMin, $output, LOCK_EX);
+                }
 			}
 		}
 	}
