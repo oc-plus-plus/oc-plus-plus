@@ -17,6 +17,7 @@
     "docs": "http://docs.opencart.com/"
   },
   "config": {
+    "optimize-autoloader": true,
     "vendor-dir": "www/system/storage/vendor/"
   },
   "require": {
