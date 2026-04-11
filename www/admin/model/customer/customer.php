@@ -1472,9 +1472,7 @@ class Customer extends \Opencart\System\Engine\Model {
 		}
 	}
 
-	/*
-	 * Add Token
-	 */
+	// Add Token
 	public function addToken(int $customer_id, string $type, string $code): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_token` WHERE `customer_id` = '" . (int)$customer_id . "' AND `type` = '" . $this->db->escape($type) . "'");
 

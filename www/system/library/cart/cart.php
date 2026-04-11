@@ -90,10 +90,9 @@ class Cart {
 
 					$option_data = [];
 
-					$product_options = (array) json_decode(!empty($cart['option']) ? $cart['option'] : '{}', true);
+					$product_options = (array)json_decode(!empty($cart['option']) ? $cart['option'] : '{}', true);
 
 					$variant = json_decode(!empty($product_query->row['variant']) ? $product_query->row['variant'] : '{}', true);
-
 
 					if ($variant) {
 						foreach ($variant as $key => $value) {

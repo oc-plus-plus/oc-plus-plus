@@ -70,9 +70,9 @@ class WishList extends \Opencart\System\Engine\Controller {
 		$this->load->language('account/wishlist');
 
 		if (!$this->load->controller('account/login.validate')) {
-            $token = isset($this->session->data['customer_token']) ? '&customer_token=' . $this->session->data['customer_token'] : '';
+			$token = isset($this->session->data['customer_token']) ? '&customer_token=' . $this->session->data['customer_token'] : '';
 
-            $this->session->data['redirect'] = $this->url->link('account/wishlist', 'language=' . $this->config->get('config_language') . $token);
+			$this->session->data['redirect'] = $this->url->link('account/wishlist', 'language=' . $this->config->get('config_language') . $token);
 		}
 
 		$this->response->setOutput($this->getList());
@@ -241,7 +241,7 @@ class WishList extends \Opencart\System\Engine\Controller {
 
 			$json['success'] = $this->language->get('text_remove');
 		}
-        $json['customer_token'] = $this->session->data['customer_token'];
+		$json['customer_token'] = $this->session->data['customer_token'];
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}

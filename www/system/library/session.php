@@ -66,10 +66,10 @@ class Session {
 		if (!$session_id || !preg_match('/^[a-zA-Z0-9,\-]{22,52}$/', $session_id)) {
 			$session_id = substr(bin2hex(openssl_random_pseudo_bytes(26)), 0, 26);
 		} else {
-            $this->data = $this->adaptor->read($session_id);
-        }
+			$this->data = $this->adaptor->read($session_id);
+		}
 
-        $this->session_id = $session_id;
+		$this->session_id = $session_id;
 
 		return $session_id;
 	}

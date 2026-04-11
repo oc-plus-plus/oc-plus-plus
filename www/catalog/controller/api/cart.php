@@ -279,12 +279,12 @@ class Cart extends \Opencart\System\Engine\Controller {
 		// Cart
 		$this->load->model('checkout/cart');
 
-        // Display prices
-        if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-            $price_status = true;
-        } else {
-            $price_status = false;
-        }
+		// Display prices
+		if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
+			$price_status = true;
+		} else {
+			$price_status = false;
+		}
 
 		$products = $this->model_checkout_cart->getProducts();
 
