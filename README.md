@@ -1,6 +1,7 @@
 # OpenCart ++
 
 [![GitHub](https://img.shields.io/github/license/batumibiz/oc4?color=green)](https://github.com/batumibiz/oc4/blob/main/LICENSE)
+[![coding standards](https://github.com/batumibiz/oc4/actions/workflows/coding-standards.yml/badge.svg)](https://github.com/batumibiz/oc4/actions/workflows/coding-standards.yml)
 [![static analysis](https://github.com/batumibiz/oc4/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/batumibiz/oc4/actions/workflows/static-analysis.yml)
 
 This project is a collection of improvements and fixes for [OpenCart 4.1.0.3].  
