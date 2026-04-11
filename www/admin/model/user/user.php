@@ -92,7 +92,7 @@ class User extends \Opencart\System\Engine\Model {
 	 * $this->model_user_user->editPassword($user_id, $password);
 	 */
 	public function editPassword(int $user_id, $password): void {
-		$this->db->query("UPDATE `" . DB_PREFIX . "user` SET `password` = '" . $this->db->escape(password_hash(html_entity_decode($password, ENT_QUOTES, 'UTF-8'), PASSWORD_DEFAULT)) . "', `code` = '' WHERE `user_id` = '" . (int)$user_id . "'");
+		$this->db->query("UPDATE `" . DB_PREFIX . "user` SET `password` = '" . $this->db->escape(password_hash(html_entity_decode($password, ENT_QUOTES, 'UTF-8'), PASSWORD_DEFAULT)) . "' WHERE `user_id` = '" . $user_id . "'");
 	}
 
 	/**
@@ -721,33 +721,11 @@ class User extends \Opencart\System\Engine\Model {
 	}
 
 	/**
-	 * Reset Customer Au
-	 * th
-	 * o
-	 * ri
-	 * zes
+	 * Reset Customer Authorizes
 	 *
-	 * @
-	 * para
-	 * m
-	 * int
-	 * $
-	 * us
-	 * er
-	 * _id pr
-	 * imary
-	 * key of th
-	 * e customer recor
-	 * d
+	 * @param int $user_id primary key of the customer record
 	 *
-	 * @ret
-	 * urn void
-	 *
-	 * @
-	 * exa
-	 * mple
-	 *
-	 * @param int $user_id
+	 * @return void
 	 */
 	public function resetAuthorizes(int $user_id): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "user_authorize` SET `total` = '0' WHERE `user_id` = '" . (int)$user_id . "'");
