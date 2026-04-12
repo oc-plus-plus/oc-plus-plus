@@ -92,6 +92,7 @@ Entries without a reference link were developed exclusively within the [batumibi
 - Undefined variable `$thid` in `catalog/controller/api/order.php`.
 - Variable `$file` in `isset()` always exists and is not nullable in `system/engine/autoloader.php` (90)
 - Administrator password recovery
+- PHP Warning: unlink(): No such file or directory in /system/library/cache/file.php on line 37
 - **Green Build** - Fixed various static analysis errors and comments
 
 ### Security
