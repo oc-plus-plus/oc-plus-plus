@@ -1,24 +1,43 @@
-# OpenCart ++
+# OC ++
 
 [![GitHub](https://img.shields.io/github/license/batumibiz/oc4?color=green)](https://github.com/batumibiz/oc4/blob/main/LICENSE)
 [![coding standards](https://github.com/batumibiz/oc4/actions/workflows/coding-standards.yml/badge.svg)](https://github.com/batumibiz/oc4/actions/workflows/coding-standards.yml)
 [![static analysis](https://github.com/batumibiz/oc4/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/batumibiz/oc4/actions/workflows/static-analysis.yml)
 
-This project is a collection of improvements and fixes for [OpenCart 4.1.0.3].  
+> [!NOTE]
+>
+> ### The Beta release of OC++ is scheduled for April 18–19.  
+> If any critical issues are identified during this period, the release may be deferred until they are fully resolved.
+
+This project is a collection of improvements and fixes, based on [OpenCart 4.1.0.3].  
 The [CHANGELOG] file contains a comprehensive list of all modifications, including direct links to original sources, pull requests, and issue reports.
 
 ### Why this repository exists
 To provide a stable, production-ready environment by backporting essential fixes while strictly avoiding the breaking changes found in the official development branches.
 
-### Compatibility Guarantee
-All modifications and enhancements are strictly developed to maintain full backward compatibility with [OpenCart 4.1.0.3].
-
 ### Why the "++" in the name?
-The OpenCart 4.1.0.3++ designation signifies that this repository is a "plus-plus" edition of the original 4.1.0.3 release:
+The OC ++ designation signifies that this repository is a "plus-plus" edition of the original OpenCart 4.1.0.3 release:
 - The first + represents fixes for bugs and issues identified after the official 4.1.0.3 release.
 - The second + stands for additional enhancements and optimizations that strictly maintain full backward compatibility.
 
 This ensures a robust, production-ready core that remains a drop-in replacement for any 4.1.0.3-compatible environment.
+
+## Compatibility Guarantee
+This project are strictly developed to maintain **full backward compatibility with [OpenCart 4.1.0.3]**.
+All included fixes and improvements have been extensively tested on live production sites.
+They are fully compatible with major frameworks and heavy-duty extensions,
+including **[Journal 3.2.8.7](https://themeforest.net/item/journal-advanced-opencart-theme/4260361)**
+and **[MazaEngine 1.13.10](https://themeforest.net/item/poco-advanced-opencart-theme/29855890)**.
+
+Most importantly, the `error.log` on these production environments has remained clean for a long period, confirming the stability and reliability of this build.
+
+> Of course, if errors appear, they will be fixed if possible :)
+
+### Production Example
+For a real-world example in action, you can visit small multilanguage website: https://isoap.ge
+- Core: **OC ++** from this repository.
+- Framework: Running flawlessly on Journal v.3.2.8.7.
+- Stability: Zero errors in the logs.
 
 
 ## Local Development with Docker
