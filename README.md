@@ -1,8 +1,8 @@
-# OC ++
+# OC++
 
-[![GitHub](https://img.shields.io/github/license/batumibiz/oc4?color=green)](https://github.com/batumibiz/oc4/blob/main/LICENSE)
-[![coding standards](https://github.com/batumibiz/oc4/actions/workflows/coding-standards.yml/badge.svg)](https://github.com/batumibiz/oc4/actions/workflows/coding-standards.yml)
-[![static analysis](https://github.com/batumibiz/oc4/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/batumibiz/oc4/actions/workflows/static-analysis.yml)
+[![GitHub License](https://img.shields.io/github/license/oc-plus-plus/oc-plus-plus?color=green)](https://github.com/oc-plus-plus/oc-plus-plus/blob/main/LICENSE)
+[![coding standards](https://github.com/oc-plus-plus/oc-plus-plus/actions/workflows/coding-standards.yml/badge.svg)](https://github.com/oc-plus-plus/oc-plus-plus/actions/workflows/coding-standards.yml)
+[![static analysis](https://github.com/oc-plus-plus/oc-plus-plus/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/oc-plus-plus/oc-plus-plus/actions/workflows/static-analysis.yml)
 
 > [!NOTE]
 >
@@ -16,7 +16,7 @@ The [CHANGELOG] file contains a comprehensive list of all modifications, includi
 To provide a stable, production-ready environment by backporting essential fixes while strictly avoiding the breaking changes found in the official development branches.
 
 ### Why the "++" in the name?
-The OC ++ designation signifies that this repository is a "plus-plus" edition of the original OpenCart 4.1.0.3 release:
+The OC++ designation signifies that this repository is a "plus-plus" edition of the original OpenCart 4.1.0.3 release:
 - The first + represents fixes for bugs and issues identified after the official 4.1.0.3 release.
 - The second + stands for additional enhancements and optimizations that strictly maintain full backward compatibility.
 
@@ -35,7 +35,7 @@ Most importantly, the `error.log` on these production environments has remained 
 
 ### Production Example
 For a real-world example in action, you can visit small multilanguage website: https://isoap.ge
-- Core: **OC ++** from this repository.
+- Core: **OC++** from this repository.
 - Framework: Running flawlessly on Journal v.3.2.8.7.
 - Stability: Zero errors in the logs.
 
@@ -176,13 +176,6 @@ Modifications without a specific link were developed within this repository.
 [GNU General Public License v.3]
 
 
-## Links
-
-- [OpenCart sources](https://github.com/opencart/opencart)
-- [OpenCart forums](https://forum.opencart.com/)
-- [Discussions](https://github.com/opencart/opencart/discussions)
-
-
 [OpenCart 4.1.0.3]: https://github.com/opencart/opencart/releases/tag/4.1.0.3
-[CHANGELOG]: https://github.com/opencart-lts/oc4/blob/main/CHANGELOG.md
+[CHANGELOG]: https://github.com/oc-plus-plus/oc-plus-plus/blob/main/CHANGELOG.md
 [GNU General Public License v.3]: https://github.com/opencart-lts/oc4/blob/main/LICENSE
