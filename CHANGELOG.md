@@ -18,6 +18,7 @@ Entries without a reference link were developed exclusively within the [batumibi
   introduced a custom `oc_glob()` helper function to emulate native glob functionality.
 - The `date_added` field has been added to the product form.
 - CSS minification, minified versions of CSS are used.
+- Modern `Chart.js` library for Dashboard sales and analytics visualization.
 
 ### Changed
 - Bump minimum PHP version to 8.2 (mentioned on the [#15327](https://github.com/opencart/opencart/issues/15327)).
@@ -50,6 +51,7 @@ Entries without a reference link were developed exclusively within the [batumibi
 - `aws/aws-sdk-php` package as unused.
 - `bootstrap-icons` as unused.
 - `nunjucks-slim.js` library as unused.
+- Obsolete `Flot` library (_replaced with Chart.js_).
 - Vendor-related functionality and references from the developer tools as unused
 
 ### Fixed
