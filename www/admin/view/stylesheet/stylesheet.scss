@@ -414,8 +414,12 @@ a {
 }
 
 #stats .progress {
-    height: 3px;
+    height: 4px;
     margin-bottom: 0;
+}
+
+.progress-bar {
+    height: 100%;
 }
 
 /* footer */
