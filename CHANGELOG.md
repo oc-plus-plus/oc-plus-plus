@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 
 ### Note regarding sources
 Entries accompanied by a reference link indicate code borrowed or adapted from external sources.  
-Entries without a reference link were developed exclusively within the [batumibiz/oc4](https://github.com/batumibiz/oc4) repository.
+Entries without a reference link were developed exclusively within this repository.
 
 
 ## [Unreleased]
@@ -83,15 +83,14 @@ Entries without a reference link were developed exclusively within the [batumibi
 - [#14988](https://github.com/opencart/opencart/pull/14988) - Correct method names for bulk delete operations
 - [#15046](https://github.com/opencart/opencart/pull/15046), [6999e3e](https://github.com/opencart/opencart/commit/6999e3e6c091aafa958eefa2af1a2deff10524a3#diff-6ec7893dd58bb90a8bb72684d687095fb309087e63063d59d90b64e53f6ed3ec), [6dd838b](https://github.com/opencart/opencart/commit/6dd838bf7b469e7da80df22dd0439d25037a412f) - Various bugs in `system/library/curl.php`.
 - [#15185](https://github.com/opencart/opencart/pull/15185) - Fix viewing embedded Youtube video.
+- [#15319](https://github.com/opencart/opencart/issues/15319) - getReviewsByProductId(): Argument 2 ($start) must be of type int
 - [#forum](https://forum.opencart.com/viewtopic.php?t=235946#p880856) - Error when deleting a product from Wishlist.
-- Deprecation warning on PHP 8.4.
 - The zone name was not displayed in the list
 - The password recovery link in the email was visible as plain text
 - Undefined array key "author" in catalog/controller/product/review.php on line 161
 - getProduct(): Argument #1 ($product_id) must be of type int
 - PHP Warning:  Undefined array key "en-gb'nvOpzp;..." in catalog/controller/common/language.php
 - Error: Opencart\Admin\Model\Catalog\Product::getDiscounts(): Argument #1 ($product_id) must be of type int
-- [#15319](https://github.com/opencart/opencart/issues/15319) - getReviewsByProductId(): Argument 2 ($start) must be of type int
 - Error: Invalid session ID
 - Undefined variable `$price_status` in `catalog/controller/api/cart.php`.
 - Undefined variable `$thid` in `catalog/controller/api/order.php`.
@@ -105,4 +104,4 @@ Entries without a reference link were developed exclusively within the [batumibi
 - Nothing
 
 
-[repository log]: https://github.com/batumibiz/oc4/commits/
+[repository log]: https://github.com/oc-plus-plus/oc-plus-plus/commits/main/
