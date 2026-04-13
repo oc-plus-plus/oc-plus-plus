@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.    
 Detailed changes can see in the [repository log].
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 
 ### Note regarding sources
 Entries accompanied by a reference link indicate code borrowed or adapted from external sources.  
@@ -35,11 +35,14 @@ Entries without a reference link were developed exclusively within the [batumibi
 - Refactored the codebase to replace all `glob()` calls using the `GLOB_BRACE` flag with `oc_glob()` emulator to ensure compatibility with Alpine Linux and other musl-based environments where `GLOB_BRACE` is unavailable.
 - Improved Category and Product search for the Admin panel.
 - Reduced the size of the "Delete" buttons on the 'Links' tab of the product form.
-- `scssphp/scssphp` package updated to version `2.1`
-- `twig/twig` package updated to version `3.24`
 - Improved session handler
 - Improved cache cleanup
 - Improved .css refresh
+
+
+- Bootstrap CSS and JS libraries updated to version `5.3.8`
+- `scssphp/scssphp` package updated to version `2.1`
+- `twig/twig` package updated to version `3.24`
 
 
 ### Removed
