@@ -96,6 +96,7 @@ Entries without a reference link were developed exclusively within the [batumibi
 - Variable `$file` in `isset()` always exists and is not nullable in `system/engine/autoloader.php` (90)
 - Administrator password recovery
 - PHP Warning: unlink(): No such file or directory in /system/library/cache/file.php on line 37
+- Display of sales statistics on the Dashboard Map
 - **Green Build** - Fixed various static analysis errors and comments
 
 ### Security
