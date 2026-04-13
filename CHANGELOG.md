@@ -46,6 +46,7 @@ Entries without a reference link were developed exclusively within the [batumibi
 - [d342547](https://github.com/opencart/opencart/commit/d34254714d6d08995851f8fec2ea58987ff2e0ae) - `upload/system/helper/filter.php` as unused.
 - `aws/aws-sdk-php` package as unused.
 - `bootstrap-icons` as unused.
+- `nunjucks-slim.js` library as unused.
 - Vendor-related functionality and references from the developer tools as unused
 
 ### Fixed
