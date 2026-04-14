@@ -52,6 +52,7 @@ Entries without a reference link were developed exclusively within this reposito
 - Vendor-related functionality and references from the developer tools as unused
 - `Flot` library (obsolete, replaced with `Chart.js`).
 - `jQuery Vector Map` library (obsolete, replaced with `Jsvectormap`)
+- Deprecated `curl_close` function (mentioned on [#15330](https://github.com/opencart/opencart/issues/15330))
 
 ### Fixed
 - [#14438](https://github.com/opencart/opencart/issues/14438) - WYSIWYG misconfiguration in ADMIN page for product edit.
@@ -83,7 +84,6 @@ Entries without a reference link were developed exclusively within this reposito
 - [#14988](https://github.com/opencart/opencart/pull/14988) - Correct method names for bulk delete operations
 - [#15046](https://github.com/opencart/opencart/pull/15046), [6999e3e](https://github.com/opencart/opencart/commit/6999e3e6c091aafa958eefa2af1a2deff10524a3#diff-6ec7893dd58bb90a8bb72684d687095fb309087e63063d59d90b64e53f6ed3ec), [6dd838b](https://github.com/opencart/opencart/commit/6dd838bf7b469e7da80df22dd0439d25037a412f) - Various bugs in `system/library/curl.php`.
 - [#15185](https://github.com/opencart/opencart/pull/15185) - Fix viewing embedded Youtube video.
-- [#15319](https://github.com/opencart/opencart/issues/15319) - getReviewsByProductId(): Argument 2 ($start) must be of type int
 - [#forum](https://forum.opencart.com/viewtopic.php?t=235946#p880856) - Error when deleting a product from Wishlist.
 - The zone name was not displayed in the list
 - The password recovery link in the email was visible as plain text
@@ -94,6 +94,7 @@ Entries without a reference link were developed exclusively within this reposito
 - Error: Invalid session ID
 - Undefined variable `$price_status` in `catalog/controller/api/cart.php`.
 - Undefined variable `$thid` in `catalog/controller/api/order.php`.
+- getReviewsByProductId(): Argument 2 ($start) must be of type int (mentioned on [#15319](https://github.com/opencart/opencart/issues/15319))
 - Variable `$file` in `isset()` always exists and is not nullable in `system/engine/autoloader.php` (90)
 - Administrator password recovery
 - PHP Warning: unlink(): No such file or directory in /system/library/cache/file.php on line 37

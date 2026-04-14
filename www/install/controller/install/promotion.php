@@ -33,8 +33,6 @@ class Promotion extends \Opencart\System\Engine\Controller {
 			$response = '';
 		}
 
-		curl_close($curl);
-
 		return $response;
 	}
 }
