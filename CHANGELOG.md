@@ -52,6 +52,7 @@ Entries without a reference link were developed exclusively within this reposito
 - Vendor-related functionality and references from the developer tools as unused
 - `Flot` library (obsolete, replaced with `Chart.js`).
 - `jQuery Vector Map` library (obsolete, replaced with `Jsvectormap`)
+- Deprecated `imagedestroy` function (mentioned on [#15330](https://github.com/opencart/opencart/issues/15330))
 - Deprecated `curl_close` function (mentioned on [#15330](https://github.com/opencart/opencart/issues/15330))
 
 ### Fixed
