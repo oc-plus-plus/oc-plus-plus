@@ -45,15 +45,20 @@ Entries without a reference link were developed exclusively within this reposito
 
 
 ### Removed
-- [d342547](https://github.com/opencart/opencart/commit/d34254714d6d08995851f8fec2ea58987ff2e0ae) - `upload/system/helper/filter.php` as unused.
-- `aws/aws-sdk-php` package as unused.
-- `bootstrap-icons` as unused.
-- `nunjucks-slim.js` library as unused.
-- Vendor-related functionality and references from the developer tools as unused
-- `Flot` library (obsolete, replaced with `Chart.js`).
-- `jQuery Vector Map` library (obsolete, replaced with `Jsvectormap`)
-- Deprecated `imagedestroy` function (mentioned on [#15330](https://github.com/opencart/opencart/issues/15330))
-- Deprecated `curl_close` function (mentioned on [#15330](https://github.com/opencart/opencart/issues/15330))
+- Deprecated libraries replaced with current versions:
+  - `Flot` (replaced with `Chart.js`).
+  - `jQuery Vector Map` (replaced with `Jsvectormap`)
+- Deprecated PHP functions:
+  - `imagedestroy`
+  - `curl_close`
+- As unused:
+  - vendor-related functionality and references from the developer tools
+  - `upload/system/helper/filter.php`
+  - `aws/aws-sdk-php` package
+  - `bootstrap-icons`
+  - `nunjucks-slim.js` library
+  - `jquery-ui`
+
 
 ### Fixed
 - [#14438](https://github.com/opencart/opencart/issues/14438) - WYSIWYG misconfiguration in ADMIN page for product edit.
