@@ -12,6 +12,7 @@
 !/www/system/storage/cache/index.html
 /www/system/storage/download/*
 !/www/system/storage/download/index.html
+!/www/system/storage/download/linuxmint.zip.73534af7d03df29ac0158455c46e3d2a
 /www/system/storage/logs/*
 !/www/system/storage/logs/index.html
 /www/system/storage/session/*
