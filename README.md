@@ -9,6 +9,22 @@
 > ### The Beta release of OC++ is scheduled for April 18–19.  
 > If any critical issues are identified during this period, the release may be deferred until they are fully resolved.
 
+## Contents
+- [About](#about)
+- [Compatibility Guarantee](#compatibility-guarantee)
+- [Local Development with Docker](#local-development-with-docker)
+  - [Using Make](#using-make)
+  - [Using Docker CLI](#or-using-docker-cli)
+  - [Docker Environment](#docker-environment)
+  - [SSL Configuration](#ssl-configuration)
+  - [Disabling SSL](#disabling-ssl)
+  - [Profiling with XDebug](#profiling-with-xdebug)
+- [Code Quality](#code-quality)
+- [Credits & Sources](#credits--sources)
+- [License](#license)
+
+
+## About
 This project is a collection of improvements and fixes, based on [OpenCart 4.1.0.3].  
 The [CHANGELOG] file contains a comprehensive list of all modifications, including direct links to original sources, pull requests, and issue reports.
 
@@ -137,16 +153,16 @@ Assuming the preparation steps above are completed...
 
 You can now open this file in your preferred analysis tool to inspect the performance data.
 
-### Code Quality
+## Code Quality
 To maintain high code quality and prevent hidden regressions, we use **PHPStan** for static analysis
 and **PHP-CS-Fixer** for coding standards enforcement.
 It is highly recommended to run these **Full Check** before submitting any changes.
 
-#### Prerequisites:
+### Prerequisites:
 - PHP 8.1 – 8.5
 - Composer
 
-#### Run the analysis
+### Run the analysis
 You can run the full suite or individual checks using the following commands:
 - **Full Check** (Runs both CS and Static Analysis):
     ```bash
