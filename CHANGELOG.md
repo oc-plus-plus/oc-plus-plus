@@ -39,6 +39,7 @@ Entries without a reference link were developed exclusively within this reposito
 - Improved session handler
 - Improved cache cleanup
 - Improved .css refresh
+- Improved `Reset` buttons on the admin panel filters 
 - Bootstrap CSS and JS libraries updated to version `5.3.8`
 - `scssphp/scssphp` package updated to version `2.1`
 - `twig/twig` package updated to version `3.24`
@@ -105,6 +106,7 @@ Entries without a reference link were developed exclusively within this reposito
 - PHP Warning: unlink(): No such file or directory in /system/library/cache/file.php on line 37
 - Administrator password recovery
 - Display of sales statistics on the Dashboard Map
+- The 'Reset' button on the admin panel filters did not work correctly
 - **Green Build** - Fixed various static analysis errors and comments
 
 ### Security

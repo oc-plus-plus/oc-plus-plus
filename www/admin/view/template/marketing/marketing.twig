@@ -38,7 +38,7 @@
               </div>
               <div class="text-end">
                 <button type="submit" id="button-filter" class="btn btn-light"><i class="fa-solid fa-filter"></i> {{ button_filter }}</button>
-                <button type="reset" data-bs-toggle="tooltip" title="{{ button_reset }}" class="btn btn-outline-secondary"><i class="fa-solid fa-filter-circle-xmark"></i></button>
+                <button type="button" id="button-reset" data-bs-toggle="tooltip" title="{{ button_reset }}" class="btn btn-outline-secondary"><i class="fa-solid fa-filter-circle-xmark"></i></button>
               </div>
             </form>
           </div>
@@ -58,6 +58,10 @@ $('#list').on('click', 'thead a, .pagination a', function(e) {
     e.preventDefault();
 
     $('#list').load(this.href);
+});
+
+$('#button-reset').on('click', function() {
+  location = 'index.php?route=marketing/marketing&user_token={{ user_token }}';
 });
 
 $('#form-filter').on('submit', function(e) {

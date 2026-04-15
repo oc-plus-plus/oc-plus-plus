@@ -58,7 +58,7 @@
               </div>
               <div class="text-end">
                 <button type="button" id="button-filter" class="btn btn-light"><i class="fa-solid fa-filter"></i> {{ button_filter }}</button>
-                <button type="reset" data-bs-toggle="tooltip" title="{{ button_reset }}" class="btn btn-outline-secondary"><i class="fa-solid fa-filter-circle-xmark"></i></button>
+                <button type="button" id="button-reset" data-bs-toggle="tooltip" title="{{ button_reset }}" class="btn btn-outline-secondary"><i class="fa-solid fa-filter-circle-xmark"></i></button>
               </div>
             </form>
           </div>
@@ -134,6 +134,10 @@ $('#button-filter').on('click', function() {
     window.history.pushState({}, null, 'index.php?route=sale/returns&user_token={{ user_token }}' + url);
 
     $('#return').load('index.php?route=sale/returns.list&user_token={{ user_token }}' + url);
+});
+
+$('#button-reset').on('click', function() {
+    location = 'index.php?route=sale/returns&user_token={{ user_token }}';
 });
 
 $('#input-customer').autocomplete({
