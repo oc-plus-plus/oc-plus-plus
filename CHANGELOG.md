@@ -102,8 +102,8 @@ Entries without a reference link were developed exclusively within this reposito
 - Undefined variable `$thid` in `catalog/controller/api/order.php`.
 - getReviewsByProductId(): Argument 2 ($start) must be of type int (mentioned on [#15319](https://github.com/opencart/opencart/issues/15319))
 - Variable `$file` in `isset()` always exists and is not nullable in `system/engine/autoloader.php` (90)
-- Administrator password recovery
 - PHP Warning: unlink(): No such file or directory in /system/library/cache/file.php on line 37
+- Administrator password recovery
 - Display of sales statistics on the Dashboard Map
 - **Green Build** - Fixed various static analysis errors and comments
 
