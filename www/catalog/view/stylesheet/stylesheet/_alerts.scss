@@ -1,0 +1,26 @@
+#alert {
+  z-index: 9999;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  width: 400px;
+  margin-left: -200px;
+
+  @media (min-width: 992px) {
+    width: 600px;
+    margin-left: -300px;
+  }
+
+  .alert {
+    margin-bottom: 15px;
+  }
+
+  .alert-primary   { box-shadow: 0 0 0 5px rgb(var(--bs-primary-rgb), 0.1); }
+  .alert-secondary { box-shadow: 0 0 0 5px rgb(var(--bs-secondary-rgb), 0.1); }
+  .alert-success   { box-shadow: 0 0 0 5px rgb(var(--bs-success-rgb), 0.1); }
+  .alert-warning   { box-shadow: 0 0 0 5px rgb(var(--bs-warning-rgb), 0.1); }
+  .alert-danger    { box-shadow: 0 0 0 5px rgb(var(--bs-danger-rgb), 0.1); }
+  .alert-info      { box-shadow: 0 0 0 5px rgb(var(--bs-info-rgb), 0.1); }
+  .alert-light     { box-shadow: 0 0 0 5px rgb(var(--bs-light-rgb), 0.1); }
+  .alert-dark      { box-shadow: 0 0 0 5px rgb(var(--bs-dark-rgb), 0.1); }
+}

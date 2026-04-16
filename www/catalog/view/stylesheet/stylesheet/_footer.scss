@@ -1,0 +1,34 @@
+footer {
+  background-color: #303030;
+  color: #e2e2e2;
+  border: 1px solid #000000;
+  border-top: 1px solid #ddd;
+  position: absolute;
+  bottom: -1px;
+  width: 100%;
+  padding-top: 30px;
+
+  hr {
+    border-top: none;
+    border-bottom: 1px solid #666;
+  }
+
+  a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  h5 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}

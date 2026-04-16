@@ -43,6 +43,7 @@ Entries without a reference link were developed exclusively within this reposito
 - Bootstrap CSS and JS libraries updated to version `5.3.8`
 - `scssphp/scssphp` package updated to version `2.1`
 - `twig/twig` package updated to version `3.24`
+- Monolithic `stylesheet.css` has been converted to a modular SCSS structure
 
 
 ### Removed
