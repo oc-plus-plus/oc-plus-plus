@@ -44,7 +44,7 @@ $breadcrumb-item-padding:   .3rem;
 $breadcrumb-divider-color:  $gray-400;
 $breadcrumb-divider:        "\f105";
 
-@import "scss/bootstrap";
+@import "bootstrap/bootstrap";
 
 @each $color, $value in $theme-colors {
   .btn-#{$color} {
