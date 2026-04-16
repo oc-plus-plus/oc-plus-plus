@@ -3,13 +3,13 @@
 [![GitHub License](https://img.shields.io/github/license/oc-plus-plus/oc-plus-plus?color=green)](https://github.com/oc-plus-plus/oc-plus-plus/blob/main/LICENSE)
 [![coding standards](https://github.com/oc-plus-plus/oc-plus-plus/actions/workflows/coding-standards.yml/badge.svg)](https://github.com/oc-plus-plus/oc-plus-plus/actions/workflows/coding-standards.yml)
 [![static analysis](https://github.com/oc-plus-plus/oc-plus-plus/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/oc-plus-plus/oc-plus-plus/actions/workflows/static-analysis.yml)
-![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/oc-plus-plus/oc-plus-plus)
+[![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/oc-plus-plus/oc-plus-plus)](https://github.com/oc-plus-plus/oc-plus-plus/issues)
 
 
 > [!NOTE]
 >
 > ### The Beta release of OC++ is scheduled for April 18–19.  
-> If any critical issues are identified during this period, the release may be deferred until they are fully resolved.
+> If any [critical issues](https://github.com/oc-plus-plus/oc-plus-plus/issues) are identified during this period, the release may be deferred until they are fully resolved.
 
 ## Contents
 - [About](#about)
