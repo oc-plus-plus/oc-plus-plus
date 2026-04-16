@@ -108,6 +108,7 @@ Entries without a reference link were developed exclusively within this reposito
 - Display of sales statistics on the Dashboard Map
 - The 'Reset' button on the admin panel filters did not work correctly
 - SQL error on `admin/sale/subscription` filter
+- SQL error on `admin/sale/returns` filter
 - **Green Build** - Fixed various static analysis errors and comments
 
 ### Security
