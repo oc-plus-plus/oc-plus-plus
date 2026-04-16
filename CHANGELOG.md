@@ -107,6 +107,7 @@ Entries without a reference link were developed exclusively within this reposito
 - Administrator password recovery
 - Display of sales statistics on the Dashboard Map
 - The 'Reset' button on the admin panel filters did not work correctly
+- SQL error on `admin/sale/subscription` filter
 - **Green Build** - Fixed various static analysis errors and comments
 
 ### Security
