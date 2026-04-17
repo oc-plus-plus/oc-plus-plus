@@ -2223,7 +2223,7 @@ CREATE TABLE `oc_customer_ip` (
   `date_added` datetime DEFAULT NULL,
   PRIMARY KEY (`customer_ip_id`),
   KEY `ip` (`ip`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2233,7 +2233,8 @@ CREATE TABLE `oc_customer_ip` (
 LOCK TABLES `oc_customer_ip` WRITE;
 /*!40000 ALTER TABLE `oc_customer_ip` DISABLE KEYS */;
 INSERT INTO `oc_customer_ip` VALUES
-(1,1,0,'172.18.0.1','','2026-03-15 18:17:55');
+(1,1,0,'172.18.0.1','','2026-03-15 18:17:55'),
+(2,1,0,'172.18.0.1','','2026-04-17 08:49:51');
 /*!40000 ALTER TABLE `oc_customer_ip` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5167,7 +5168,7 @@ CREATE TABLE `oc_review` (
   `date_modified` datetime DEFAULT NULL,
   PRIMARY KEY (`review_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5176,6 +5177,11 @@ CREATE TABLE `oc_review` (
 
 LOCK TABLES `oc_review` WRITE;
 /*!40000 ALTER TABLE `oc_review` DISABLE KEYS */;
+INSERT INTO `oc_review` VALUES
+(1,43,1,'Test User','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in eleifend orci. Quisque congue mattis bibendum. Fusce gravida porttitor mauris, eget mollis lacus maximus mattis.',4,0,'2026-04-17 08:50:38','2026-04-17 08:50:38'),
+(2,43,1,'Test User','Aenean maximus lacus eu pretium hendrerit. Etiam fringilla venenatis fermentum. Fusce lobortis consequat eros, ut varius diam commodo ac. Mauris consectetur magna non nulla porttitor dapibus. Duis consectetur pretium est at mattis. In gravida at dolor a vestibulum. Sed sagittis urna nec sagittis dapibus. Mauris lacinia vitae massa ac ullamcorper. Aenean gravida varius eros non dapibus. Phasellus maximus ex non blandit malesuada. Suspendisse potenti. Nulla aliquet risus vitae turpis gravida mollis.',2,0,'2026-04-17 08:51:00','2026-04-17 08:51:00'),
+(3,30,1,'Test User','Nam libero elit, accumsan vitae pretium id, cursus vitae ante. Suspendisse varius lacus at justo efficitur, et aliquet neque luctus. Nam mi turpis, imperdiet vel nibh quis, tempor venenatis purus. Nam malesuada feugiat dui, nec fringilla nunc vehicula sit amet. Vestibulum nec vulputate tortor. Fusce interdum at nunc convallis semper. Praesent dolor libero, lobortis ac urna sed, elementum faucibus nunc. Donec luctus est in sapien pulvinar facilisis. Morbi eget aliquet ante. Suspendisse turpis est, iaculis eget sollicitudin nec, aliquet ut metus. Ut ultrices lectus tempor, euismod est nec, luctus felis. Pellentesque posuere sagittis augue, finibus condimentum sem vehicula nec. Duis sem mauris, posuere in metus et, volutpat aliquet metus. Vivamus a justo id felis scelerisque placerat. Suspendisse potenti.',5,0,'2026-04-17 08:51:24','2026-04-17 08:51:24'),
+(4,30,1,'Test User','Lorem ipsum dolor sit amet, consectetur adipiscing elit.',4,0,'2026-04-17 08:51:45','2026-04-17 08:51:45');
 /*!40000 ALTER TABLE `oc_review` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5623,7 +5629,7 @@ INSERT INTO `oc_statistics` VALUES
 (4,'order_other',0.0000),
 (5,'returns',0.0000),
 (6,'product',0.0000),
-(7,'review',0.0000);
+(7,'review',4.0000);
 /*!40000 ALTER TABLE `oc_statistics` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -6350,7 +6356,7 @@ CREATE TABLE `oc_user_login` (
   `user_agent` varchar(255) DEFAULT NULL,
   `date_added` datetime DEFAULT NULL,
   PRIMARY KEY (`user_login_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6364,7 +6370,8 @@ INSERT INTO `oc_user_login` VALUES
 (2,1,'172.18.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0','2026-03-15 18:09:22'),
 (3,1,'172.18.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0','2026-04-11 14:08:43'),
 (4,1,'172.18.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0','2026-04-15 08:54:14'),
-(5,1,'172.18.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0','2026-04-15 15:49:38');
+(5,1,'172.18.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0','2026-04-15 15:49:38'),
+(6,1,'172.18.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0','2026-04-17 08:49:06');
 /*!40000 ALTER TABLE `oc_user_login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -14779,4 +14786,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2026-04-15 20:26:20
+-- Dump completed on 2026-04-17 12:56:11
