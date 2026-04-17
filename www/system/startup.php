@@ -3,7 +3,7 @@
 error_reporting(E_ALL);
 
 // Check Version
-if (version_compare(PHP_VERSION, '8.2', '<')) {
+if (version_compare(PHP_VERSION, '8.1', '<')) {
 	exit('PHP8.2+ Required');
 }
 
