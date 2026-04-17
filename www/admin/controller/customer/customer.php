@@ -37,7 +37,7 @@ class Customer extends \Opencart\System\Engine\Controller {
 		}
 
 		if (isset($this->request->get['filter_status'])) {
-			$filter_status = (bool)$this->request->get['filter_status'];
+			$filter_status = $this->request->get['filter_status'];
 		} else {
 			$filter_status = '';
 		}
@@ -177,7 +177,7 @@ class Customer extends \Opencart\System\Engine\Controller {
 		}
 
 		if (isset($this->request->get['filter_status'])) {
-			$filter_status = (bool)$this->request->get['filter_status'];
+			$filter_status = $this->request->get['filter_status'];
 		} else {
 			$filter_status = '';
 		}
