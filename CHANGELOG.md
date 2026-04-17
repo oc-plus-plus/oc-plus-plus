@@ -40,6 +40,7 @@ Entries without a reference link were developed exclusively within this reposito
 - Improved cache cleanup.
 - Improved .css refresh.
 - `admin/view/javascript/common.js` fixed and improved _(revision using Claude LLM)_.
+- `catalog/view/javascript/common.js` fixed and improved _(revision using Claude LLM)_.
 - Bootstrap CSS and JS libraries updated to version `5.3.8`
 - `scssphp/scssphp` package updated to version `2.1`
 - `twig/twig` package updated to version `3.24`

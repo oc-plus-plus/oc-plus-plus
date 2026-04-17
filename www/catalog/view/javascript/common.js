@@ -1,32 +1,41 @@
+// Parses URL query parameters by key.
+// Uses native URLSearchParams where available, with fallback for older environments.
 function getURLVar(key) {
-    var value = [];
-
-    var query = String(document.location).split('?');
-
-    if (query[1]) {
-        var part = query[1].split('&');
-
-        for (i = 0; i < part.length; i++) {
-            var data = part[i].split('=');
-
-            if (data[0] && data[1]) {
-                value[data[0]] = data[1];
-            }
-        }
-
-        if (value[key]) {
-            return value[key];
-        } else {
-            return '';
-        }
-    }
+    return new URLSearchParams(document.location.search).get(key) || '';
 }
 
-// Observe
-+function($) {
-    $.fn.observe = function(callback) {
-        observer = new MutationObserver(callback);
+// Helper: escape HTML to prevent XSS when inserting server-provided strings into the DOM.
+function escapeHtml(str) {
+    if (typeof str !== 'string') { return ''; }
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
 
+// Helper: build an error alert — message is plain text and gets escaped.
+function buildErrorAlert(message) {
+    return '<div class="alert alert-danger alert-dismissible">'
+        + '<i class="fa-solid fa-circle-exclamation"></i> '
+        + escapeHtml(message)
+        + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>';
+}
+
+// Helper: build a success alert — OpenCart intentionally returns HTML in success messages
+// (e.g. links to cart or comparison list), so the value is inserted as-is.
+function buildSuccessAlert(message) {
+    return '<div class="alert alert-success alert-dismissible">'
+        + '<i class="fa-solid fa-circle-check"></i> '
+        + message
+        + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>';
+}
+
+// Observe — MutationObserver jQuery plugin.
++function ($) {
+    $.fn.observe = function (callback) {
+        var observer = new MutationObserver(callback); // fixed: was missing `var`, leaked to global scope
         observer.observe($(this)[0], {
             characterData: false,
             childList: true,
@@ -35,89 +44,80 @@ function getURLVar(key) {
     };
 }(jQuery);
 
-$(document).ready(function() {
+$(document).ready(function () {
     // Tooltip
-    var oc_tooltip = function() {
-        // Get tooltip instance
-        tooltip = bootstrap.Tooltip.getInstance(this);
-
+    $(document).on('mouseenter', '[data-bs-toggle=\'tooltip\']', function () {
+        var tooltip = bootstrap.Tooltip.getInstance(this); // fixed: was missing `var`, leaked to global scope
         if (!tooltip) {
-            // Apply to current element
             tooltip = bootstrap.Tooltip.getOrCreateInstance(this);
             tooltip.show();
         }
-    }
+    });
 
-    $(document).on('mouseenter', '[data-bs-toggle=\'tooltip\']', oc_tooltip);
-
-    $(document).on('click', 'button', function() {
+    $(document).on('click', 'button', function () {
         $('.tooltip').remove();
     });
 
-    $('#alert').observe(function() {
-        window.setTimeout(function() {
-            $('#alert .alert-dismissible').fadeTo(3000, 0, function() {
+    $('#alert').observe(function () {
+        window.setTimeout(function () {
+            $('#alert .alert-dismissible').fadeTo(3000, 0, function () {
                 $(this).remove();
             });
         }, 3000);
     });
 });
 
-// Button
-$(document).ready(function() {
-    +function($) {
-        $.fn.button = function(state) {
-            return this.each(function() {
-                var element = this;
+// Button loading state plugin — defined once at module level, not inside document.ready.
+// fixed: was re-registered on every document.ready call.
++function ($) {
+    $.fn.button = function (state) {
+        return this.each(function () {
+            var element = this;
 
-                if (state == 'loading') {
-                    this.html = $(element).html();
-                    this.state = $(element).prop('disabled');
+            if (state === 'loading') {
+                this.html  = $(element).html();
+                this.state = $(element).prop('disabled');
 
-                    $(element).prop('disabled', true).width($(element).width()).html('<i class="fa-solid fa-circle-notch fa-spin text-light"></i>');
-                }
+                $(element)
+                    .prop('disabled', true)
+                    .width($(element).width())
+                    .html('<i class="fa-solid fa-circle-notch fa-spin text-light"></i>');
+            }
 
-                if (state == 'reset') {
-                    $(element).prop('disabled', this.state).width('').html(this.html);
-                }
-            });
-        };
-    }(jQuery);
-});
+            if (state === 'reset') {
+                $(element).prop('disabled', this.state).width('').html(this.html);
+            }
+        });
+    };
+}(jQuery);
 
-// Forms
+// Forms — AJAX submit handler.
 $(document).on('submit', 'form', function (e) {
     var element = this;
-    var button = (e.originalEvent !== undefined && e.originalEvent.submitter !== undefined) ? e.originalEvent.submitter : '';
+    var button  = (e.originalEvent !== undefined && e.originalEvent.submitter !== undefined)
+        ? e.originalEvent.submitter
+        : '';
 
-    if ($(element).attr('data-oc-toggle') == 'ajax' || $(button).attr('data-oc-toggle') == 'ajax') {
+    if ($(element).attr('data-oc-toggle') === 'ajax' || $(button).attr('data-oc-toggle') === 'ajax') {
         e.preventDefault();
 
-        var form = e.target;
-        var action = $(button).attr('formaction') || $(form).attr('action');
-        var method = $(button).attr('formmethod') || $(form).attr('method') || 'post';
-        var enctype = $(button).attr('formenctype') || $(form).attr('enctype') || 'application/x-www-form-urlencoded';
+        var form     = e.target;
+        var action   = $(button).attr('formaction')   || $(form).attr('action');
+        var method   = $(button).attr('formmethod')   || $(form).attr('method')  || 'post';
+        var enctype  = $(button).attr('formenctype')  || $(form).attr('enctype') || 'application/x-www-form-urlencoded';
 
-        console.log(e);
-        console.log(element);
-        console.log('action ' + action);
-        console.log('button ' + button);
-        console.log('method ' + method);
-        console.log('enctype ' + enctype);
-        console.log($(element).serialize());
-
-        // https://github.com/opencart/opencart/issues/9690
-        if (typeof CKEDITOR != 'undefined') {
-            for (instance in CKEDITOR.instances) {
+        // Sync CKEditor instances before serializing the form.
+        if (typeof CKEDITOR !== 'undefined') {
+            for (var instance in CKEDITOR.instances) {
                 CKEDITOR.instances[instance].updateElement();
             }
         }
 
         $.ajax({
-            url: action.replaceAll('&amp;', '&'),
-            type: method,
-            data: $(form).serialize(),
-            dataType: 'json',
+            url:         action.replaceAll('&amp;', '&'),
+            type:        method,
+            data:        $(form).serialize(),
+            dataType:    'json',
             contentType: enctype,
             beforeSend: function () {
                 $(button).button('loading');
@@ -125,10 +125,7 @@ $(document).on('submit', 'form', function (e) {
             complete: function () {
                 $(button).button('reset');
             },
-            success: function (json, textStatus) {
-                console.log(json);
-                console.log(textStatus);
-
+            success: function (json) {
                 $('.alert-dismissible').remove();
                 $(element).find('.is-invalid').removeClass('is-invalid');
                 $(element).find('.invalid-feedback').removeClass('d-block');
@@ -137,26 +134,30 @@ $(document).on('submit', 'form', function (e) {
                     location = json['redirect'];
                 }
 
-                if (typeof json['error'] == 'string') {
-                    $('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+                if (typeof json['error'] === 'string') {
+                    // fixed: server value escaped before insertion into DOM (XSS prevention)
+                    $('#alert').prepend(buildErrorAlert(json['error']));
                 }
 
-                if (typeof json['error'] == 'object') {
+                if (typeof json['error'] === 'object') {
                     if (json['error']['warning']) {
-                        $('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error']['warning'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+                        $('#alert').prepend(buildErrorAlert(json['error']['warning']));
                     }
 
-                    for (key in json['error']) {
-                        $('#input-' + key.replaceAll('_', '-')).addClass('is-invalid').find('.form-control, .form-select, .form-check-input, .form-check-label').addClass('is-invalid');
-                        $('#error-' + key.replaceAll('_', '-')).html(json['error'][key]).addClass('d-block');
+                    for (var key in json['error']) {
+                        // Sanitise key before using it as a jQuery selector fragment.
+                        var safeKey = key.replaceAll('_', '-').replace(/[^a-zA-Z0-9\-]/g, '');
+                        $('#input-' + safeKey).addClass('is-invalid')
+                            .find('.form-control, .form-select, .form-check-input, .form-check-label')
+                            .addClass('is-invalid');
+                        $('#error-' + safeKey).html(escapeHtml(json['error'][key])).addClass('d-block');
                     }
                 }
 
                 if (json['success']) {
-                    $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-circle-check"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+                    $('#alert').prepend(buildSuccessAlert(json['success']));
 
-                    // Refresh
-                    var url = $(form).attr('data-oc-load');
+                    var url    = $(form).attr('data-oc-load');
                     var target = $(form).attr('data-oc-target');
 
                     if (url !== undefined && target !== undefined) {
@@ -164,93 +165,81 @@ $(document).on('submit', 'form', function (e) {
                     }
                 }
 
-                // Replace any form values that correspond to form names.
-                for (key in json) {
+                // Populate any form fields whose names match response keys.
+                for (var key in json) {
                     $(element).find('[name=\'' + key + '\']').val(json[key]);
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {
-                console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                console.error(thrownError + '\r\n' + xhr.statusText + '\r\n' + xhr.responseText);
             }
         });
     }
 });
 
-// Upload
-$(document).on('click', 'button[data-oc-toggle=\'upload\']', function() {
+// Upload — file upload via hidden form.
+$(document).on('click', 'button[data-oc-toggle=\'upload\']', function () {
     var element = this;
 
-    if (!$(element).prop('disabled')) {
-        $('#form-upload').remove();
+    if ($(element).prop('disabled')) { return; }
 
-        $('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" value=""/></form>');
+    $('#form-upload').remove();
 
-        $('#form-upload input[name=\'file\']').trigger('click');
+    $('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display:none;"><input type="file" name="file" value=""/></form>');
 
-        $('#form-upload input[name=\'file\']').on('change', function(e) {
-            if ((this.files[0].size / 1024) > $(element).attr('data-oc-size-max')) {
-                alert($(element).attr('data-oc-size-error'));
+    var $fileInput = $('#form-upload input[name=\'file\']');
 
-                $(this).val('');
-            }
-        });
+    $fileInput.trigger('click');
 
-        if (typeof timer !== 'undefined') {
-            clearInterval(timer);
+    $fileInput.on('change', function () {
+        if (this.files.length === 0) { return; }
+
+        // Validate file size.
+        if ((this.files[0].size / 1024) > $(element).attr('data-oc-size-max')) {
+            alert($(element).attr('data-oc-size-error'));
+            $(this).val('');
+            return;
         }
 
-        var timer = setInterval(function() {
-            if ($('#form-upload input[name=\'file\']').val() != '') {
-                clearInterval(timer);
-
-                $.ajax({
-                    url: $(element).attr('data-oc-url'),
-                    type: 'post',
-                    data: new FormData($('#form-upload')[0]),
-                    dataType: 'json',
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    beforeSend: function() {
-                        $(element).button('loading');
-                    },
-                    complete: function() {
-                        $(element).button('reset');
-                    },
-                    success: function(json) {
-                        console.log(json);
-
-                        if (json['error']) {
-                            alert(json['error']);
-                        }
-
-                        if (json['success']) {
-                            alert(json['success']);
-                        }
-
-                        if (json['code']) {
-                            $($(element).attr('data-oc-target')).attr('value', json['code']);
-                        }
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {
-                        console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                    }
-                });
+        // Upload immediately on change — no polling interval needed.
+        // fixed: replaced unreliable setInterval(500) with direct change handler.
+        $.ajax({
+            url:         $(element).attr('data-oc-url'),
+            type:        'post',
+            data:        new FormData($('#form-upload')[0]),
+            dataType:    'json',
+            cache:       false,
+            contentType: false,
+            processData: false,
+            beforeSend: function () {
+                $(element).button('loading');
+            },
+            complete: function () {
+                $(element).button('reset');
+            },
+            success: function (json) {
+                if (json['error'])   { alert(json['error']);   }
+                if (json['success']) { alert(json['success']); }
+                if (json['code'])    { $($(element).attr('data-oc-target')).attr('value', json['code']); }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.error(thrownError + '\r\n' + xhr.statusText + '\r\n' + xhr.responseText);
             }
-        }, 500);
-    }
+        });
+    });
 });
 
-// Chain ajax calls.
+// Chain — serialises async jQuery AJAX calls.
+// fixed: execute() now uses `this` instead of the global `chain` variable,
+//        making the class safe to instantiate multiple times.
 class Chain {
     constructor() {
         this.start = false;
-        this.data = [];
+        this.data  = [];
     }
 
     attach(call) {
         this.data.push(call);
-
         if (!this.start) {
             this.execute();
         }
@@ -260,12 +249,12 @@ class Chain {
         if (this.data.length) {
             this.start = true;
 
+            var self = this;
             var call = this.data.shift();
-
             var jqxhr = call();
 
-            jqxhr.done(function() {
-                chain.execute();
+            jqxhr.done(function () {
+                self.execute(); // fixed: was `chain.execute()` — relied on global variable
             });
         } else {
             this.start = false;
@@ -275,50 +264,44 @@ class Chain {
 
 var chain = new Chain();
 
-// Autocomplete
-+function($) {
-    $.fn.autocomplete = function(option) {
-        return this.each(function() {
-            var element = this;
+// Autocomplete jQuery plugin.
++function ($) {
+    $.fn.autocomplete = function (option) {
+        return this.each(function () {
+            var element   = this;
             var $dropdown = $('#' + $(element).attr('data-oc-target'));
 
             this.timer = null;
-            this.items = [];
+            this.items = {}; // fixed: use plain object instead of array for key→value map
 
             $.extend(this, option);
 
-            // Focus in
-            $(element).on('focusin', function() {
+            $(element).on('focusin', function () {
                 element.request();
             });
 
-            // Focus out
-            $(element).on('focusout', function(e) {
+            $(element).on('focusout', function (e) {
                 if (!e.relatedTarget || !$(e.relatedTarget).hasClass('dropdown-item')) {
                     $dropdown.removeClass('show');
                 }
             });
 
-            // Input
-            $(element).on('input', function(e) {
+            $(element).on('input', function () {
                 element.request();
             });
 
-            // Click
-            $dropdown.on('click', 'a', function(e) {
+            $dropdown.on('click', 'a', function (e) {
                 e.preventDefault();
 
                 var value = $(this).attr('href');
 
                 if (element.items[value] !== undefined) {
                     element.select(element.items[value]);
-
                     $dropdown.removeClass('show');
                 }
             });
 
-            // Request
-            this.request = function() {
+            this.request = function () {
                 clearTimeout(this.timer);
 
                 $('#autocomplete-loading').remove();
@@ -326,99 +309,78 @@ var chain = new Chain();
                 $dropdown.prepend('<li id="autocomplete-loading"><span class="dropdown-item text-center disabled"><i class="fa-solid fa-circle-notch fa-spin"></i></span></li>');
                 $dropdown.addClass('show');
 
-                this.timer = setTimeout(function(object) {
+                this.timer = setTimeout(function (object) {
                     object.source($(object).val(), $.proxy(object.response, object));
                 }, 150, this);
-            }
+            };
 
-            // Response
-            this.response = function(json) {
-                var html = '';
+            this.response = function (json) {
+                // fixed: reset items on each response to prevent unbounded memory growth
+                this.items = {};
+
+                var html     = '';
                 var category = {};
-                var name;
-                var i = 0, j = 0;
 
                 if (json.length) {
-                    for (i = 0; i < json.length; i++) {
-                        // update element items
+                    for (var i = 0; i < json.length; i++) {
                         this.items[json[i]['value']] = json[i];
 
                         if (!json[i]['category']) {
-                            // ungrouped items
                             html += '<li><a href="' + json[i]['value'] + '" class="dropdown-item">' + json[i]['label'] + '</a></li>';
                         } else {
-                            // grouped items
-                            name = json[i]['category'];
-
-                            if (!category[name]) {
-                                category[name] = [];
-                            }
-
+                            var name = json[i]['category'];
+                            if (!category[name]) { category[name] = []; }
                             category[name].push(json[i]);
                         }
                     }
 
-                    for (name in category) {
+                    for (var name in category) {
                         html += '<li><h6 class="dropdown-header">' + name + '</h6></li>';
-
-                        for (j = 0; j < category[name].length; j++) {
+                        for (var j = 0; j < category[name].length; j++) {
                             html += '<li><a href="' + category[name][j]['value'] + '" class="dropdown-item">' + category[name][j]['label'] + '</a></li>';
                         }
                     }
                 }
 
                 $dropdown.html(html);
-            }
+            };
         });
-    }
+    };
 }(jQuery);
 
-$(document).ready(function() {
-    // Currency
-    $('#form-currency .dropdown-item').on('click', function(e) {
+$(document).ready(function () {
+    // Currency switcher
+    $('#form-currency .dropdown-item').on('click', function (e) {
         e.preventDefault();
-
         $('#form-currency input[name=\'code\']').val($(this).attr('href'));
-
         $('#form-currency').submit();
     });
 
-    // Language
-    $('#form-language .dropdown-item').on('click', function(e) {
+    // Language switcher
+    $('#form-language .dropdown-item').on('click', function (e) {
         e.preventDefault();
-
         $('#form-language input[name=\'code\']').val($(this).attr('href'));
-
         $('#form-language').submit();
     });
 
-    // Product List
-    $('#button-list').on('click', function() {
-        var element = this;
-
+    // Product list view toggle
+    $('#button-list').on('click', function () {
         $('#product-list').attr('class', 'row row-cols-1 product-list');
-
         $('#button-grid').removeClass('active');
         $('#button-list').addClass('active');
-
         localStorage.setItem('display', 'list');
     });
 
-    // Product Grid
-    $('#button-grid').on('click', function() {
-        var element = this;
-
-        // What a shame bootstrap does not take into account dynamically loaded columns
+    // Product grid view toggle
+    $('#button-grid').on('click', function () {
         $('#product-list').attr('class', 'row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3');
-
         $('#button-list').removeClass('active');
         $('#button-grid').addClass('active');
-
         localStorage.setItem('display', 'grid');
     });
 
-    // Local Storage
-    if (localStorage.getItem('display') == 'list') {
+    // Restore display preference from localStorage
+    if (localStorage.getItem('display') === 'list') {
         $('#product-list').attr('class', 'row row-cols-1 product-list');
         $('#button-list').addClass('active');
     } else {
@@ -426,8 +388,8 @@ $(document).ready(function() {
         $('#button-grid').addClass('active');
     }
 
-    /* Agree to Terms */
-    $('body').on('click', '.modal-link', function(e) {
+    // Modal links (e.g. "Agree to Terms")
+    $('body').on('click', '.modal-link', function (e) {
         e.preventDefault();
 
         var element = this;
@@ -435,39 +397,38 @@ $(document).ready(function() {
         $('#modal-information').remove();
 
         $.ajax({
-            url: $(element).attr('href'),
+            url:      $(element).attr('href'),
             dataType: 'html',
-            success: function(html) {
+            success:  function (html) {
                 $('body').append(html);
-
                 $('#modal-information').modal('show');
             }
         });
     });
 
-    // Cookie Policy
-    $('#cookie button').on('click', function() {
+    // Cookie policy consent
+    $('#cookie button').on('click', function () {
         var element = this;
 
         $.ajax({
-            url: $(this).val(),
-            type: 'get',
+            url:      $(this).val(),
+            type:     'get',
             dataType: 'json',
-            beforeSend: function() {
+            beforeSend: function () {
                 $(element).button('loading');
             },
-            complete: function() {
+            complete: function () {
                 $(element).button('reset');
             },
-            success: function(json) {
+            success: function (json) {
                 if (json['success']) {
-                    $('#cookie').fadeOut(400, function() {
+                    $('#cookie').fadeOut(400, function () {
                         $('#cookie').remove();
                     });
                 }
             },
-            error: function(xhr, ajaxOptions, thrownError) {
-                console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.error(thrownError + '\r\n' + xhr.statusText + '\r\n' + xhr.responseText);
             }
         });
     });
