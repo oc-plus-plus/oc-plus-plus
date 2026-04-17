@@ -34,12 +34,11 @@ Entries without a reference link were developed exclusively within this reposito
 - [8996eb3](https://github.com/opencart/opencart/commit/8996eb371620c3c7a453872d39a3a815562690f3) - `partially used` - Improved `admin/controller/marketplace/installer.php`.
 - [062ba0e](https://github.com/opencart/opencart/commit/062ba0ee243cc707b51b95e56b69b7f07cda5f7f), [85e8ddb](https://github.com/opencart/opencart/commit/85e8ddb82916cc48a4dcb30fcfcd4a1a9ea9add0) - `partially used` - Updated language methods.
 - Refactored the codebase to replace all `glob()` calls using the `GLOB_BRACE` flag with `oc_glob()` emulator to ensure compatibility with Alpine Linux and other musl-based environments where `GLOB_BRACE` is unavailable.
-- Improved Category and Product search for the Admin panel.
+- Improved Filters for the Admin panel.
 - Reduced the size of the "Delete" buttons on the 'Links' tab of the product form.
 - Improved session handler
 - Improved cache cleanup
-- Improved .css refresh
-- Improved `Reset` buttons on the admin panel filters 
+- Improved .css refresh 
 - Bootstrap CSS and JS libraries updated to version `5.3.8`
 - `scssphp/scssphp` package updated to version `2.1`
 - `twig/twig` package updated to version `3.24`

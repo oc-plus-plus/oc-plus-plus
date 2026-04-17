@@ -14,119 +14,86 @@ class Order extends \Opencart\System\Engine\Controller {
 	public function index(): void {
 		$this->load->language('sale/order');
 
+		$url = '';
+
 		if (isset($this->request->get['filter_order_id'])) {
 			$filter_order_id = (int)$this->request->get['filter_order_id'];
+			$url .= '&filter_order_id=' . $this->request->get['filter_order_id'];
 		} else {
 			$filter_order_id = '';
 		}
 
 		if (isset($this->request->get['filter_customer_id'])) {
 			$filter_customer_id = $this->request->get['filter_customer_id'];
+			$url .= '&filter_customer_id=' . (int)$this->request->get['filter_customer_id'];
 		} else {
 			$filter_customer_id = '';
 		}
 
 		if (isset($this->request->get['filter_customer'])) {
 			$filter_customer = $this->request->get['filter_customer'];
+			$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
 		} else {
 			$filter_customer = '';
 		}
 
 		if (isset($this->request->get['filter_store_id'])) {
 			$filter_store_id = (int)$this->request->get['filter_store_id'];
+			$url .= '&filter_store_id=' . (int)$this->request->get['filter_store_id'];
 		} else {
 			$filter_store_id = '';
 		}
 
 		if (isset($this->request->get['filter_order_status'])) {
 			$filter_order_status = $this->request->get['filter_order_status'];
+			$url .= '&filter_order_status=' . $this->request->get['filter_order_status'];
 		} else {
 			$filter_order_status = '';
 		}
 
 		if (isset($this->request->get['filter_order_status_id'])) {
 			$filter_order_status_id = (int)$this->request->get['filter_order_status_id'];
+			$url .= '&filter_order_status_id=' . (int)$this->request->get['filter_order_status_id'];
 		} else {
 			$filter_order_status_id = '';
 		}
 
 		if (isset($this->request->get['filter_total'])) {
 			$filter_total = $this->request->get['filter_total'];
+			$url .= '&filter_total=' . $this->request->get['filter_total'];
 		} else {
 			$filter_total = '';
 		}
 
 		if (isset($this->request->get['filter_date_from'])) {
 			$filter_date_from = $this->request->get['filter_date_from'];
+			$url .= '&filter_date_from=' . $this->request->get['filter_date_from'];
 		} else {
 			$filter_date_from = '';
 		}
 
 		if (isset($this->request->get['filter_date_to'])) {
 			$filter_date_to = $this->request->get['filter_date_to'];
+			$url .= '&filter_date_to=' . $this->request->get['filter_date_to'];
 		} else {
 			$filter_date_to = '';
 		}
 
 		if (isset($this->request->get['filter_date_modified_from'])) {
 			$filter_date_modified_from = $this->request->get['filter_date_modified_from'];
+			$url .= '&filter_date_modified_from=' . $this->request->get['filter_date_modified_from'];
 		} else {
 			$filter_date_modified_from = '';
 		}
 
 		if (isset($this->request->get['filter_date_modified_to'])) {
 			$filter_date_modified_to = $this->request->get['filter_date_modified_to'];
+			$url .= '&filter_date_modified_to=' . $this->request->get['filter_date_modified_to'];
 		} else {
 			$filter_date_modified_to = '';
 		}
 
 		$this->document->setTitle($this->language->get('heading_title'));
-
-		$url = '';
-
-		if (isset($this->request->get['filter_order_id'])) {
-			$url .= '&filter_order_id=' . $this->request->get['filter_order_id'];
-		}
-
-		if (isset($this->request->get['filter_customer_id'])) {
-			$url .= '&filter_customer_id=' . (int)$this->request->get['filter_customer_id'];
-		}
-
-		if (isset($this->request->get['filter_customer'])) {
-			$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
-		}
-
-		if (isset($this->request->get['filter_store_id'])) {
-			$url .= '&filter_store_id=' . (int)$this->request->get['filter_store_id'];
-		}
-
-		if (isset($this->request->get['filter_order_status'])) {
-			$url .= '&filter_order_status=' . $this->request->get['filter_order_status'];
-		}
-
-		if (isset($this->request->get['filter_order_status_id'])) {
-			$url .= '&filter_order_status_id=' . (int)$this->request->get['filter_order_status_id'];
-		}
-
-		if (isset($this->request->get['filter_total'])) {
-			$url .= '&filter_total=' . $this->request->get['filter_total'];
-		}
-
-		if (isset($this->request->get['filter_date_from'])) {
-			$url .= '&filter_date_from=' . $this->request->get['filter_date_from'];
-		}
-
-		if (isset($this->request->get['filter_date_to'])) {
-			$url .= '&filter_date_to=' . $this->request->get['filter_date_to'];
-		}
-
-		if (isset($this->request->get['filter_date_modified_from'])) {
-			$url .= '&filter_date_modified_from=' . $this->request->get['filter_date_modified_from'];
-		}
-
-		if (isset($this->request->get['filter_date_modified_to'])) {
-			$url .= '&filter_date_modified_to=' . $this->request->get['filter_date_modified_to'];
-		}
 
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
