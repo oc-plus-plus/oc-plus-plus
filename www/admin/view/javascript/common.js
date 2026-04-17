@@ -6,7 +6,7 @@ function getURLVar(key) {
     if (query[1]) {
         var part = query[1].split('&');
 
-        for (i = 0; i < part.length; i++) {
+        for (var i = 0; i < part.length; i++) {
             var data = part[i].split('=');
 
             if (data[0] && data[1]) {
@@ -20,15 +20,17 @@ function getURLVar(key) {
             return '';
         }
     }
+
+    return '';
 }
 
 $(document).ready(function() {
     // Tooltip
     var oc_tooltip = function() {
         // Get tooltip instance
-        tooltip = bootstrap.Tooltip.getOrCreateInstance(this);
+        var tooltip = bootstrap.Tooltip.getOrCreateInstance(this);
 
-        if (!tooltip) {
+        if (tooltip) {
             // Apply to current element
             tooltip.show();
         }
@@ -47,7 +49,11 @@ $(document).ready(function() {
 
         //[data-bs-target='pagination']
 
-        $(this.target).load(this.href);
+        var target = $(element).attr('data-bs-target');
+
+        if (target) {
+            $(target).load(this.href);
+        }
     });
 
     // Alert Fade
@@ -66,14 +72,14 @@ $(document).ready(function() {
                 var element = this;
 
                 if (state == 'loading') {
-                    this.html = $(element).html();
-                    this.state = $(element).prop('disabled');
+                    element._oc_html = $(element).html();
+                    element._oc_state = $(element).prop('disabled');
 
                     $(element).prop('disabled', true).width($(element).width()).html('<i class="fa-solid fa-circle-notch fa-spin text-light"></i>');
                 }
 
                 if (state == 'reset') {
-                    $(element).prop('disabled', this.state).width('').html(this.html);
+                    $(element).prop('disabled', element._oc_state).width('').html(element._oc_html);
                 }
             });
         }
@@ -91,7 +97,7 @@ function decodeHTMLEntities(html) {
 // Observe
 +function($) {
     $.fn.observe = function(callback) {
-        observer = new MutationObserver(callback);
+        var observer = new MutationObserver(callback);
 
         observer.observe($(this)[0], {
             characterData: false,
@@ -124,8 +130,10 @@ class Chain {
 
             var jqxhr = call();
 
+            var self = this;
+
             jqxhr.done(function() {
-                chain.execute();
+                self.execute();
             });
         } else {
             this.start = false;
@@ -148,17 +156,9 @@ $(document).on('submit', 'form', function(e) {
         var method = $(button).attr('formmethod') || $(form).attr('method') || 'post';
         var enctype = $(button).attr('formenctype') || $(form).attr('enctype') || 'application/x-www-form-urlencoded';
 
-        console.log(e);
-        console.log(element);
-        console.log('action ' + action);
-        console.log('button ' + button);
-        console.log('method ' + method);
-        console.log('enctype ' + enctype);
-        console.log($(element).serialize());
-
         // https://github.com/opencart/opencart/issues/9690
         if (typeof CKEDITOR != 'undefined') {
-            for (instance in CKEDITOR.instances) {
+            for (var instance in CKEDITOR.instances) {
                 CKEDITOR.instances[instance].updateElement();
             }
         }
@@ -176,9 +176,6 @@ $(document).on('submit', 'form', function(e) {
                 $(button).button('reset');
             },
             success: function(json, textStatus) {
-                console.log(json);
-                console.log(textStatus);
-
                 $('.alert-dismissible').remove();
                 $(element).find('.is-invalid').removeClass('is-invalid');
                 $(element).find('.invalid-feedback').removeClass('d-block');
@@ -196,7 +193,7 @@ $(document).on('submit', 'form', function(e) {
                         $('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error']['warning'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
                     }
 
-                    for (key in json['error']) {
+                    for (var key in json['error']) {
                         $('#input-' + key.replaceAll('_', '-')).addClass('is-invalid').find('.form-control, .form-select, .form-check-input, .form-check-label').addClass('is-invalid');
                         $('#error-' + key.replaceAll('_', '-')).html(json['error'][key]).addClass('d-block');
                     }
@@ -215,7 +212,7 @@ $(document).on('submit', 'form', function(e) {
                 }
 
                 // Replace any form values that correspond to form names.
-                for (key in json) {
+                for (var key in json) {
                     $(element).find('[name=\'' + key + '\']').val(json[key]);
                 }
             },
@@ -268,8 +265,6 @@ $(document).on('click', '[data-oc-toggle=\'upload\']', function() {
                         $(element).button('reset');
                     },
                     success: function(json) {
-                        console.log(json);
-
                         if (json['error']) {
                             alert(json['error']);
                         }
@@ -505,9 +500,6 @@ $(document).ready(function() {
             data: 'code=' + $(element).attr('href') + '&redirect=' + encodeURIComponent($('#input-redirect').val()),
             dataType: 'json',
             success: function(json) {
-                console.log($(element).attr('href'));
-                console.log($('input-redirect').val());
-
                 if (json['redirect']) {
                     location = json['redirect'];
                 }

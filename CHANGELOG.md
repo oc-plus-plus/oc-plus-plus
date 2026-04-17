@@ -36,9 +36,10 @@ Entries without a reference link were developed exclusively within this reposito
 - Refactored the codebase to replace all `glob()` calls using the `GLOB_BRACE` flag with `oc_glob()` emulator to ensure compatibility with Alpine Linux and other musl-based environments where `GLOB_BRACE` is unavailable.
 - Improved Filters for the Admin panel.
 - Reduced the size of the "Delete" buttons on the 'Links' tab of the product form.
-- Improved session handler
-- Improved cache cleanup
-- Improved .css refresh 
+- Improved session handler.
+- Improved cache cleanup.
+- Improved .css refresh.
+- `admin/view/javascript/common.js` fixed and improved _(revision using Claude LLM)_.
 - Bootstrap CSS and JS libraries updated to version `5.3.8`
 - `scssphp/scssphp` package updated to version `2.1`
 - `twig/twig` package updated to version `3.24`
