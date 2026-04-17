@@ -91,6 +91,7 @@ Entries without a reference link were developed exclusively within this reposito
 - [#14988](https://github.com/opencart/opencart/pull/14988) - Correct method names for bulk delete operations
 - [#15046](https://github.com/opencart/opencart/pull/15046), [6999e3e](https://github.com/opencart/opencart/commit/6999e3e6c091aafa958eefa2af1a2deff10524a3#diff-6ec7893dd58bb90a8bb72684d687095fb309087e63063d59d90b64e53f6ed3ec), [6dd838b](https://github.com/opencart/opencart/commit/6dd838bf7b469e7da80df22dd0439d25037a412f) - Various bugs in `system/library/curl.php`.
 - [#15185](https://github.com/opencart/opencart/pull/15185) - Fix viewing embedded Youtube video.
+- [#15363](https://github.com/opencart/opencart/pull/15363) - Fixed Category Filter
 - [#forum](https://forum.opencart.com/viewtopic.php?t=235946#p880856) - Error when deleting a product from Wishlist.
 - The zone name was not displayed in the list
 - The password recovery link in the email was visible as plain text
