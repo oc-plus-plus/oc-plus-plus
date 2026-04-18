@@ -1,0 +1,167 @@
+// =============================================================================
+// Sidebar Navigation & Menu
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Navigation heading
+// -----------------------------------------------------------------------------
+
+#navigation {
+    text-transform: uppercase;
+    padding: 22px 15px 15px 15px;
+    color: $color-sidebar-nav-text;
+    background: $color-sidebar-nav-bg;
+    display: block;
+}
+
+// -----------------------------------------------------------------------------
+// Menu tree
+// -----------------------------------------------------------------------------
+
+#menu {
+    margin-bottom: 25px;
+
+    &,
+    ul,
+    li {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    li a {
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+        cursor: pointer;
+        border-bottom: 0 solid #515151;
+
+        // Parent arrow icons (Font Awesome)
+        &.parent::after {
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 600;
+            float: right;
+            margin-right: 8px;
+            content: "\f107";
+        }
+
+        &.collapsed::after {
+            content: "\f105";
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // 1st level
+    // -------------------------------------------------------------------------
+
+    > li {
+        position: relative;
+        border-bottom: 1px solid $color-menu-border;
+
+        > a {
+            font-size: 14px;
+            color: $color-menu-link;
+            padding-left: 20px;
+            border-bottom: 0 solid #585858;
+
+            &:hover {
+                background-color: $color-menu-link-hover-bg;
+            }
+
+            > i {
+                font-size: 16px;
+                width: 18px;
+                margin-right: 5px;
+            }
+        }
+
+        &.active > a {
+            color: $color-menu-active;
+            background-color: $color-menu-active-bg;
+        }
+
+        > ul {
+            background-color: $color-menu-sub-bg;
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // 2nd level
+    // -------------------------------------------------------------------------
+
+    li li a {
+        color: $color-menu-sub-link;
+
+        &::before {
+            font-family: 'Font Awesome 6 Free';
+            content: "\f101";
+            font-weight: 900;
+            font-size: 13px;
+            margin-left: 10px;
+            margin-right: 10px;
+            transition: $transition-medium;
+        }
+
+        &:hover {
+            color: $color-menu-sub-hover;
+            background-color: $color-menu-sub-hover-bg;
+
+            &::before {
+                margin-right: 20px;
+            }
+        }
+    }
+
+    li li.active > a {
+        color: $color-menu-sub-active;
+        background-color: $color-menu-sub-hover-bg;
+    }
+
+    // -------------------------------------------------------------------------
+    // Nested indent levels
+    // -------------------------------------------------------------------------
+
+    li ul a         { padding-left: 20px; }
+    li li ul a      { padding-left: 40px; }
+    li li li ul a   { padding-left: 60px; }
+    li li li li ul a{ padding-left: 80px; }
+}
+
+// -----------------------------------------------------------------------------
+// Stats block (sidebar)
+// -----------------------------------------------------------------------------
+
+#stats {
+    border-radius: 2px;
+    color: $color-stats-text;
+    background: $color-stats-bg;
+    margin: 15px 20px;
+    padding: 5px 0;
+
+    ul,
+    li {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    li {
+        font-size: 11px;
+        color: $color-stats-item-text;
+        padding: 5px 10px;
+        border-bottom: 1px dotted $color-stats-border;
+    }
+
+    div:first-child {
+        margin-bottom: 4px;
+    }
+
+    .progress {
+        height: 4px;
+        margin-bottom: 0;
+    }
+}
+
+.progress-bar {
+    height: 100%;
+}
