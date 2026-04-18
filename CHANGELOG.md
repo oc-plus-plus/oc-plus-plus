@@ -23,7 +23,6 @@ Entries without a reference link were developed exclusively within this reposito
 
 ### Changed
 - [#14753](https://github.com/opencart/opencart/pull/14753) - Retrieve more in depth files from extension directory for permission.
-- [#14780](https://github.com/opencart/opencart/pull/14780) - Admin Filter Improvements.
 - [#14790](https://github.com/opencart/opencart/pull/14790) - Updated `catalog/language/en-gb/default.php`, added `text_all`.
 - [#14818](https://github.com/opencart/opencart/pull/14818) - Safest one just in case the product options are empty.
 - [#14820](https://github.com/opencart/opencart/pull/14820) - Event list: always allow for viewing event details.
@@ -34,7 +33,6 @@ Entries without a reference link were developed exclusively within this reposito
 - [8996eb3](https://github.com/opencart/opencart/commit/8996eb371620c3c7a453872d39a3a815562690f3) - `partially used` - Improved `admin/controller/marketplace/installer.php`.
 - [062ba0e](https://github.com/opencart/opencart/commit/062ba0ee243cc707b51b95e56b69b7f07cda5f7f), [85e8ddb](https://github.com/opencart/opencart/commit/85e8ddb82916cc48a4dcb30fcfcd4a1a9ea9add0) - `partially used` - Updated language methods.
 - Refactored the codebase to replace all `glob()` calls using the `GLOB_BRACE` flag with `oc_glob()` emulator to ensure compatibility with Alpine Linux and other musl-based environments where `GLOB_BRACE` is unavailable.
-- Improved Filters for the Admin panel.
 - Reduced the size of the "Delete" buttons on the 'Links' tab of the product form.
 - Improved session handler.
 - Improved cache cleanup.
@@ -45,6 +43,11 @@ Entries without a reference link were developed exclusively within this reposito
 - `scssphp/scssphp` package updated to version `2.1`
 - `twig/twig` package updated to version `3.24`
 - Monolithic `stylesheet.css` has been converted to a modular SCSS structure
+- Improved Filters for the Admin panel:
+  - The algorithm for interacting JS with filter forms has been reworked.
+  - JS is separated into an include file that can be reused.
+  - Clean URLs are generated, without empty selectors.
+  - Removed a large amount of duplicate and outdated code
 
 
 ### Removed
@@ -86,7 +89,6 @@ Entries without a reference link were developed exclusively within this reposito
 - [#14867](https://github.com/opencart/opencart/pull/14867) - Fix autoloader: one namespace can contain classes from different folders.
 - [#14878](https://github.com/opencart/opencart/issues/14878) - Wrong column used in topic layout methods (`article_id` instead of `topic_id`)
 - [#14882](https://github.com/opencart/opencart/issues/14882) - Undefined array key "payment_zones".
-- [#14886](https://github.com/opencart/opencart/pull/14886) - Fix Admin Filter Submit logout.
 - [#14887](https://github.com/opencart/opencart/issues/14887) - `Product::addReport()`: Argument #1 must be of type `int`, `string` given.
 - [#14895](https://github.com/opencart/opencart/issues/14895) - Should use array_merge.
 - [#14903](https://github.com/opencart/opencart/pull/14903) - Fixed `getTotals()`.

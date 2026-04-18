@@ -432,6 +432,8 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 		$data['order'] = $order;
 		$data['limit'] = $limit;
 
+		$this->document->addScript('view/javascript/oc/common-filter.min.js');
+
 		return $this->load->view('marketing/affiliate_list', $data);
 	}
 

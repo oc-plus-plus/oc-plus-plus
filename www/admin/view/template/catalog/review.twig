@@ -63,94 +63,82 @@
     </div>
   </div>
 </div>
-<script type="text/javascript"><!--
-$('#review').on('click', 'thead a, .pagination a', function(e) {
-    e.preventDefault();
+<script type="text/javascript">
+    initCommonFilter('#form-filter', '#review', 'catalog/review', '{{ user_token }}');
 
-    $('#review').load(this.href);
-});
+    $('#review').on('click', 'thead a, .pagination a', function (e) {
+        e.preventDefault();
 
-$('#form-filter').on('submit', function(e) {
-    e.preventDefault();
+        $('#review').load(this.href);
+    });
 
-    let url = $(this).serialize();
+    $('#input-product').autocomplete({
+        'source': function (request, response) {
+            $.ajax({
+                url: 'index.php?route=catalog/product.autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
+                dataType: 'json',
+                success: function (json) {
+                    response($.map(json, function (item) {
+                        return {
+                            label: item['name'],
+                            value: item['product_id']
+                        }
+                    }));
+                }
+            });
+        },
+        'select': function (item) {
+            $('#input-product').val(decodeHTMLEntities(item['label']));
+        }
+    });
 
-    window.history.pushState({}, null, 'index.php?route=catalog/review&user_token={{ user_token }}&' + url);
+    $('#button-rating').on('click', function () {
+        var element = this;
 
-    $('#review').load('index.php?route=catalog/review.list&user_token={{ user_token }}&' + url);
-});
+        $(element).button('loading');
 
-$('#button-reset').on('click', function() {
-    location = 'index.php?route=catalog/review&user_token={{ user_token }}';
-});
+        var next = 'index.php?route=catalog/review.sync&user_token={{ user_token }}';
 
-$('#input-product').autocomplete({
-    'source': function(request, response) {
-        $.ajax({
-            url: 'index.php?route=catalog/product.autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
-            dataType: 'json',
-            success: function(json) {
-                response($.map(json, function(item) {
-                    return {
-                        label: item['name'],
-                        value: item['product_id']
+        var rating = function () {
+            return $.ajax({
+                url: next,
+                dataType: 'json',
+                success: function (json) {
+                    console.log(json);
+
+                    $('.alert-dismissible').remove();
+
+                    if (json['error']) {
+                        $('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+
+                        $(element).button('reset');
                     }
-                }));
-            }
-        });
-    },
-    'select': function(item) {
-        $('#input-product').val(decodeHTMLEntities(item['label']));
-    }
-});
 
-$('#button-rating').on('click', function() {
-    var element = this;
+                    if (json['text']) {
+                        $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-check-circle-circle"></i> ' + json['text'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+                    }
 
-    $(element).button('loading');
+                    if (json['success']) {
+                        $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-check-circle-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
 
-    var next = 'index.php?route=catalog/review.sync&user_token={{ user_token }}';
+                        $(element).button('reset');
+                    }
 
-    var rating = function() {
-        return $.ajax({
-            url: next,
-            dataType: 'json',
-            success: function(json) {
-                console.log(json);
+                    if (json['next']) {
+                        next = json['next'];
 
-                $('.alert-dismissible').remove();
-
-                if (json['error']) {
-                    $('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+                        chain.attach(rating);
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 
                     $(element).button('reset');
                 }
+            });
+        };
 
-                if (json['text']) {
-                    $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-check-circle-circle"></i> ' + json['text'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
-                }
-
-                if (json['success']) {
-                    $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-check-circle-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
-
-                    $(element).button('reset');
-                }
-
-                if (json['next']) {
-                    next = json['next'];
-
-                    chain.attach(rating);
-                }
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-
-                $(element).button('reset');
-            }
-        });
-    };
-
-    chain.attach(rating);
-});
-//--></script>
+        chain.attach(rating);
+    });
+</script>
 {{ footer }}
