@@ -390,7 +390,7 @@ class Returns extends \Opencart\System\Engine\Controller {
 		$data['sort'] = $sort;
 		$data['order'] = $order;
 
-		$this->document->addScript('view/javascript/oc/common-filter.min.js');
+		$this->document->addScript('view/javascript/oc/filter.min.js');
 
 		return $this->load->view('sale/returns_list', $data);
 	}

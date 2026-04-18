@@ -6,7 +6,7 @@
  * @param {string} route  - Controller route (e.g. "catalog/category")
  * @param {string} userToken - User token
  */
-function initCommonFilter(formId, listId, route, userToken) {
+function initFilter(formId, listId, route, userToken) {
     let $form = $(formId);
     let $list = $(listId);
 
