@@ -43,6 +43,7 @@ Entries without a reference link were developed exclusively within this reposito
 - `scssphp/scssphp` package updated to version `2.1`
 - `twig/twig` package updated to version `3.24`
 - Monolithic `stylesheet.css` has been converted to a modular SCSS structure
+- Improved Autocomplete for the Admin panel.
 - Improved Filters for the Admin panel:
   - The algorithm for interacting JS with filter forms has been reworked.
   - JS is separated into an include file that can be reused.
@@ -51,6 +52,7 @@ Entries without a reference link were developed exclusively within this reposito
 
 
 ### Removed
+- Removed a large amount of outdated and duplicate code
 - Deprecated libraries replaced with current versions:
   - `Flot` (replaced with `Chart.js`).
   - `jQuery Vector Map` (replaced with `Jsvectormap`)
