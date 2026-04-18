@@ -55,30 +55,12 @@
 <script type="text/javascript">
     initFilter('#form-filter', '#manufacturer', 'catalog/manufacturer', '{{ user_token }}');
 
+    initAutocomplete('#input-name', 'catalog/manufacturer.autocomplete', '{{ user_token }}', 'filter_name', 'manufacturer_id', 'name');
+
     $('#manufacturer').on('click', 'thead a, .pagination a', function (e) {
         e.preventDefault();
 
         $('#manufacturer').load(this.href);
-    });
-
-    $('#input-name').autocomplete({
-        'source': function (request, response) {
-            $.ajax({
-                url: 'index.php?route=catalog/manufacturer.autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
-                dataType: 'json',
-                success: function (json) {
-                    response($.map(json, function (item) {
-                        return {
-                            label: item['name'],
-                            value: item['manufacturer_id']
-                        }
-                    }));
-                }
-            });
-        },
-        'select': function (item) {
-            $('#input-name').val(item['label']);
-        }
     });
 </script>
 {{ footer }}

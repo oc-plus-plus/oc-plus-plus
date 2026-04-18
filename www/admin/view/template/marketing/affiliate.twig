@@ -85,30 +85,12 @@
 <script type="text/javascript">
     initFilter('#form-filter', '#list', 'marketing/affiliate', '{{ user_token }}');
 
+    initAutocomplete('#input-customer', 'customer/customer.autocomplete', '{{ user_token }}', 'filter_affiliate=1&filter_name', 'customer_id', 'name');
+
     $('#list').on('click', 'thead a, .pagination a', function (e) {
         e.preventDefault();
 
         $('#list').load(this.href);
-    });
-
-    $('#input-customer').autocomplete({
-        'source': function (request, response) {
-            $.ajax({
-                url: 'index.php?route=customer/customer.autocomplete&user_token={{ user_token }}&filter_affiliate=1&filter_name=' + encodeURIComponent(request),
-                dataType: 'json',
-                success: function (json) {
-                    response($.map(json, function (item) {
-                        return {
-                            label: item['name'],
-                            value: item['customer_id']
-                        }
-                    }));
-                }
-            });
-        },
-        'select': function (item) {
-            $('#input-customer').val(decodeHTMLEntities(item['label']));
-        }
     });
 
     $('#button-calculate').on('click', function (e) {

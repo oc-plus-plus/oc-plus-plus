@@ -71,30 +71,12 @@
 <script type="text/javascript">
     initFilter('#form-filter', '#subscription', 'sale/subscription', '{{ user_token }}');
 
+    initAutocomplete('#input-customer', 'customer/customer.autocomplete', '{{ user_token }}', 'filter_name', 'customer_id', 'name');
+
     $('#subscription').on('click', 'thead a, .pagination a', function (e) {
         e.preventDefault();
 
         $('#subscription').load(this.href);
-    });
-
-    $('#input-customer').autocomplete({
-        'source': function (request, response) {
-            $.ajax({
-                url: 'index.php?route=customer/customer.autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
-                dataType: 'json',
-                success: function (json) {
-                    response($.map(json, function (item) {
-                        return {
-                            label: item['name'],
-                            value: item['customer_id']
-                        }
-                    }));
-                }
-            });
-        },
-        'select': function (item) {
-            $('#input-customer').val(decodeHTMLEntities(item['label']));
-        }
     });
 </script>
 {{ footer }}

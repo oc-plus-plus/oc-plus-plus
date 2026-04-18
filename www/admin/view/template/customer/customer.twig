@@ -76,50 +76,13 @@
 <script type="text/javascript">
     initFilter('#form-filter', '#customer', 'customer/customer', '{{ user_token }}');
 
+    initAutocomplete('#input-name', 'customer/customer.autocomplete', '{{ user_token }}', 'filter_name', 'customer_id', 'name');
+    initAutocomplete('#input-email', 'customer/customer.autocomplete', '{{ user_token }}', 'filter_email', 'customer_id', 'email');
+
     $('#customer').on('click', 'thead a, .pagination a', function (e) {
         e.preventDefault();
 
         $('#customer').load(this.href);
-    });
-
-    $('#input-name').autocomplete({
-        'source': function (request, response) {
-            $.ajax({
-                url: 'index.php?route=customer/customer.autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
-                dataType: 'json',
-                success: function (json) {
-                    response($.map(json, function (item) {
-                        return {
-                            label: item['name'],
-                            value: item['customer_id']
-                        }
-                    }));
-                }
-            });
-        },
-        'select': function (item) {
-            $('#input-name').val(decodeHTMLEntities(item['label']));
-        }
-    });
-
-    $('#input-email').autocomplete({
-        'source': function (request, response) {
-            $.ajax({
-                url: 'index.php?route=customer/customer.autocomplete&user_token={{ user_token }}&filter_email=' + encodeURIComponent(request),
-                dataType: 'json',
-                success: function (json) {
-                    response($.map(json, function (item) {
-                        return {
-                            label: item['email'],
-                            value: item['customer_id']
-                        }
-                    }));
-                }
-            });
-        },
-        'select': function (item) {
-            $('#input-email').val(decodeHTMLEntities(item['label']));
-        }
     });
 
     $('#customer').on('click', '[data-oc-toggle=\'unlock\']', function (e) {

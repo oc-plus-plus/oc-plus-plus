@@ -34,7 +34,12 @@
               </div>
               <div class="mb-3">
                 <label for="input-customer" class="form-label">{{ entry_customer }}</label>
-                <input type="text" name="filter_customer" value="" placeholder="{{ entry_customer }}" id="input-customer" class="form-control"/>
+                <input type="text" name="filter_customer" value="{{ filter_customer }}" placeholder="{{ entry_customer }}" id="input-customer" data-oc-target="autocomplete-customer" class="form-control" autocomplete="off"/>
+                <ul id="autocomplete-customer" class="dropdown-menu"></ul>
+              </div>
+              <div class="mb-3">
+                  <label class="form-label">{{ entry_email }}</label> <input type="text" name="filter_email" value="{{ filter_email }}" placeholder="{{ entry_email }}" id="input-email" data-oc-target="autocomplete-email" class="form-control" autocomplete="off"/>
+                  <ul id="autocomplete-email" class="dropdown-menu"></ul>
               </div>
               <div class="mb-3">
                 <label for="input-status" class="form-label">{{ entry_status }}</label>
@@ -74,6 +79,9 @@
 <script type="text/javascript">
     initFilter('#form-filter', '#comment', 'cms/comment', '{{ user_token }}');
 
+    initAutocomplete('#input-customer', 'customer/customer.autocomplete', '{{ user_token }}', 'filter_name', 'customer_id', 'name');
+    initAutocomplete('#input-email', 'customer/customer.autocomplete', '{{ user_token }}', 'filter_email', 'customer_id', 'email');
+
     $('#comment').on('click', '.pagination a', function (e) {
         e.preventDefault();
 
@@ -107,46 +115,6 @@
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
             }
         });
-    });
-
-    $('#input-customer').autocomplete({
-        'source': function (request, response) {
-            $.ajax({
-                url: 'index.php?route=customer/customer.autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
-                dataType: 'json',
-                success: function (json) {
-                    response($.map(json, function (item) {
-                        return {
-                            label: item['name'],
-                            value: item['customer_id']
-                        }
-                    }));
-                }
-            });
-        },
-        'select': function (item) {
-            $('#input-customer').val(decodeHTMLEntities(item['label']));
-        }
-    });
-
-    $('#input-email').autocomplete({
-        'source': function (request, response) {
-            $.ajax({
-                url: 'index.php?route=customer/customer.autocomplete&user_token={{ user_token }}&filter_email=' + encodeURIComponent(request),
-                dataType: 'json',
-                success: function (json) {
-                    response($.map(json, function (item) {
-                        return {
-                            label: item['email'],
-                            value: item['customer_id']
-                        }
-                    }));
-                }
-            });
-        },
-        'select': function (item) {
-            $('#input-email').val(decodeHTMLEntities(item['label']));
-        }
     });
 
     $('#button-rating').on('click', function () {
