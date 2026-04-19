@@ -725,14 +725,6 @@ class ColumnLeft extends \Opencart\System\Engine\Controller {
 			// Tools
 			$maintenance = [];
 
-			if ($this->user->hasPermission('access', 'tool/upgrade')) {
-				$maintenance[] = [
-					'name'     => $this->language->get('text_upgrade'),
-					'href'     => $this->url->link('tool/upgrade', 'user_token=' . $this->session->data['user_token']),
-					'children' => []
-				];
-			}
-
 			if ($this->user->hasPermission('access', 'tool/backup')) {
 				$maintenance[] = [
 					'name'     => $this->language->get('text_backup'),
