@@ -6,14 +6,12 @@
 [![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/oc-plus-plus/oc-plus-plus)](https://github.com/oc-plus-plus/oc-plus-plus/issues)
 
 
-> [!NOTE]
->
-> ### The Beta release of OC++ is scheduled for April 18–19.  
-> If any [critical issues](https://github.com/oc-plus-plus/oc-plus-plus/issues) are identified during this period, the release may be deferred until they are fully resolved.
-
 ## Contents
 - [About](#about)
 - [Compatibility Guarantee](#compatibility-guarantee)
+- [Installation](#installation)
+  - [New installation](#new-installation)
+  - [Upgrading OpenCart 4.1.0.3](#upgrading-opencart-4103) 
 - [Local Development with Docker](#local-development-with-docker)
   - [Using Make](#using-make)
   - [Using Docker CLI](#or-using-docker-cli)
@@ -56,6 +54,13 @@ For a real-world example in action, you can visit small multilanguage website: h
 - Core: **OC++** from this repository.
 - Framework: Running flawlessly on Journal v.3.2.8.7.
 - Stability: Zero errors in the logs.
+
+
+## Installation
+
+### New installation
+
+### Upgrading OpenCart 4.1.0.3
 
 
 ## Local Development with Docker
