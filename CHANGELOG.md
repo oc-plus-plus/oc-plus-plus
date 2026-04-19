@@ -1,16 +1,37 @@
 # Changelog 
 
 All notable changes to this project will be documented in this file.    
-Detailed changes can see in the [repository log].
+Detailed changes can see in the [repository log](https://github.com/oc-plus-plus/oc-plus-plus/commits/main/).
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 
-### Note regarding sources
-Entries accompanied by a reference link indicate code borrowed or adapted from external sources.  
-Entries without a reference link were developed exclusively within this repository.
+## Note regarding sources
+- Entries accompanied by a reference link indicate code borrowed or adapted from external sources.  
+- Entries without a reference link were developed exclusively within [this repository](https://github.com/oc-plus-plus/oc-plus-plus).
 
 
 ## [Unreleased]
+
+#### Added
+- Nothing
+
+#### Changed
+- Nothing
+
+#### Deprecated
+- Nothing
+
+#### Removed
+- Nothing
+
+#### Fixed
+- Nothing
+
+#### Security
+- Nothing
+
+
+## [0.1.0] - 2026-04-19
 
 ### Added
 - [#14857](https://github.com/opencart/opencart/pull/14857), [#14858](https://github.com/opencart/opencart/pull/14858), [#14859](https://github.com/opencart/opencart/pull/14859) - Add manufacturer filter
@@ -43,13 +64,15 @@ Entries without a reference link were developed exclusively within this reposito
 - `scssphp/scssphp` package updated to version `2.1`
 - `twig/twig` package updated to version `3.24`
 - Monolithic `stylesheet.css` has been converted to a modular SCSS structure
-- Improved Autocomplete for the Admin panel.
-- Improved Filters for the Admin panel:
-  - The algorithm for interacting JS with filter forms has been reworked.
+- Reworked Autocomplete for the Admin panel:
+  - The code has been reworked.
+  - JS is separated into an include file that can be reused.
+  - Removed a large amount of duplicate and outdated code.
+- Reworked Filters for the Admin panel:
+  - The code has been reworked.
   - JS is separated into an include file that can be reused.
   - Clean URLs are generated, without empty selectors.
-  - Removed a large amount of duplicate and outdated code
-
+  - Removed a large amount of duplicate and outdated code.
 
 ### Removed
 - Removed a large amount of outdated and duplicate code
@@ -67,7 +90,6 @@ Entries without a reference link were developed exclusively within this reposito
   - `nunjucks-slim.js` library
   - `jquery-ui`
 
-
 ### Fixed
 - [#14438](https://github.com/opencart/opencart/issues/14438) - WYSIWYG misconfiguration in ADMIN page for product edit.
 - [#14498](https://github.com/opencart/opencart/issues/14498) - Sales order Store - wrong in the order list.
@@ -82,7 +104,6 @@ Entries without a reference link were developed exclusively within this reposito
 - [#14758](https://github.com/opencart/opencart/issues/14758) - Unnecessary parameter
 - [#14759](https://github.com/opencart/opencart/pull/14759) - Checkout cart page lists wrong item totals.
 - [#14764](https://github.com/opencart/opencart/issues/14764) - Admin login as customer not working.
-- [#14770](https://github.com/opencart/opencart/issues/14770) - Incorrect glob path used in `admin/controller/common/developer.php`.
 - [#14791](https://github.com/opencart/opencart/pull/14791) - Fix wrong search result pagination.
 - [#14803](https://github.com/opencart/opencart/issues/14803) - Admin order notes are visible to the customer
 - [#14822](https://github.com/opencart/opencart/pull/14822) - In Admin, while creating new order, Product is not being added.
@@ -118,8 +139,10 @@ Entries without a reference link were developed exclusively within this reposito
 - SQL error on `admin/sale/returns` filter
 - **Green Build** - Fixed various static analysis errors and comments
 
-### Security
-- Nothing
 
+## Soure Code
+Based on [OpenCart 4.1.0.3](https://github.com/opencart/opencart/releases/tag/4.1.0.3),
+with the original source code imported as the foundation for all subsequent development within this project.
 
-[repository log]: https://github.com/oc-plus-plus/oc-plus-plus/commits/main/
+[Unreleased]: https://github.com/oc-plus-plus/oc-plus-plus/compare/0.1.0...HEAD
+[0.1.0]: https://github.com/oc-plus-plus/oc-plus-plus/releases/tag/0.1.0
