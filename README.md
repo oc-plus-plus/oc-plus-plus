@@ -9,9 +9,9 @@
 ## Contents
 - [About](#about)
 - [Compatibility Guarantee](#compatibility-guarantee)
+- [System Requirements](#system-requirements)
 - [Installation](#installation)
-  - [New installation](#new-installation)
-  - [Upgrading OpenCart 4.1.0.3](#upgrading-opencart-4103) 
+- [Upgrade](#upgrade) 
 - [Local Development with Docker](#local-development-with-docker)
   - [Using Make](#using-make)
   - [Using Docker CLI](#or-using-docker-cli)
@@ -56,11 +56,53 @@ For a real-world example in action, you can visit small multilanguage website: h
 - Stability: Zero errors in the logs.
 
 
+## System Requirements
+- **Web Server**: Apache 2.x.x.  
+  While operation on Nginx + PHP-FPM is theoretically possible, it has not been tested yet.
+- **Database Server**: Current versions of MariaDB or MySQL.  
+   OC++ has not been tested with other database systems, and compatibility is not guaranteed.
+- **PHP**: 8.1 – 8.5 _(PHP 8.4 is recommended)_.
+- **PHP Settings**:
+  - m`ax_execution_time` = 150 
+  - `max_input_time` = 180 
+  - `memory_limit` = 256M (at least 384M recommended for developers)
+- **Required PHP Extensions**: the following extensions are required. Most of these are likely already enabled on your server:
+  `fileinfo`, `mysqli`, `openssl`, `simplexml`, `zip`, `json`, `ctype`, `curl`, `dom`, `gd`, `iconv`, `intl`, `mbstring`, `session`, `tokenizer`, `xml`, `xmlwriter`. 
+
+
 ## Installation
+1. **Check Requirements**: Ensure your server environment meets all the system requirements listed above.
+2. **Prepare the Database** (MariaDB or MySQL):
+   - Create a new empty database.
+   - Assign (or create) a database user with full privileges (CREATE, DROP, etc.) for this database.
+   - Note down your database credentials: Hostname (or IP), Username, Password, and Database Name.
+3. **Upload Files**: Extract the downloaded archive into the root directory of your virtual web host (the folder accessible via the Internet at your domain address).
+4. **Run Installer**: Open your web browser and navigate to https://your-domain.com.
+5. **Follow Instructions**: The web installer will launch automatically; follow the on-screen steps to complete the setup.
+6. **Post-Installation**: Once the installation is finished, manually **delete the /install folder** for security reasons.
 
-### New installation
 
-### Upgrading OpenCart 4.1.0.3
+## Upgrade
+
+> [!CAUTION]
+>
+> ### ATTENTION! Please read carefully before proceeding with the upgrade!
+
+1. **Version Compatibility**: This upgrade package is designed **strictly for OpenCart 4.1.0.3**.
+2. **Unsupported Versions**: OC++ is incompatible with any other versions of OpenCart, including the official `master` branch or any other `4.x.x.x` releases.
+3. **Pre-requisite**: If you are running an older version of OpenCart, you must first upgrade to version 4.1.0.3 before applying the OC++ upgrade package.
+4. **BETA Software Warning**: This is a BETA release. While it has been tested on live stores, bugs may still exist.
+   Do not use this on a production site unless you have the technical expertise to troubleshoot and resolve issues quickly.
+5. **Extension Compatibility**: OC++ has been tested with various extensions, including major frameworks like
+   Journal and MazaEngine, and no issues were found. If it worked on clean OpenCart 4.1.0.3, it should work on OC++.
+   However, since several libraries (including jQuery) have been updated, some legacy extensions might require updates or replacements.
+
+> [!CAUTION]
+>
+> ### VERY IMPORTANT!
+> Before starting the upgrade procedure, **you MUST create a full backup** of your database and all website files.
+> You must ensure that you have the means to quickly restore your website to its original state (pre-upgrade)
+> should any issues arise.
 
 
 ## Local Development with Docker
