@@ -16,111 +16,72 @@ class Product extends \Opencart\System\Engine\Controller {
 	public function index(): void {
 		$this->load->language('catalog/product');
 
+		$url = '';
+
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		} else {
 			$filter_name = '';
 		}
 
 		if (isset($this->request->get['filter_model'])) {
 			$filter_model = $this->request->get['filter_model'];
+			$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
 		} else {
 			$filter_model = '';
 		}
 
 		if (isset($this->request->get['filter_category_id'])) {
 			$filter_category_id = $this->request->get['filter_category_id'];
+			$url .= '&filter_category_id=' . $this->request->get['filter_category_id'];
 		} else {
 			$filter_category_id = '';
 		}
 
 		if (isset($this->request->get['filter_manufacturer_id'])) {
 			$filter_manufacturer_id = $this->request->get['filter_manufacturer_id'];
+			$url .= '&filter_manufacturer_id=' . $this->request->get['filter_manufacturer_id'];
 		} else {
 			$filter_manufacturer_id = '';
 		}
 
 		if (isset($this->request->get['filter_price_from'])) {
 			$filter_price_from = $this->request->get['filter_price_from'];
+			$url .= '&filter_price_from=' . $this->request->get['filter_price_from'];
 		} else {
 			$filter_price_from = '';
 		}
 
 		if (isset($this->request->get['filter_price_to'])) {
 			$filter_price_to = $this->request->get['filter_price_to'];
+			$url .= '&filter_price_to=' . $this->request->get['filter_price_to'];
 		} else {
 			$filter_price_to = '';
 		}
 
 		if (isset($this->request->get['filter_quantity_from'])) {
 			$filter_quantity_from = $this->request->get['filter_quantity_from'];
+			$url .= '&filter_quantity_from=' . $this->request->get['filter_quantity_from'];
 		} else {
 			$filter_quantity_from = '';
 		}
 
 		if (isset($this->request->get['filter_quantity_to'])) {
 			$filter_quantity_to = $this->request->get['filter_quantity_to'];
-		} else {
-			$filter_quantity_to = '';
-		}
-
-		if (isset($this->request->get['filter_quantity_from'])) {
-			$filter_quantity_from = $this->request->get['filter_quantity_from'];
-		} else {
-			$filter_quantity_from = '';
-		}
-
-		if (isset($this->request->get['filter_quantity_to'])) {
-			$filter_quantity_to = $this->request->get['filter_quantity_to'];
+			$url .= '&filter_quantity_to=' . $this->request->get['filter_quantity_to'];
 		} else {
 			$filter_quantity_to = '';
 		}
 
 		if (isset($this->request->get['filter_status'])) {
 			$filter_status = $this->request->get['filter_status'];
+			$url .= '&filter_status=' . $this->request->get['filter_status'];
 		} else {
 			$filter_status = '';
 		}
 
 		$this->document->setTitle($this->language->get('heading_title'));
-
-		$url = '';
-
-		if (isset($this->request->get['filter_name'])) {
-			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
-		}
-
-		if (isset($this->request->get['filter_model'])) {
-			$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
-		}
-
-		if (isset($this->request->get['filter_category_id'])) {
-			$url .= '&filter_category_id=' . $this->request->get['filter_category_id'];
-		}
-
-		if (isset($this->request->get['filter_manufacturer_id'])) {
-			$url .= '&filter_manufacturer_id=' . $this->request->get['filter_manufacturer_id'];
-		}
-
-		if (isset($this->request->get['filter_price_from'])) {
-			$url .= '&filter_price_from=' . $this->request->get['filter_price_from'];
-		}
-
-		if (isset($this->request->get['filter_price_to'])) {
-			$url .= '&filter_price_to=' . $this->request->get['filter_price_to'];
-		}
-
-		if (isset($this->request->get['filter_quantity_from'])) {
-			$url .= '&filter_quantity_from=' . $this->request->get['filter_quantity_from'];
-		}
-
-		if (isset($this->request->get['filter_quantity_to'])) {
-			$url .= '&filter_quantity_to=' . $this->request->get['filter_quantity_to'];
-		}
-
-		if (isset($this->request->get['filter_status'])) {
-			$url .= '&filter_status=' . $this->request->get['filter_status'];
-		}
 
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
@@ -357,7 +318,7 @@ class Product extends \Opencart\System\Engine\Controller {
 
 			$special = '';
 
-			$product_discounts = $this->model_catalog_product->getDiscounts($result['product_id']);
+			$product_discounts = $this->model_catalog_product->getDiscounts((int)$result['product_id']);
 
 			foreach ($product_discounts as $product_discount) {
 				if (($product_discount['date_start'] == '0000-00-00' || strtotime($product_discount['date_start']) < time()) && ($product_discount['date_end'] == '0000-00-00' || strtotime($product_discount['date_end']) > time())) {
@@ -485,6 +446,9 @@ class Product extends \Opencart\System\Engine\Controller {
 
 		$data['sort'] = $sort;
 		$data['order'] = $order;
+
+		$this->document->addScript('view/javascript/oc/filter.min.js');
+		$this->document->addScript('view/javascript/oc/autocomplete.min.js');
 
 		return $this->load->view('catalog/product_list', $data);
 	}
@@ -749,6 +713,12 @@ class Product extends \Opencart\System\Engine\Controller {
 		}
 
 		if (!empty($product_info)) {
+			$data['date_added'] = date('Y-m-d', strtotime($product_info['date_added']));
+		} else {
+			$data['date_added'] = date('Y-m-d');
+		}
+
+		if (!empty($product_info)) {
 			$data['date_available'] = ($product_info['date_available'] != '0000-00-00') ? $product_info['date_available'] : '';
 		} else {
 			$data['date_available'] = date('Y-m-d');
@@ -877,21 +847,17 @@ class Product extends \Opencart\System\Engine\Controller {
 			}
 		}
 
-		// Store
-		$data['stores'] = [];
+		// Stores
+		$stores = [];
 
-		$data['stores'][] = [
+		$stores[] = [
 			'store_id' => 0,
-			'name'     => $this->language->get('text_default')
+			'name'     => $this->config->get('config_name')
 		];
 
 		$this->load->model('setting/store');
 
-		$results = $this->model_setting_store->getStores();
-
-		foreach ($results as $result) {
-			$data['stores'][] = $result;
-		}
+		$data['stores'] = array_merge($stores, $this->model_setting_store->getStores());
 
 		if ($product_id) {
 			$data['product_store'] = $this->model_catalog_product->getStores($product_id);
@@ -1187,6 +1153,7 @@ class Product extends \Opencart\System\Engine\Controller {
 			'minimum'             => 0,
 			'subtract'            => 0,
 			'stock_status_id'     => 0,
+			'date_added'          => '',
 			'date_available'      => '',
 			'manufacturer_id'     => 0,
 			'shipping'            => 0,
@@ -1450,7 +1417,7 @@ class Product extends \Opencart\System\Engine\Controller {
 		$json = [];
 
 		if (isset($this->request->get['filter_name'])) {
-			$filter_name = $this->request->get['filter_name'];
+			$filter_name = '%' . $this->request->get['filter_name'] . '%';
 		} else {
 			$filter_name = '';
 		}

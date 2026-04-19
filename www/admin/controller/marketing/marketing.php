@@ -14,49 +14,37 @@ class Marketing extends \Opencart\System\Engine\Controller {
 	public function index(): void {
 		$this->load->language('marketing/marketing');
 
+		$url = '';
+
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		} else {
 			$filter_name = '';
 		}
 
 		if (isset($this->request->get['filter_code'])) {
 			$filter_code = $this->request->get['filter_code'];
+			$url .= '&filter_code=' . $this->request->get['filter_code'];
 		} else {
 			$filter_code = '';
 		}
 
 		if (isset($this->request->get['filter_date_from'])) {
 			$filter_date_from = $this->request->get['filter_date_from'];
+			$url .= '&filter_date_from=' . $this->request->get['filter_date_from'];
 		} else {
 			$filter_date_from = '';
 		}
 
 		if (isset($this->request->get['filter_date_to'])) {
 			$filter_date_to = $this->request->get['filter_date_to'];
+			$url .= '&filter_date_to=' . $this->request->get['filter_date_to'];
 		} else {
 			$filter_date_to = '';
 		}
 
 		$this->document->setTitle($this->language->get('heading_title'));
-
-		$url = '';
-
-		if (isset($this->request->get['filter_name'])) {
-			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
-		}
-
-		if (isset($this->request->get['filter_code'])) {
-			$url .= '&filter_code=' . $this->request->get['filter_code'];
-		}
-
-		if (isset($this->request->get['filter_date_from'])) {
-			$url .= '&filter_date_from=' . $this->request->get['filter_date_from'];
-		}
-
-		if (isset($this->request->get['filter_date_to'])) {
-			$url .= '&filter_date_to=' . $this->request->get['filter_date_to'];
-		}
 
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
@@ -284,6 +272,8 @@ class Marketing extends \Opencart\System\Engine\Controller {
 
 		$data['sort'] = $sort;
 		$data['order'] = $order;
+
+		$this->document->addScript('view/javascript/oc/filter.min.js');
 
 		return $this->load->view('marketing/marketing_list', $data);
 	}

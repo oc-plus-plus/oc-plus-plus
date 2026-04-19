@@ -3,8 +3,8 @@
 error_reporting(E_ALL);
 
 // Check Version
-if (version_compare(PHP_VERSION, '8.0', '<')) {
-	exit('PHP8.0+ Required');
+if (version_compare(PHP_VERSION, '8.1', '<')) {
+	exit('PHP8.2+ Required');
 }
 
 if (!ini_get('date.timezone')) {
@@ -58,5 +58,4 @@ require_once(DIR_SYSTEM . 'engine/config.php');
 
 // Helper
 require_once(DIR_SYSTEM . 'helper/general.php');
-require_once(DIR_SYSTEM . 'helper/filter.php');
 require_once(DIR_SYSTEM . 'helper/validation.php');

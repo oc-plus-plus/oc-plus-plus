@@ -55,7 +55,7 @@ class Developer extends \Opencart\System\Engine\Controller {
 	 *
 	 * @return void
 	 */
-	public function cache(): void {
+	public function systemcache(): void {
 		$this->load->language('common/developer');
 
 		$json = [];
@@ -65,17 +65,8 @@ class Developer extends \Opencart\System\Engine\Controller {
 		}
 
 		if (!$json) {
-			$files = glob(DIR_CACHE . 'cache.*');
-
-			if ($files) {
-				foreach ($files as $file) {
-					if (is_file($file)) {
-						unlink($file);
-					}
-				}
-			}
-
-			$json['success'] = $this->language->get('text_cache_success');
+			$this->cleanDirectory(DIR_CACHE);
+			$json['success'] = $this->language->get('text_systemcache_success');
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
@@ -87,7 +78,7 @@ class Developer extends \Opencart\System\Engine\Controller {
 	 *
 	 * @return void
 	 */
-	public function theme(): void {
+	public function imagecache(): void {
 		$this->load->language('common/developer');
 
 		$json = [];
@@ -97,25 +88,8 @@ class Developer extends \Opencart\System\Engine\Controller {
 		}
 
 		if (!$json) {
-			$directories = glob(DIR_CACHE . 'template/*', GLOB_ONLYDIR);
-
-			if ($directories) {
-				foreach ($directories as $directory) {
-					$files = glob($directory . '/*');
-
-					foreach ($files as $file) {
-						if (is_file($file)) {
-							unlink($file);
-						}
-					}
-
-					if (is_dir($directory)) {
-						rmdir($directory);
-					}
-				}
-			}
-
-			$json['success'] = $this->language->get('text_theme_success');
+			$this->cleanDirectory(DIR_IMAGE . 'cache');
+			$json['success'] = $this->language->get('text_imagecache_success');
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
@@ -137,32 +111,9 @@ class Developer extends \Opencart\System\Engine\Controller {
 		}
 
 		if (!$json) {
-			// Before we delete we need to make sure there is a sass file to regenerate the css
-			$file = DIR_APPLICATION . 'view/stylesheet/bootstrap.css';
-
-			if (is_file($file) && is_file(DIR_APPLICATION . 'view/stylesheet/scss/bootstrap.scss')) {
-				unlink($file);
-			}
-
-			$files = glob(DIR_CATALOG . 'view/theme/*/stylesheet/scss/bootstrap.scss');
-
-			foreach ($files as $file) {
-				$file = substr($file, 0, -20) . '/bootstrap.css';
-
-				if (is_file($file)) {
-					unlink($file);
-				}
-			}
-
-			$files = glob(DIR_CATALOG . 'view/theme/*/stylesheet/stylesheet.scss');
-
-			foreach ($files as $file) {
-				$file = substr($file, 0, -16) . '/stylesheet.css';
-
-				if (is_file($file)) {
-					unlink($file);
-				}
-			}
+			// Cleans the *.css files of a specified directory
+			array_map('unlink', array_filter(glob(DIR_APPLICATION . 'view/stylesheet/*.css'), 'is_file'));
+			array_map('unlink', array_filter(glob(DIR_CATALOG . 'view/stylesheet/*.css'), 'is_file'));
 
 			$json['success'] = $this->language->get('text_sass_success');
 		}
@@ -172,121 +123,42 @@ class Developer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
-	 * Vendor
+	 * Cleans the contents of a specified directory by deleting all files and subdirectories,
+	 * except for the 'index.html' file in the root of the directory.
 	 *
-	 * Generate new autoloader file
+	 * @param string $dir the path of the directory to clean
 	 *
-	 * @return void
+	 * @return bool returns true if the directory was successfully cleaned, or false if the provided path is not a directory
 	 */
-	public function vendor(): void {
-		$this->load->language('common/developer');
-
-		$json = [];
-
-		if (!$this->user->hasPermission('modify', 'common/developer')) {
-			$json['error'] = $this->language->get('error_permission');
+	private function cleanDirectory(string $dir): bool {
+		if (!is_dir($dir)) {
+			return false;
 		}
 
-		if (!$json) {
-			// Generate php autoload file
-			$code = '<?php' . "\n";
+		$dir = rtrim($dir, '/\\') . DIRECTORY_SEPARATOR;
+		$indexHtmlPath = $dir . 'index.html';
 
-			$files = glob(DIR_STORAGE . 'vendor/*/*/composer.json');
+		$iterator = new \RecursiveIteratorIterator(
+			new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS),
+			\RecursiveIteratorIterator::CHILD_FIRST
+		);
 
-			foreach ($files as $file) {
-				$output = json_decode(file_get_contents($file), true);
+		foreach ($iterator as $file) {
+			/** @var \SplFileInfo $file */
+			$pathname = $file->getPathname();
 
-				$code .= '// ' . $output['name'] . "\n";
-
-				if (isset($output['autoload'])) {
-					$directory = substr(dirname($file), strlen(DIR_STORAGE . 'vendor/'));
-
-					// Autoload psr-4 files
-					if (isset($output['autoload']['psr-4'])) {
-						$autoload = $output['autoload']['psr-4'];
-
-						foreach ($autoload as $namespace => $path) {
-							if (!is_array($path)) {
-								$code .= '$autoloader->register(\'' . rtrim($namespace, '\\') . '\', DIR_STORAGE . \'vendor/' . $directory . '/' . rtrim($path, '/') . '/' . '\', true);' . "\n";
-							} else {
-								foreach ($path as $value) {
-									$code .= '$autoloader->register(\'' . rtrim($namespace, '\\') . '\', DIR_STORAGE . \'vendor/' . $directory . '/' . rtrim($value, '/') . '/' . '\', true);' . "\n";
-								}
-							}
-						}
-					}
-
-					// Autoload psr-0 files
-					if (isset($output['autoload']['psr-0'])) {
-						$autoload = $output['autoload']['psr-0'];
-
-						foreach ($autoload as $namespace => $path) {
-							if (!is_array($path)) {
-								$code .= '$autoloader->register(\'' . rtrim($namespace, '\\') . '\', DIR_STORAGE . \'vendor/' . $directory . '/' . rtrim($path, '/') . '/' . '\', true);' . "\n";
-							} else {
-								foreach ($path as $value) {
-									$code .= '$autoloader->register(\'' . rtrim($namespace, '\\') . '\', DIR_STORAGE . \'vendor/' . $directory . '/' . rtrim($value, '/') . '/' . '\', true);' . "\n";
-								}
-							}
-						}
-					}
-
-					// Autoload classmap
-					if (isset($output['autoload']['classmap'])) {
-						$autoload = [];
-
-						$classmaps = $output['autoload']['classmap'];
-
-						foreach ($classmaps as $classmap) {
-							$directories = [dirname($file) . '/' . $classmap];
-
-							while (count($directories) != 0) {
-								$next = array_shift($directories);
-
-								if (is_dir($next)) {
-									foreach (glob(trim($next, '/') . '/{*,.[!.]*,..?*}', GLOB_BRACE) as $file) {
-										if (is_dir($file)) {
-											$directories[] = $file . '/';
-										}
-
-										if (is_file($file)) {
-											$namespace = substr(dirname($file), strlen(DIR_STORAGE . 'vendor/' . $directory . $classmap) + 1);
-
-											if ($namespace) {
-												$autoload[$namespace] = substr(dirname($file), strlen(DIR_STORAGE . 'vendor/'));
-											}
-										}
-									}
-								}
-							}
-						}
-
-						foreach ($autoload as $namespace => $path) {
-							$code .= '$autoloader->register(\'' . rtrim($namespace, '\\') . '\', DIR_STORAGE . \'vendor/' . rtrim($path, '/') . '/' . '\', true);' . "\n";
-						}
-					}
-
-					// Autoload files
-					if (isset($output['autoload']['files'])) {
-						$files = $output['autoload']['files'];
-
-						foreach ($files as $file) {
-							$code .= 'if (is_file(DIR_STORAGE . \'vendor/' . $directory . '/' . $file . '\')) {' . "\n";
-							$code .= '	require_once(DIR_STORAGE . \'vendor/' . $directory . '/' . $file . '\');' . "\n";
-							$code .= '}' . "\n";
-						}
-					}
-				}
-
-				$code .= "\n";
+			// Пропускаем index.html только в корневой папке
+			if ($pathname === $indexHtmlPath) {
+				continue;
 			}
 
-			file_put_contents(DIR_SYSTEM . 'vendor.php', trim($code));
-
-			$json['success'] = $this->language->get('text_vendor_success');
+			if ($file->isDir()) {
+				@rmdir($pathname);
+			} else {
+				@unlink($pathname);
+			}
 		}
 
-		$this->response->addHeader('Content-Type: application/json');
-		$this->response->setOutput(json_encode($json));
+		return true;
 	}
 }

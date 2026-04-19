@@ -1,25 +1,28 @@
 /.idea
+/*.cache
 
 # Image cache files
 /www/image/cache/*
 !/www/image/cache/index.html
 
 # Storage files
-/storage/backup/*
-!/storage/backup/index.html
-/storage/cache/*
-!/storage/cache/index.html
-/storage/download/*
-!/storage/download/index.html
-/storage/logs/*
-!/storage/logs/index.html
-/storage/session/*
-!/storage/session/index.html
-/storage/upload/*
-!/storage/upload/index.html
+/www/system/storage/backup/*
+!/www/system/storage/backup/index.html
+/www/system/storage/cache/*
+!/www/system/storage/cache/index.html
+/www/system/storage/download/*
+!/www/system/storage/download/index.html
+!/www/system/storage/download/linuxmint.zip.73534af7d03df29ac0158455c46e3d2a
+/www/system/storage/logs/*
+!/www/system/storage/logs/index.html
+/www/system/storage/session/*
+!/www/system/storage/session/index.html
+/www/system/storage/upload/*
+!/www/system/storage/upload/index.html
 
 # CSS Files
-/www/catalog/view/stylesheet/stylesheet.css
+/www/admin/view/stylesheet/*.css
+/www/catalog/view/stylesheet/*.css
 
 # Docker files
 /.docker/log/apache/*

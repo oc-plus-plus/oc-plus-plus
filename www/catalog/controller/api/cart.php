@@ -279,6 +279,13 @@ class Cart extends \Opencart\System\Engine\Controller {
 		// Cart
 		$this->load->model('checkout/cart');
 
+		// Display prices
+		if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
+			$price_status = true;
+		} else {
+			$price_status = false;
+		}
+
 		$products = $this->model_checkout_cart->getProducts();
 
 		foreach ($products as $product) {
@@ -286,7 +293,7 @@ class Cart extends \Opencart\System\Engine\Controller {
 
 			if ($product['subscription']) {
 				if ($product['subscription']['trial_status']) {
-					$subscription .= sprintf($this->language->get('text_subscription_trial'), $price_status ?? $product['subscription']['trial_price_text'], $product['subscription']['trial_cycle'], $product['subscription']['trial_frequency'], $product['subscription']['trial_duration']);
+					$subscription .= sprintf($this->language->get('text_subscription_trial'), ($price_status ? $product['subscription']['trial_price_text'] : ''), $product['subscription']['trial_cycle'], $product['subscription']['trial_frequency'], $product['subscription']['trial_duration']);
 				}
 
 				if ($product['subscription']['duration']) {

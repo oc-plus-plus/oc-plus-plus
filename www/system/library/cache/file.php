@@ -34,8 +34,8 @@ class File {
 			$time = substr(strrchr($file, '.'), 1);
 
 			if ($time < time()) {
-				if (!@unlink($file)) {
-					clearstatcache(false, $file);
+				if (is_file($file)) {
+					@unlink($file);
 				}
 			} else {
 				return json_decode(file_get_contents($file), true);
@@ -87,15 +87,17 @@ class File {
 	 * Destructor
 	 */
 	public function __destruct() {
-		$files = glob(DIR_CACHE . 'cache.*');
+		if (mt_rand(1, 100) == 1) {
+			$files = glob(DIR_CACHE . 'cache.*');
 
-		if ($files && mt_rand(1, 100) == 1) {
-			foreach ($files as $file) {
-				$time = substr(strrchr($file, '.'), 1);
+			if ($files) {
+				foreach ($files as $file) {
+					$time = substr(strrchr($file, '.'), 1);
 
-				if ($time < time()) {
-					if (!@unlink($file)) {
-						clearstatcache(false, $file);
+					if ($time < time()) {
+						if (!@unlink($file)) {
+							clearstatcache(false, $file);
+						}
 					}
 				}
 			}

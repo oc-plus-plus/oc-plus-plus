@@ -14,85 +14,65 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 	public function index(): void {
 		$this->load->language('marketing/affiliate');
 
+		$url = '';
+
 		if (isset($this->request->get['filter_customer'])) {
 			$filter_customer = $this->request->get['filter_customer'];
+			$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
 		} else {
 			$filter_customer = '';
 		}
 
 		if (isset($this->request->get['filter_tracking'])) {
 			$filter_tracking = $this->request->get['filter_tracking'];
+			$url .= '&filter_tracking=' . $this->request->get['filter_tracking'];
 		} else {
 			$filter_tracking = '';
 		}
 
 		if (isset($this->request->get['filter_payment_method'])) {
 			$filter_payment_method = (string)$this->request->get['filter_payment_method'];
+			$url .= '&filter_payment_method=' . $this->request->get['filter_payment_method'];
 		} else {
 			$filter_payment_method = '';
 		}
 
 		if (isset($this->request->get['filter_commission'])) {
 			$filter_commission = $this->request->get['filter_commission'];
+			$url .= '&filter_commission=' . $this->request->get['filter_commission'];
 		} else {
 			$filter_commission = '';
 		}
 
 		if (isset($this->request->get['filter_date_from'])) {
 			$filter_date_from = $this->request->get['filter_date_from'];
+			$url .= '&filter_date_from=' . $this->request->get['filter_date_from'];
 		} else {
 			$filter_date_from = '';
 		}
 
 		if (isset($this->request->get['filter_date_to'])) {
 			$filter_date_to = $this->request->get['filter_date_to'];
+			$url .= '&filter_date_to=' . $this->request->get['filter_date_to'];
 		} else {
 			$filter_date_to = '';
 		}
 
 		if (isset($this->request->get['filter_status'])) {
 			$filter_status = $this->request->get['filter_status'];
+			$url .= '&filter_status=' . $this->request->get['filter_status'];
 		} else {
 			$filter_status = '';
 		}
 
 		if (isset($this->request->get['limit'])) {
 			$limit = (int)$this->request->get['limit'];
+			$url .= '&limit=' . $this->request->get['limit'];
 		} else {
 			$limit = $this->config->get('config_pagination');
 		}
 
 		$this->document->setTitle($this->language->get('heading_title'));
-
-		$url = '';
-
-		if (isset($this->request->get['filter_customer'])) {
-			$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
-		}
-
-		if (isset($this->request->get['filter_tracking'])) {
-			$url .= '&filter_tracking=' . $this->request->get['filter_tracking'];
-		}
-
-		if (isset($this->request->get['filter_payment_method'])) {
-			$url .= '&filter_payment_method=' . $this->request->get['filter_payment_method'];
-		}
-
-		if (isset($this->request->get['filter_commission'])) {
-			$url .= '&filter_commission=' . $this->request->get['filter_commission'];
-		}
-
-		if (isset($this->request->get['filter_date_from'])) {
-			$url .= '&filter_date_from=' . $this->request->get['filter_date_from'];
-		}
-
-		if (isset($this->request->get['filter_date_to'])) {
-			$url .= '&filter_date_to=' . $this->request->get['filter_date_to'];
-		}
-
-		if (isset($this->request->get['filter_status'])) {
-			$url .= '&filter_status=' . $this->request->get['filter_status'];
-		}
 
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
@@ -104,10 +84,6 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 
 		if (isset($this->request->get['page'])) {
 			$url .= '&page=' . $this->request->get['page'];
-		}
-
-		if (isset($this->request->get['limit'])) {
-			$url .= '&limit=' . $this->request->get['limit'];
 		}
 
 		$data['breadcrumbs'] = [];
@@ -455,6 +431,9 @@ class Affiliate extends \Opencart\System\Engine\Controller {
 		$data['sort'] = $sort;
 		$data['order'] = $order;
 		$data['limit'] = $limit;
+
+		$this->document->addScript('view/javascript/oc/filter.min.js');
+		$this->document->addScript('view/javascript/oc/autocomplete.min.js');
 
 		return $this->load->view('marketing/affiliate_list', $data);
 	}

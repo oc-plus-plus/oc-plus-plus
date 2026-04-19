@@ -39,12 +39,13 @@ class Header extends \Opencart\System\Engine\Controller {
 		$data['keywords'] = $this->document->getKeywords();
 
 		// Hard coding css, so they can be replaced via the event's system.
-		$data['bootstrap'] = 'catalog/view/stylesheet/bootstrap.css';
-		$data['icons'] = 'catalog/view/stylesheet/fonts/fontawesome/css/all.min.css';
-		$data['stylesheet'] = 'catalog/view/stylesheet/stylesheet.css';
+		$cssext = $this->config->get('developer_sass') ? '.min.css' : '.css';
+		$data['bootstrap'] = 'catalog/view/stylesheet/bootstrap' . $cssext;
+		$data['icons'] = 'catalog/view/fonts/fontawesome/css/all' . $cssext;
+		$data['stylesheet'] = 'catalog/view/stylesheet/stylesheet' . $cssext;
 
 		// Hard coding scripts, so they can be replaced via the event's system.
-		$data['jquery'] = 'catalog/view/javascript/jquery/jquery-3.7.1.min.js';
+		$data['jquery'] = 'catalog/view/javascript/jquery/jquery-4.0.0.min.js';
 
 		$data['links'] = $this->document->getLinks();
 		$data['styles'] = $this->document->getStyles();

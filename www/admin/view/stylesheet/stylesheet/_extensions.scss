@@ -1,0 +1,234 @@
+// =============================================================================
+// Filemanager
+// =============================================================================
+
+#filemanager {
+    .fa-folder.fa-5x {
+        font-size: 10.5em;
+    }
+}
+
+// =============================================================================
+// Extension list
+// =============================================================================
+
+#extension-list {
+    color: $color-ext-text;
+
+    h2 {
+        margin-top: 54px;
+        margin-bottom: 44px;
+    }
+
+    section {
+        border: 1px solid $color-ext-border;
+
+        > div {
+            position: relative;
+        }
+
+        > div + div {
+            border-top: 1px solid $color-ext-border;
+            padding: 10px;
+        }
+
+        &:hover {
+            border: 1px solid $color-ext-highlight;
+        }
+    }
+
+    > .row {
+        margin-top: 30px;
+
+        > * {
+            margin-bottom: 30px;
+        }
+    }
+
+    .extension-preview {
+        min-height: 150px;
+
+        img {
+            margin: 0 auto;
+        }
+
+        .extension-description {
+            position: absolute;
+            background-color: rgba(36, 45, 55, 0.9);
+            color: #fff;
+            padding: 10px;
+            font-size: 14px;
+            line-height: 16px;
+            opacity: 0;
+            height: 100%;
+            width: 100%;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+
+    i {
+        color: $color-ext-icon;
+    }
+
+    // Tablet range: 992px–1199px
+    @media screen and (min-width: $bp-md) and (max-width: $bp-desktop-max) {
+        .extension-preview {
+            min-height: 123px;
+
+            .extension-description {
+                font-size: 12.5px;
+                padding: 6px;
+            }
+
+            img {
+                margin: 0 auto;
+            }
+        }
+
+        .extension-name {
+            min-height: 105px;
+
+            p {
+                color: $color-black;
+                margin-bottom: 0;
+                font-weight: 600;
+
+                &:first-child {
+                    font-size: 17px;
+                }
+
+                span {
+                    color: $color-ext-text;
+                    font-weight: 400;
+                }
+            }
+
+            h4 a,
+            p a {
+                color: $color-black;
+            }
+
+            + div > .row {
+                margin-top: 0;
+                font-size: 14px; // nested @media merged here
+            }
+        }
+
+        span {
+            font-weight: 600;
+        }
+    }
+}
+
+// =============================================================================
+// Marketplace — Extension info page
+// =============================================================================
+
+#marketplace-extension-info {
+    #banner img {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .extension-review {
+        border-top: 5px solid $color-ext-highlight;
+        padding-top: 50px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .nav-tabs {
+        font-size: 14px;
+
+        + .tab-content {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+    }
+
+    iframe {
+        width: 100%;
+        height: 500px;
+
+        @media screen and (max-width: $bp-tablet-max) {
+            height: 350px;
+        }
+    }
+
+    #buy {
+        color: $color-ext-text;
+
+        #price {
+            color: $color-black;
+            font-size: 20px;
+            padding-top: 15px;
+            padding-bottom: 5px;
+        }
+
+        i {
+            color: $color-ext-icon;
+        }
+
+        hr {
+            border-color: $color-ext-border;
+            margin: 10px 0;
+        }
+    }
+
+    #sales {
+        color: $color-ext-text;
+
+        i {
+            color: $color-ext-sales-icon;
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        strong {
+            font-size: 24px;
+        }
+    }
+
+    #comment {
+        color: $color-ext-text;
+
+        i {
+            margin-right: 10px;
+            font-size: 22px;
+        }
+
+        strong {
+            font-size: 22px;
+        }
+    }
+
+    .reply > div {
+        margin-top: 15px;
+    }
+
+    .well .media {
+        line-height: 1.2;
+
+        .media-body {
+            padding-top: 6px;
+
+            span {
+                font-size: 24px;
+                font-weight: 600;
+            }
+
+            small {
+                color: #878f9a;
+            }
+        }
+    }
+
+    @media screen and (max-width: $bp-md) {
+        .container-fluid {
+            padding-bottom: 30px;
+        }
+    }
+}
