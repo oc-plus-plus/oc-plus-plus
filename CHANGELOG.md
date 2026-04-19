@@ -31,7 +31,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 - Nothing
 
 
-## [0.1.0] - 2026-04-19
+## [0.1.0] beta - 2026-04-19
 
 ### Added
 - [#14857](https://github.com/opencart/opencart/pull/14857), [#14858](https://github.com/opencart/opencart/pull/14858), [#14859](https://github.com/opencart/opencart/pull/14859) - Add manufacturer filter

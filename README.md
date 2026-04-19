@@ -63,7 +63,7 @@ For a real-world example in action, you can visit small multilanguage website: h
    OC++ has not been tested with other database systems, and compatibility is not guaranteed.
 - **PHP**: 8.1 – 8.5 _(PHP 8.4 is recommended)_.
 - **PHP Settings**:
-  - m`ax_execution_time` = 150 
+  - `max_execution_time` = 150 
   - `max_input_time` = 180 
   - `memory_limit` = 256M (at least 384M recommended for developers)
 - **Required PHP Extensions**: the following extensions are required. Most of these are likely already enabled on your server:
@@ -76,7 +76,7 @@ For a real-world example in action, you can visit small multilanguage website: h
    - Create a new empty database.
    - Assign (or create) a database user with full privileges (CREATE, DROP, etc.) for this database.
    - Note down your database credentials: Hostname (or IP), Username, Password, and Database Name.
-3. **Upload Files**: Extract the downloaded archive into the root directory of your virtual web host (the folder accessible via the Internet at your domain address).
+3. **Upload Files**: Extract the downloaded `oc-plus-plus.0.1.0.zip` archive into the root directory of your virtual web host (the folder accessible via the Internet at your domain address).
 4. **Run Installer**: Open your web browser and navigate to https://your-domain.com.
 5. **Follow Instructions**: The web installer will launch automatically; follow the on-screen steps to complete the setup.
 6. **Post-Installation**: Once the installation is finished, manually **delete the /install folder** for security reasons.
@@ -103,6 +103,24 @@ For a real-world example in action, you can visit small multilanguage website: h
 > Before starting the upgrade procedure, **you MUST create a full backup** of your database and all website files.
 > You must ensure that you have the means to quickly restore your website to its original state (pre-upgrade)
 > should any issues arise.
+
+### Quick Upgrade Guide
+
+1. **Extract Core Files**: Unpack the `update-opencart-4.1.0.3-oc-plus-plus.0.1.0.zip` archive directly into your
+   web host's root directory, overwriting all existing OpenCart 4.1.0.3 files.
+2. **Handle Storage/Vendor Files**: Since OpenCart 4 requires moving the `/system/storage` folder after the
+   initial installation, the updated vendor libraries are provided as a separate part of the package.
+3. **Update Vendor Directory**: Locate your current `/storage` folder (wherever you moved it during setup).
+   Extract the contents of the `update-vendor-oc-plus-plus.0.1.0.zip` update package into this folder,
+   ensuring all files within the existing `/vendor` directory are overwritten.
+4. **Clear Caches**: Log in to your Admin Panel. Go to Dashboard -> Developer Settings
+   (the gear icon in the top right corner) and refresh/clear: System Cache, Image Cache, and SASS.
+5. **Verification**: Check both the storefront and the Admin Panel.
+   If the steps were followed correctly, everything should be fully functional.
+
+**Note on Database**: The database structure remains unchanged and is fully compatible with OpenCart 4.1.0.3. No update scripts are required—simply replace the files, and you are ready to go.
+
+**Troubleshooting**: If critical issues occur (e.g., the site becomes inaccessible) and you cannot identify the cause, restore your site using the backup you created before starting the upgrade.
 
 
 ## Local Development with Docker
