@@ -57,7 +57,7 @@
                 <input type="date" name="filter_date_to" value="{{ filter_date_to }}" placeholder="{{ entry_date_to }}" id="input-date-to" class="form-control"/>
               </div>
               <div class="text-end">
-                <button type="submit" id="button-filter" class="btn btn-light"><i class="fa-solid fa-filter"></i> {{ button_filter }}</button>
+                <button type="submit" class="btn btn-light"><i class="fa-solid fa-filter"></i> {{ button_filter }}</button>
                 <button type="reset" data-bs-toggle="tooltip" title="{{ button_reset }}" class="btn btn-outline-secondary"><i class="fa-solid fa-filter-circle-xmark"></i></button>
               </div>
             </form>
@@ -74,16 +74,49 @@
   </div>
 </div>
 <script type="text/javascript">
-    initFilter('#form-filter', '#return', 'sale/returns', '{{ user_token }}');
+  ocFilter({
+    formId: '#form-filter',
+    listId: '#return',
+    route: 'sale/returns',
+    userToken: '{{ user_token }}'
+  });
 
-    initAutocomplete('#input-customer', 'customer/customer.autocomplete', '{{ user_token }}', 'filter_name', 'customer_id', 'name');
-    initAutocomplete('#input-product', 'catalog/product.autocomplete', '{{ user_token }}', 'filter_name', 'product_id', 'name');
-    initAutocomplete('#input-model', 'catalog/product.autocomplete', '{{ user_token }}', 'filter_model', 'product_id', 'model');
+  ocAutocomplete({
+    inputSelector: '#input-customer',
+    route: 'customer/customer.autocomplete',
+    userToken: '{{ user_token }}',
+    valueKey: 'customer_id',
+    labelKey: 'name',
+    onSelect: function (item) {
+      $('#input-customer').val(decodeHTMLEntities(item.label));
+    }
+  });
 
-    $('#return').on('click', 'thead a, .pagination a', function (e) {
-        e.preventDefault();
+  ocAutocomplete({
+    inputSelector: '#input-product',
+    route: 'catalog/product.autocomplete',
+    userToken: '{{ user_token }}',
+    valueKey: 'product_id',
+    labelKey: 'name',
+    onSelect: function (item) {
+      $('#input-product').val(decodeHTMLEntities(item.label));
+    }
+  });
 
-        $('#return').load(this.href);
-    });
+  ocAutocomplete({
+    inputSelector: '#input-model',
+    route: 'catalog/product.autocomplete',
+    userToken: '{{ user_token }}',
+    valueKey: 'product_id',
+    labelKey: 'model',
+    onSelect: function (item) {
+      $('#input-model').val(decodeHTMLEntities(item.label));
+    }
+  });
+
+  $('#return').on('click', 'thead a, .pagination a', function (e) {
+    e.preventDefault();
+    $('#return').load(this.href);
+  });
 </script>
 {{ footer }}

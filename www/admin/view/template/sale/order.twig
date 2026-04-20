@@ -73,7 +73,7 @@
                 <input type="date" name="filter_date_modified_to" value="{{ filter_date_modified_to }}" placeholder="{{ entry_date_modified_to }}" id="input-date-modified-to" class="form-control"/>
               </div>
               <div class="text-end">
-                <button type="submit" id="button-filter" class="btn btn-light"><i class="fa-solid fa-filter"></i> {{ button_filter }}</button>
+                <button type="submit" class="btn btn-light"><i class="fa-solid fa-filter"></i> {{ button_filter }}</button>
                 <button type="reset" data-bs-toggle="tooltip" title="{{ button_reset }}" class="btn btn-outline-secondary"><i class="fa-solid fa-filter-circle-xmark"></i></button>
               </div>
             </form>
@@ -90,33 +90,46 @@
   </div>
 </div>
 <script type="text/javascript">
-    initFilter('#form-filter', '#order', 'sale/order', '{{ user_token }}');
+  ocFilter({
+    formId: '#form-filter',
+    listId: '#order',
+    route: 'sale/order',
+    userToken: '{{ user_token }}'
+  });
 
-    initAutocomplete('#input-customer', 'customer/customer.autocomplete', '{{ user_token }}', 'filter_name', 'customer_id', 'name');
+  ocAutocomplete({
+    inputSelector: '#input-customer',
+    route: 'customer/customer.autocomplete',
+    userToken: '{{ user_token }}',
+    valueKey: 'customer_id',
+    labelKey: 'name',
+    onSelect: function (item) {
+      $('#input-customer').val(decodeHTMLEntities(item.label));
+    }
+  });
 
-    $('#order').on('click', 'thead a, .pagination a', function (e) {
-        e.preventDefault();
+  $('#order').on('click', 'thead a, .pagination a', function (e) {
+    e.preventDefault();
+    $('#order').load(this.href);
+  });
 
-        $('#order').load(this.href);
-    });
-
-    $('input[name^=\'selected\']').on('change', function () {
-        $('#button-shipping, #button-invoice').prop('disabled', true);
-
-        var selected = $('input[name^=\'selected\']:checked');
-
-        if (selected.length) {
-            $('#button-invoice').prop('disabled', false);
-        }
-
-        for (i = 0; i < selected.length; i++) {
-            if ($(selected[i]).parent().find('input[name^=\'shipping_method\']').val()) {
-                $('#button-shipping').prop('disabled', false);
-                break;
-            }
-        }
-    });
-
+  $('input[name^=\'selected\']').on('change', function () {
     $('#button-shipping, #button-invoice').prop('disabled', true);
+
+    var selected = $('input[name^=\'selected\']:checked');
+
+    if (selected.length) {
+      $('#button-invoice').prop('disabled', false);
+    }
+
+    for (i = 0; i < selected.length; i++) {
+      if ($(selected[i]).parent().find('input[name^=\'shipping_method\']').val()) {
+        $('#button-shipping').prop('disabled', false);
+        break;
+      }
+    }
+  });
+
+  $('#button-shipping, #button-invoice').prop('disabled', true);
 </script>
 {{ footer }}

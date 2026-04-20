@@ -47,7 +47,7 @@
                 <input type="date" name="filter_date_to" value="{{ filter_date_to }}" placeholder="{{ entry_date_to }}" id="input-date-to" class="form-control"/>
               </div>
               <div class="text-end">
-                <button type="submit" id="button-filter" class="btn btn-light"><i class="fa-solid fa-filter"></i> {{ button_filter }}</button>
+                <button type="submit" class="btn btn-light"><i class="fa-solid fa-filter"></i> {{ button_filter }}</button>
                 <button type="reset" data-bs-toggle="tooltip" title="{{ button_reset }}" class="btn btn-outline-secondary"><i class="fa-solid fa-filter-circle-xmark"></i></button>
               </div>
             </form>
@@ -64,63 +64,77 @@
   </div>
 </div>
 <script type="text/javascript">
-    initFilter('#form-filter', '#review', 'catalog/review', '{{ user_token }}');
+  ocFilter({
+    formId: '#form-filter',
+    listId: '#review',
+    route: 'catalog/review',
+    userToken: '{{ user_token }}'
+  });
 
-    initAutocomplete('#input-product', 'catalog/product.autocomplete', '{{ user_token }}', 'filter_name', 'product_id', 'name');
+  ocAutocomplete({
+    inputSelector: '#input-product',
+    route: 'catalog/product.autocomplete',
+    userToken: '{{ user_token }}',
+    valueKey: 'product_id',
+    labelKey: 'name',
+    onSelect: function (item) {
+      $('#input-product').val(decodeHTMLEntities(item.label));
+    }
+  });
 
-    $('#review').on('click', 'thead a, .pagination a', function (e) {
-        e.preventDefault();
+  $('#review').on('click', 'thead a, .pagination a', function (e) {
+    e.preventDefault();
 
-        $('#review').load(this.href);
-    });
+    $('#review').load(this.href);
+  });
 
-    $('#button-rating').on('click', function () {
-        var element = this;
+  $('#button-rating').on('click', function () {
+    var element = this;
 
-        $(element).button('loading');
+    $(element).button('loading');
 
-        var next = 'index.php?route=catalog/review.sync&user_token={{ user_token }}';
+    var next = 'index.php?route=catalog/review.sync&user_token={{ user_token }}';
 
-        var rating = function () {
-            return $.ajax({
-                url: next,
-                dataType: 'json',
-                success: function (json) {
-                    console.log(json);
+    var rating = function () {
+      return $.ajax({
+        url: next,
+        dataType: 'json',
+        success: function (json) {
+          console.log(json);
 
-                    $('.alert-dismissible').remove();
+          $('.alert-dismissible').remove();
 
-                    if (json['error']) {
-                        $('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+          if (json['error']) {
+            $('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
 
-                        $(element).button('reset');
-                    }
+            $(element).button('reset');
+          }
 
-                    if (json['text']) {
-                        $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-check-circle-circle"></i> ' + json['text'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
-                    }
+          if (json['text']) {
+            $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-check-circle-circle"></i> ' + json['text'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+          }
 
-                    if (json['success']) {
-                        $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-check-circle-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+          if (json['success']) {
+            $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-check-circle-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
 
-                        $(element).button('reset');
-                    }
+            $(element).button('reset');
+          }
 
-                    if (json['next']) {
-                        next = json['next'];
+          if (json['next']) {
+            next = json['next'];
 
-                        chain.attach(rating);
-                    }
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            chain.attach(rating);
+          }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+          console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 
-                    $(element).button('reset');
-                }
-            });
-        };
+          $(element).button('reset');
+        }
+      });
+    };
 
-        chain.attach(rating);
-    });
+    chain.attach(rating);
+  });
 </script>
 {{ footer }}
