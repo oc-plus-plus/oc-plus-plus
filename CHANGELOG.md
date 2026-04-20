@@ -65,6 +65,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 - `scssphp/scssphp` package updated to version `2.1`
 - `twig/twig` package updated to version `3.24`
 - Monolithic `stylesheet.css` has been converted to a modular SCSS structure
+- `Opencart\System\Library::addScript()` - The list of scripts can be passed as an array
 - Reworked Autocomplete for the Admin panel:
   - The code has been reworked.
   - JS is separated into an include file that can be reused.

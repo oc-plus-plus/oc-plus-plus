@@ -153,13 +153,19 @@ class Document {
 	/**
 	 * Add Script
 	 *
-	 * @param string $href
-	 * @param string $position
+	 * @param array|string $href
+	 * @param string       $position
 	 *
 	 * @return void
 	 */
-	public function addScript(string $href, string $position = 'header'): void {
-		$this->scripts[$position][$href] = ['href' => $href];
+	public function addScript(array|string $href, string $position = 'header'): void {
+		if (is_array($href)) {
+			foreach ($href as $h) {
+				$this->addScript($h, $position);
+			}
+		} else {
+			$this->scripts[$position][$href] = ['href' => $href];
+		}
 	}
 
 	/**
