@@ -135,7 +135,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 - PHP Warning: unlink(): No such file or directory in /system/library/cache/file.php on line 37
 - Administrator password recovery
 - Display of sales statistics on the Dashboard Map
-- The 'Reset' button on the admin panel filters did not work correctly
 - SQL error on `admin/sale/subscription` filter
 - SQL error on `admin/sale/returns` filter
 - **Green Build** - Fixed various static analysis errors and comments
