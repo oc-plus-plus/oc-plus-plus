@@ -325,6 +325,8 @@ class Review extends \Opencart\System\Engine\Controller {
 	public function form(): void {
 		$this->load->language('catalog/review');
 
+		$this->document->addScript('view/javascript/oc/autocomplete.min.js');
+
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$data['text_form'] = !isset($this->request->get['review_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');

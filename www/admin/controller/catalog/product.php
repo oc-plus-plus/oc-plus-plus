@@ -467,7 +467,8 @@ class Product extends \Opencart\System\Engine\Controller {
 
 		$this->document->addScript([
 			'view/javascript/ckeditor/ckeditor.js',
-			'view/javascript/ckeditor/adapters/jquery.js'
+			'view/javascript/ckeditor/adapters/jquery.js',
+			'view/javascript/oc/autocomplete.min.js'
 		]);
 
 		$data['text_form'] = !isset($this->request->get['product_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
