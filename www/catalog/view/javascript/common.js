@@ -15,16 +15,15 @@ function escapeHtml(str) {
         .replace(/'/g, '&#039;');
 }
 
-// Helper: build an error alert — message is plain text and gets escaped.
+// Helper: build an error alert
 function buildErrorAlert(message) {
     return '<div class="alert alert-danger alert-dismissible">'
         + '<i class="fa-solid fa-circle-exclamation"></i> '
-        + escapeHtml(message)
+        + message
         + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>';
 }
 
-// Helper: build a success alert — OpenCart intentionally returns HTML in success messages
-// (e.g. links to cart or comparison list), so the value is inserted as-is.
+// Helper: build a success alert
 function buildSuccessAlert(message) {
     return '<div class="alert alert-success alert-dismissible">'
         + '<i class="fa-solid fa-circle-check"></i> '
