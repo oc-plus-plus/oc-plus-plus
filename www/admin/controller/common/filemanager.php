@@ -14,6 +14,8 @@ class FileManager extends \Opencart\System\Engine\Controller {
 	 * @return void
 	 */
 	public function index(): void {
+		$this->session->data['start_file_manager'] = true;
+
 		$this->load->language('common/filemanager');
 
 		$data['error_upload_size'] = sprintf($this->language->get('error_upload_size'), $this->config->get('config_file_max_size'));
@@ -51,6 +53,19 @@ class FileManager extends \Opencart\System\Engine\Controller {
 	 * @return void
 	 */
 	public function list(): void {
+		// Remember the last directory
+		if (!isset($this->request->get['directory'])
+			&& !isset($this->request->get['page'])
+			&& isset($this->session->data['start_file_manager'])) {
+			$this->request->get['directory'] = $this->session->data['directory_file_manager'] ?? null;
+			$this->request->get['page'] = $this->session->data['page_file_manager'] ?? null;
+		} else {
+			$this->session->data['directory_file_manager'] = $this->request->get['directory'] ?? null;
+			$this->session->data['page_file_manager'] = $this->request->get['page'] ?? null;
+		}
+
+		$this->session->data['start_file_manager'] = null;
+
 		$this->load->language('common/filemanager');
 
 		$base = DIR_IMAGE . 'catalog/';
