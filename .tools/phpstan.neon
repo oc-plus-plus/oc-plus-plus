@@ -1,0 +1,17 @@
+services:
+    -
+        class: \Tools\PHPStan\RegistryPropertyReflectionExtension
+        tags:
+            - phpstan.broker.propertiesClassReflectionExtension
+parameters:
+    level: 1
+    paths:
+        - ../www/
+    excludePaths:
+        - ./phpstan/
+        - ../www/system/storage/vendor/
+        - ../www/system/storage/cache/
+    tmpDir: .cache
+    ignoreErrors:
+        - '#^Constant [A-Z_]+ not found\.$#'
+        - '#^Variable \$\S+ might not be defined\.$#'

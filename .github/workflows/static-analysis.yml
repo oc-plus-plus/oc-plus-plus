@@ -23,4 +23,4 @@ jobs:
           php-version: ${{ matrix.php }}
 
       - name: Run PHPStan
-        run: php tools/phpstan.phar analyze --no-progress
+        run: composer static-analysis

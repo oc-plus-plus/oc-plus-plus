@@ -47,7 +47,7 @@ class ComposerStaticInit500f4c19ea959e79c114a2ad6f356da6
         ),
         'Tools\\PHPStan\\' =>
         array (
-            0 => __DIR__ . '/../../../../..' . '/tools/phpstan',
+            0 => __DIR__ . '/../../../../..' . '/.tools/phpstan',
         ),
         'Symfony\\Polyfill\\Mbstring\\' =>
         array (
@@ -462,8 +462,8 @@ class ComposerStaticInit500f4c19ea959e79c114a2ad6f356da6
         'Symfony\\Component\\Filesystem\\Path' => __DIR__ . '/..' . '/symfony/filesystem/Path.php',
         'Symfony\\Polyfill\\Ctype\\Ctype' => __DIR__ . '/..' . '/symfony/polyfill-ctype/Ctype.php',
         'Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
-        'Tools\\PHPStan\\LoadedProperty' => __DIR__ . '/../../../../..' . '/tools/phpstan/LoadedProperty.php',
-        'Tools\\PHPStan\\RegistryPropertyReflectionExtension' => __DIR__ . '/../../../../..' . '/tools/phpstan/RegistryPropertyReflectionExtension.php',
+        'Tools\\PHPStan\\LoadedProperty' => __DIR__ . '/../../../../..' . '/.tools/phpstan/LoadedProperty.php',
+        'Tools\\PHPStan\\RegistryPropertyReflectionExtension' => __DIR__ . '/../../../../..' . '/.tools/phpstan/RegistryPropertyReflectionExtension.php',
         'Twig\\AbstractTwigCallable' => __DIR__ . '/..' . '/twig/twig/src/AbstractTwigCallable.php',
         'Twig\\Attribute\\AsTwigFilter' => __DIR__ . '/..' . '/twig/twig/src/Attribute/AsTwigFilter.php',
         'Twig\\Attribute\\AsTwigFunction' => __DIR__ . '/..' . '/twig/twig/src/Attribute/AsTwigFunction.php',
