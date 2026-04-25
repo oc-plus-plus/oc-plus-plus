@@ -405,13 +405,6 @@ class Installer extends \Opencart\System\Engine\Controller {
 						$base = substr(DIR_IMAGE, 0, -6);
 					}
 
-					// We need to store the path differently for vendor folders.
-					if (substr($destination, 0, 15) == 'system/storage/') {
-						$path = substr($destination, 15);
-						$base = DIR_STORAGE;
-						$prefix = 'system/storage/';
-					}
-
 					// Must not have a path before files and directories can be moved
 					$path_new = '';
 
@@ -594,36 +587,6 @@ class Installer extends \Opencart\System\Engine\Controller {
 		}
 
 		if (!$json) {
-			$json['text'] = $this->language->get('text_vendor');
-
-			$json['next'] = $this->url->link('marketplace/installer.vendor', 'user_token=' . $this->session->data['user_token'], true);
-		}
-
-		$this->response->addHeader('Content-Type: application/json');
-		$this->response->setOutput(json_encode($json));
-	}
-
-	/**
-	 * Vendor
-	 *
-	 * Generate new autoloader file
-	 *
-	 * @return void
-	 */
-	public function vendor(): void {
-		$this->load->language('marketplace/installer');
-
-		$json = [];
-
-		if (!$this->user->hasPermission('modify', 'marketplace/installer')) {
-			$json['error'] = $this->language->get('error_permission');
-		}
-
-		if (!$json) {
-			$this->load->helper('vendor');
-
-			oc_generate_vendor();
-
 			$json['success'] = $this->language->get('text_success');
 		}
 
@@ -720,11 +683,6 @@ class Installer extends \Opencart\System\Engine\Controller {
 					$path = DIR_IMAGE . substr($result['path'], 6);
 				}
 
-				// Remove vendor files or any connected extensions that was also installed.
-				if (substr($result['path'], 0, 15) == 'system/storage/') {
-					$path = DIR_STORAGE . substr($result['path'], 15);
-				}
-
 				// Check if the location exists or not
 				$path_total = $this->model_setting_extension->getTotalPaths($result['path']);
 
@@ -749,15 +707,7 @@ class Installer extends \Opencart\System\Engine\Controller {
 
 			$this->model_setting_modification->deleteModificationsByExtensionInstallId($extension_install_id);
 
-			$json['text'] = $this->language->get('text_vendor');
-
-			$url = '';
-
-			if (isset($this->request->get['extension_install_id'])) {
-				$url .= '&extension_install_id=' . $this->request->get['extension_install_id'];
-			}
-
-			$json['next'] = $this->url->link('marketplace/installer.vendor', 'user_token=' . $this->session->data['user_token'] . $url, true);
+			$json['success'] = $this->language->get('text_success');
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
