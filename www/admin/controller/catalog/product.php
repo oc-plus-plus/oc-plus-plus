@@ -1120,13 +1120,24 @@ class Product extends \Opencart\System\Engine\Controller {
 			$data['product_layout'] = [];
 		}
 
-		$data['report'] = $this->getReport();
-
 		$data['user_token'] = $this->session->data['user_token'];
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
+
+		$data['include_tab_general'] = $this->load->view('catalog/product_form/tab_general', $data);
+		$data['include_tab_data'] = $this->load->view('catalog/product_form/tab_data', $data);
+		$data['include_tab_links'] = $this->load->view('catalog/product_form/tab_links', $data);
+		$data['include_tab_attribute'] = $this->load->view('catalog/product_form/tab_attribute', $data);
+		$data['include_tab_option'] = $this->load->view('catalog/product_form/tab_option', $data);
+		$data['include_tab_subscription'] = $this->load->view('catalog/product_form/tab_subscription', $data);
+		$data['include_tab_discount'] = $this->load->view('catalog/product_form/tab_discount', $data);
+		$data['include_tab_image'] = $this->load->view('catalog/product_form/tab_image', $data);
+		$data['include_tab_reward'] = $this->load->view('catalog/product_form/tab_reward', $data);
+		$data['include_tab_seo'] = $this->load->view('catalog/product_form/tab_seo', $data);
+		$data['include_tab_design'] = $this->load->view('catalog/product_form/tab_design', $data);
+		$data['include_tab_report'] = $this->load->view('catalog/product_form/tab_report', ['report' => $this->getReport()]);
 
 		$this->response->setOutput($this->load->view('catalog/product_form', $data));
 	}

@@ -1,0 +1,12 @@
+<div id="tab-report" class="tab-pane">
+  <fieldset>
+    <legend>{{ text_report }}</legend>
+    <div id="report">{{ report }}</div>
+  </fieldset>
+</div>
+<script type="text/javascript">
+  $('#report').on('click', '.pagination a', function (e) {
+    e.preventDefault();
+    $('#report').load(this.href);
+  });
+</script>
