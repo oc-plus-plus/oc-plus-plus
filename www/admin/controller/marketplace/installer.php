@@ -297,6 +297,11 @@ class Installer extends \Opencart\System\Engine\Controller {
 			} else {
 				$json['error'] = $this->language->get('error_unzip');
 			}
+
+			// If there were errors, then delete the uploaded file
+			if ($json && is_file($file)) {
+				unlink($file);
+			}
 		}
 
 		if (!$json) {

@@ -22,10 +22,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 - Nothing
 
 #### Removed
-- oc_generate_vendor()
+- `oc_generate_vendor()`
 
 #### Fixed
-- Nothing
+- When unloading extensions, archives with errors were not deleted, but remained in the `/marketplace` folder
 
 #### Security
 - Nothing
