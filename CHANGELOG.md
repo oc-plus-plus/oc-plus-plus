@@ -16,7 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 - Remember the last directory in the file manager
 
 #### Changed
-- Nothing
+- Product form: SEO tab merged with General tab
 
 #### Deprecated
 - Nothing

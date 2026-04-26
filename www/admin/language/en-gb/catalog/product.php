@@ -48,6 +48,7 @@ $_['text_semi_month']            = 'half-month';
 $_['text_month']                 = 'month';
 $_['text_year']                  = 'year';
 $_['text_report']                = 'Reports';
+$_['text_seo']                   = 'SEO URL';
 
 // Column
 $_['column_name']                = 'Product Name';

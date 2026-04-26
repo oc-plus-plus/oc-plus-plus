@@ -1135,7 +1135,6 @@ class Product extends \Opencart\System\Engine\Controller {
 		$data['include_tab_discount'] = $this->load->view('catalog/product_form/tab_discount', $data);
 		$data['include_tab_image'] = $this->load->view('catalog/product_form/tab_image', $data);
 		$data['include_tab_reward'] = $this->load->view('catalog/product_form/tab_reward', $data);
-		$data['include_tab_seo'] = $this->load->view('catalog/product_form/tab_seo', $data);
 		$data['include_tab_design'] = $this->load->view('catalog/product_form/tab_design', $data);
 		$data['include_tab_report'] = $this->load->view('catalog/product_form/tab_report', ['report' => $this->getReport()]);
 
