@@ -1,11 +1,13 @@
 <div id="tab-image" class="tab-pane">
   <fieldset>
     <legend>{{ text_image }}</legend>
-    <div id="image" class="border rounded d-block" style="max-width: 300px;">
+    <div id="image" class="p-2 border rounded d-inline-block" style="min-width: 150px; max-width: 300px;">
       <img src="{{ thumb }}" alt="" title="" id="thumb-image" data-oc-placeholder="{{ placeholder }}" class="img-fluid"/> <input type="hidden" name="image" value="{{ image }}" id="input-image"/>
+      <div class="mt-2 input-group justify-content-center">
+        <button type="button" data-oc-toggle="image" data-oc-target="#input-image" data-oc-thumb="#thumb-image" class="btn btn-primary"><i class="fa-solid fa-pencil"></i> {{ button_edit }}</button>
+        <button type="button" data-oc-toggle="clear" data-oc-target="#input-image" data-oc-thumb="#thumb-image" class="btn btn-warning"><i class="fa-regular fa-trash-can"></i> {{ button_clear }}</button>
+      </div>
       <div class="d-grid">
-        <button type="button" data-oc-toggle="image" data-oc-target="#input-image" data-oc-thumb="#thumb-image" class="btn btn-primary rounded-0"><i class="fa-solid fa-pencil"></i> {{ button_edit }}</button>
-        <button type="button" data-oc-toggle="clear" data-oc-target="#input-image" data-oc-thumb="#thumb-image" class="btn btn-warning rounded-0"><i class="fa-regular fa-trash-can"></i> {{ button_clear }}</button>
         {% if master_id %}
           <div class="mx-auto w-25">
             <div class="form-switch">
@@ -19,7 +21,7 @@
   <fieldset>
     <legend>{{ text_image_additional }}</legend>
     <div class="table-responsive">
-      <table id="product-image" class="table table-bordered table-hover">
+      <table id="product-image" class="table table-hover">
         <thead>
         <tr>
           <th>{{ entry_image }}</th>
@@ -37,11 +39,11 @@
         {% for product_image in product_images %}
           <tr id="product-image-row-{{ image_row }}">
             <td>
-              <div class="border rounded d-block" style="max-width: 300px;">
+              <div class="p-2 border rounded d-inline-block" style="min-width: 150px; max-width: 300px;">
                 <img src="{{ product_image.thumb }}" alt="" title="" id="product-image-{{ image_row }}" data-oc-placeholder="{{ placeholder }}" class="img-fluid"/> <input type="hidden" name="product_image[{{ image_row }}][image]" value="{{ product_image.image }}" id="input-product-image-{{ image_row }}"/>
-                <div class="d-grid">
-                  <button type="button" data-oc-toggle="image" data-oc-target="#input-product-image-{{ image_row }}" data-oc-thumb="#product-image-{{ image_row }}" class="btn btn-primary rounded-0"><i class="fa-solid fa-pencil"></i> {{ button_edit }}</button>
-                  <button type="button" data-oc-toggle="clear" data-oc-target="#input-product-image-{{ image_row }}" data-oc-thumb="#product-image-{{ image_row }}" class="btn btn-warning rounded-0"><i class="fa-regular fa-trash-can"></i> {{ button_clear }}</button>
+                <div class="mt-2 input-group justify-content-center">
+                  <button type="button" data-oc-toggle="image" data-oc-target="#input-product-image-{{ image_row }}" data-oc-thumb="#product-image-{{ image_row }}" class="btn btn-primary"><i class="fa-solid fa-pencil"></i> {{ button_edit }}</button>
+                  <button type="button" data-oc-toggle="clear" data-oc-target="#input-product-image-{{ image_row }}" data-oc-thumb="#product-image-{{ image_row }}" class="btn btn-warning"><i class="fa-regular fa-trash-can"></i> {{ button_clear }}</button>
                 </div>
               </div>
             </td>
