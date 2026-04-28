@@ -13,21 +13,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 ## [Unreleased]
 
 #### Added
-- Remember the last directory in the file manager
+- Remember the last directory in the file manager.
 
 #### Changed
-- [#15381](https://github.com/opencart/opencart/pull/15381) - Fix category filter model
-- Admin: SEO tab merged with General tab
+- Admin: SEO tab merged with General tab.
 
 #### Deprecated
 - Nothing
 
 #### Removed
-- Legacy `cron.php`
+- Legacy `cron.php`.
 
 #### Fixed
-- When unloading extensions, archives with errors were not deleted, but remained in the `/marketplace` folder
-- _(introduced in Beta 1)_ Some pop-up messages contained HTML code instead of links
+- [#15381](https://github.com/opencart/opencart/pull/15381) - Fix category filter model.
+- [#15354](https://github.com/opencart/opencart/pull/15354) - Fixed the OCMOD functionality.
+- When unloading extensions, archives with errors were not deleted, but remained in the `/marketplace` folder.
+- _(introduced in Beta 1)_ Some pop-up messages contained HTML code instead of links.
 
 #### Security
 - Nothing
