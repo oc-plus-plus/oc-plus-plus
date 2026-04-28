@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 - Remember the last directory in the file manager
 
 #### Changed
+- [#15381](https://github.com/opencart/opencart/pull/15381) - Fix category filter model
 - Admin: SEO tab merged with General tab
 
 #### Deprecated
