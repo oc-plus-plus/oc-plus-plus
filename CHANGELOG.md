@@ -27,6 +27,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 
 #### Fixed
 - When unloading extensions, archives with errors were not deleted, but remained in the `/marketplace` folder
+- _(introduced in Beta 1)_ Some pop-up messages contained HTML code instead of links
 
 #### Security
 - Nothing
