@@ -22,7 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 - Nothing
 
 #### Removed
-- `oc_generate_vendor()`
+- Legacy `cron.php`
 
 #### Fixed
 - When unloading extensions, archives with errors were not deleted, but remained in the `/marketplace` folder
@@ -77,15 +77,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
   - Removed a large amount of duplicate and outdated code.
 
 ### Removed
-- Removed a large amount of outdated and duplicate code
-- Deprecated libraries replaced with current versions:
+- Removed a large amount of legacy and duplicate code
+- Deprecated libraries (replaced with current versions):
   - `Flot` (replaced with `Chart.js`).
   - `jQuery Vector Map` (replaced with `Jsvectormap`)
 - Deprecated PHP functions:
   - `imagedestroy`
   - `curl_close`
 - As unused:
-  - vendor-related functionality and references from the developer tools
+  - Legacy vendor-related functionality
   - `upload/system/helper/filter.php`
   - `aws/aws-sdk-php` package
   - `bootstrap-icons`
