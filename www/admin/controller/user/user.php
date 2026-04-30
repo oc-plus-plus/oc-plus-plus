@@ -112,7 +112,7 @@ class User extends \Opencart\System\Engine\Controller {
 
 		$data['user_groups'] = $this->model_user_user_group->getUserGroups();
 
-		$data['filter_username'] = $filter_name;
+		$data['filter_username'] = $filter_username;
 		$data['filter_name'] = $filter_name;
 		$data['filter_email'] = $filter_email;
 		$data['filter_user_group_id'] = $filter_user_group_id;

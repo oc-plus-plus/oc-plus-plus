@@ -215,6 +215,8 @@ class Download extends \Opencart\System\Engine\Controller {
 		$data['back'] = $this->url->link('catalog/download', 'user_token=' . $this->session->data['user_token'] . $url);
 		$data['upload'] = $this->url->link('catalog/download.upload', 'user_token=' . $this->session->data['user_token']);
 
+		$download_info = [];
+
 		if (isset($this->request->get['download_id'])) {
 			$this->load->model('catalog/download');
 

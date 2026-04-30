@@ -1344,7 +1344,7 @@ class Product extends \Opencart\System\Engine\Controller {
 			$this->load->model('catalog/product');
 
 			foreach ($selected as $product_id) {
-				$this->model_catalog_product->copyProduct($product_id);
+				$this->model_catalog_product->copyProduct((int)$product_id);
 			}
 
 			$json['success'] = $this->language->get('text_success');
@@ -1439,7 +1439,7 @@ class Product extends \Opencart\System\Engine\Controller {
 		$json = [];
 
 		if (isset($this->request->get['filter_name'])) {
-			$filter_name = '%' . $this->request->get['filter_name'] . '%';
+			$filter_name = $this->request->get['filter_name'];
 		} else {
 			$filter_name = '';
 		}

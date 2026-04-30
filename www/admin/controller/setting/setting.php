@@ -505,9 +505,11 @@ class Setting extends \Opencart\System\Engine\Controller {
 			$json['error']['name'] = $this->language->get('error_name');
 		}
 
-		foreach ($this->request->post['config_description'] as $language_id => $value) {
-			if (!oc_validate_length($value['meta_title'], 1, 64)) {
-				$json['error']['meta_title_' . $language_id] = $this->language->get('error_meta_title');
+		if (isset($this->request->post['config_description'])) {
+			foreach ($this->request->post['config_description'] as $language_id => $value) {
+				if (!oc_validate_length($value['meta_title'], 1, 64)) {
+					$json['error']['meta_title_' . $language_id] = $this->language->get('error_meta_title');
+				}
 			}
 		}
 

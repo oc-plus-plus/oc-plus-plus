@@ -228,47 +228,6 @@ class Module extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
-	 * Add
-	 *
-	 * @return void
-	 */
-	public function add(): void {
-		$this->load->language('extension/module');
-
-		$json = [];
-
-		if (isset($this->request->get['extension'])) {
-			$extension = basename($this->request->get['extension']);
-		} else {
-			$extension = '';
-		}
-
-		if (isset($this->request->get['code'])) {
-			$code = basename($this->request->get['code']);
-		} else {
-			$code = '';
-		}
-
-		if (!$this->user->hasPermission('modify', 'extension/module')) {
-			$json['error'] = $this->language->get('error_permission');
-		}
-
-		if (!$json) {
-			$this->load->language('extension/' . $extension . '/module/' . $code, 'extension');
-
-			// Extension
-			$this->load->model('setting/module');
-
-			$this->model_setting_module->addModule($extension . '.' . $code, ['name' => $this->language->get('extension_heading_title')]);
-
-			$json['success'] = $this->language->get('text_success');
-		}
-
-		$this->response->addHeader('Content-Type: application/json');
-		$this->response->setOutput(json_encode($json));
-	}
-
-	/**
 	 * Delete
 	 *
 	 * @return void

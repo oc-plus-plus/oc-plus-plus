@@ -245,6 +245,8 @@ class Category extends \Opencart\System\Engine\Controller {
 		$data['save'] = $this->url->link('catalog/category.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('catalog/category', 'user_token=' . $this->session->data['user_token'] . $url);
 
+		$category_info = [];
+
 		if (isset($this->request->get['category_id'])) {
 			$this->load->model('catalog/category');
 
@@ -570,7 +572,8 @@ class Category extends \Opencart\System\Engine\Controller {
 			foreach ($results as $result) {
 				$json[] = [
 					'category_id' => $result['category_id'],
-					'name'        => $result['name']
+					'name'        => $result['name'],
+					'status'      => $result['status']
 				];
 			}
 		}
