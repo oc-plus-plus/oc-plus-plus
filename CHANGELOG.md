@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 
 #### Changed
 - Admin: SEO tab merged with General tab.
+- Admin: further improvements to the filter system.
 
 #### Deprecated
 - Nothing

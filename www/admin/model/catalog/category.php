@@ -425,11 +425,11 @@ class Category extends \Opencart\System\Engine\Model {
 			$words = explode(' ', trim(preg_replace('/\s+/', ' ', str_ireplace([' &gt; ', ' > '], ' ', $data['filter_name']))));
 
 			foreach ($words as $word) {
-				$implode[] = "LCASE(`name`) LIKE '" . $this->db->escape('%' . oc_strtolower($word) . '%') . "'";
+				$implode[] = "LCASE(`name`) LIKE '%" . $this->db->escape('%' . oc_strtolower($word)) . "%'";
 			}
 
 			if ($implode) {
-				$sql .= " HAVING ((" . implode(" AND ", $implode) . ") OR LCASE(`name`) LIKE '" . $this->db->escape(oc_strtolower($data['filter_name'])) . "')";
+				$sql .= " HAVING ((" . implode(" AND ", $implode) . ") OR LCASE(`name`) LIKE '%" . $this->db->escape(oc_strtolower($data['filter_name'])) . "%')";
 			}
 		}
 
