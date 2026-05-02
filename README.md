@@ -76,7 +76,7 @@ For a real-world example in action, you can visit small multilanguage website: h
    - Create a new empty database.
    - Assign (or create) a database user with full privileges (CREATE, DROP, etc.) for this database.
    - Note down your database credentials: Hostname (or IP), Username, Password, and Database Name.
-3. **Upload Files**: Extract the downloaded [oc-plus-plus.0.1.0.zip](https://github.com/oc-plus-plus/oc-plus-plus/releases/download/0.1.0/oc-plus-plus.0.1.0.zip) archive into the root directory of your virtual web host (the folder accessible via the Internet at your domain address).
+3. **Upload Files**: Extract the downloaded [oc.0.2.0.zip](https://github.com/oc-plus-plus/oc-plus-plus/releases/download/0.2.0/oc.0.2.0.zip) archive into the root directory of your virtual web host (the folder accessible via the Internet at your domain address).
 4. **Run Installer**: Open your web browser and navigate to https://your-domain.com.
 5. **Follow Instructions**: The web installer will launch automatically; follow the on-screen steps to complete the setup.
 6. **Post-Installation**: Once the installation is finished, manually **delete the /install folder** for security reasons.
@@ -88,7 +88,7 @@ For a real-world example in action, you can visit small multilanguage website: h
 >
 > ### ATTENTION! Please read carefully before proceeding with the upgrade!
 
-1. **Version Compatibility**: This upgrade package is designed **strictly for OpenCart 4.1.0.3**.
+1. **Version Compatibility**: This upgrade package is designed **strictly for OpenCart 4.1.0.3** or **OC++ 0.1.0**.
 2. **Unsupported Versions**: OC++ is incompatible with any other versions of OpenCart, including the official `master` branch or any other `4.x.x.x` releases.
 3. **Pre-requisite**: If you are running an older version of OpenCart, you must first upgrade to version 4.1.0.3 before applying the OC++ upgrade package.
 4. **BETA Software Warning**: This is a BETA release. While it has been tested on live stores, bugs may still exist.
@@ -106,7 +106,7 @@ For a real-world example in action, you can visit small multilanguage website: h
 
 ### Quick Upgrade Guide
 
-1. **Extract Core Files**: Unpack the [update-opencart-4.1.0.3-oc-plus-plus.0.1.0.zip](https://github.com/oc-plus-plus/oc-plus-plus/releases/download/0.1.0/update-opencart-4.1.0.3-oc-plus-plus.0.1.0.zip.zip) archive directly into your
+1. **Extract Core Files**: Unpack the [update-opencart-4.1.0.3-oc.0.2.0.zip](https://github.com/oc-plus-plus/oc-plus-plus/releases/download/0.2.0/update-opencart-4.1.0.3-oc.0.2.0.zip) archive directly into your
    web host's root directory, overwriting all existing OpenCart 4.1.0.3 files.
 2. **Handle Storage/Vendor Files**: Since OpenCart 4 requires moving the `/system/storage` folder after the
    initial installation, the updated vendor libraries are provided as a separate part of the package.
