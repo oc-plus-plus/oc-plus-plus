@@ -1199,7 +1199,7 @@ VALUES ('opencart', 'currency', 'ecb'),
 --
 
 INSERT INTO `oc_extension_install` (`extension_install_id`, `extension_id`, `extension_download_id`, `name`, `description`, `code`, `version`, `author`, `link`, `status`, `date_added`)
-VALUES (1, 0, 0, 'OpenCart Default Extensions', 'This extension contains all the default extensions for modules, currencies, payment methods, shipping methods, anti-fraud, themes, order totals and reports.', 'opencart', '2.0', 'OpenCart Ltd', 'http://www.opencart.com', 1, '2020-08-29 15:35:39');
+VALUES (1, 0, 0, 'OpenCart Default Extensions', 'This extension contains all the default extensions for modules, currencies, payment methods, shipping methods, anti-fraud, themes, order totals and reports.', 'opencart', '2.0', 'OpenCart Ltd', 'http://www.opencart.com', 1, '2026-04-29 00:00:01');
 
 -----------------------------------------------------------
 
@@ -2331,8 +2331,8 @@ VALUES (0, 'config', 'config_shared', '0', 0),
        (0, 'config', 'config_return_status_id', '2', 0),
        (0, 'config', 'config_logo', 'catalog/opencart-logo.png', 0),
        (0, 'config', 'config_icon', 'catalog/opencart.ico', 0),
-       (0, 'config', 'config_image_default_width', '300', 0),
-       (0, 'config', 'config_image_default_height', '300', 0),
+       (0, 'config', 'config_image_default_width', '200', 0),
+       (0, 'config', 'config_image_default_height', '200', 0),
        (0, 'config', 'config_image_thumb_width', '500', 0),
        (0, 'config', 'config_image_thumb_height', '500', 0),
        (0, 'config', 'config_image_popup_width', '800', 0),
@@ -2373,10 +2373,10 @@ VALUES (0, 'config', 'config_shared', '0', 0),
        (0, 'config', 'config_maintenance', '0', 0),
        (0, 'config', 'config_encryption', '', 0),
        (0, 'config', 'config_compression', '0', 0),
-       (0, 'config', 'config_error_display', '1', 0),
+       (0, 'config', 'config_error_display', '0', 0),
        (0, 'config', 'config_error_log', '1', 0),
        (0, 'config', 'config_error_filename', 'error.log', 0),
-       (0, 'config', 'config_mail_engine', '', 0),
+       (0, 'config', 'config_mail_engine', 'mail', 0),
        (0, 'config', 'config_mail_parameter', '', 0),
        (0, 'config', 'config_mail_smtp_hostname', '', 0),
        (0, 'config', 'config_mail_smtp_username', '', 0),
