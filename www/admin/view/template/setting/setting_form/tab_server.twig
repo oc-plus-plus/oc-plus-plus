@@ -1,0 +1,162 @@
+<div id="tab-server" class="tab-pane">
+  <fieldset>
+    <legend>{{ text_general }}</legend>
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">{{ entry_maintenance }}</label>
+      <div class="col-sm-10">
+        <div class="form-check form-switch form-switch-lg">
+          <input type="hidden" name="config_maintenance" value="0"/> <input type="checkbox" name="config_maintenance" value="1" id="input-maintenance" class="form-check-input"{% if config_maintenance %} checked{% endif %}/>
+        </div>
+        <div class="form-text">{{ help_maintenance }}</div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="input-session-expire" class="col-sm-2 col-form-label">{{ entry_session_expire }}</label>
+      <div class="col-sm-10">
+        <input type="text" name="config_session_expire" value="{{ config_session_expire }}" placeholder="{{ entry_session_expire }}" id="input-session-expire" class="form-control"/>
+        <div class="form-text">{{ help_session_expire }}</div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="input-session-samesite" class="col-sm-2 col-form-label">{{ entry_session_samesite }}</label>
+      <div class="col-sm-10">
+        <select name="config_session_samesite" id="input-session-samesite" class="form-select">
+          <option value="None"{% if config_session_samesite == 'None' %} selected{% endif %}>{{ text_none }}</option>
+          <option value="Lax"{% if config_session_samesite == 'Lax' %} selected{% endif %}>{{ text_lax }}</option>
+          <option value="Strict"{% if config_session_samesite == 'Strict' %} selected{% endif %}>{{ text_strict }}</option>
+        </select>
+        <div class="form-text">{{ help_session_samesite }}</div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">{{ entry_seo_url }}</label>
+      <div class="col-sm-10">
+        <div class="form-check form-switch form-switch-lg">
+          <input type="hidden" name="config_seo_url" value="0"/> <input type="checkbox" name="config_seo_url" value="1" id="input-seo-url" class="form-check-input"{% if config_seo_url %} checked{% endif %}/>
+        </div>
+        <div class="form-text">{{ help_seo_url }}</div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="input-compression" class="col-sm-2 col-form-label">{{ entry_compression }}</label>
+      <div class="col-sm-10">
+        <input type="text" name="config_compression" value="{{ config_compression }}" placeholder="{{ entry_compression }}" id="input-compression" class="form-control"/>
+        <div class="form-text">{{ help_compression }}</div>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>{{ text_security }}</legend>
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">{{ entry_user_2fa }}</label>
+      <div class="col-sm-10">
+        <div class="form-check form-switch form-switch-lg">
+          <input type="hidden" name="config_user_2fa" value="0"/>
+          <input type="checkbox" name="config_user_2fa" value="1" id="input-user-2fa" class="form-check-input"{% if config_user_2fa %} checked{% endif %}/>
+        </div>
+        <div class="form-text">{{ help_user_2fa }}</div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="input-2fa-expire" class="col-sm-2 col-form-label">{{ entry_2fa_expire }}</label>
+      <div class="col-sm-10">
+        <input type="number" name="config_2fa_expire" value="{{ config_2fa_expire }}" id="input-2fa-expire" class="form-control"/>
+        <div class="form-text">{{ help_2fa_expire }}</div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">{{ entry_password }}</label>
+      <div class="col-sm-10">
+        <div class="form-control" style="overflow: auto;">
+          <div class="form-check">
+            <input type="checkbox" name="config_user_password_uppercase" value="1" id="input-user-password-uppercase" class="form-check-input"{% if config_user_password_uppercase %} checked{% endif %}/>
+            <label for="input-user-password-uppercase" class="form-check-label">{{ text_password_uppercase }}</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" name="config_user_password_lowercase" value="1" id="input-user-password-lowercase" class="form-check-input"{% if config_user_password_lowercase %} checked{% endif %}/>
+            <label for="input-user-password-lowercase" class="form-check-label">{{ text_password_lowercase }}</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" name="config_user_password_number" value="1" id="input-user-password-number" class="form-check-input"{% if config_user_password_number %} checked{% endif %}/>
+            <label for="input-user-password-number" class="form-check-label">{{ text_password_number }}</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" name="config_user_password_symbol" value="1" id="input-user-password-symbol" class="form-check-input"{% if config_user_password_symbol %} checked{% endif %}/>
+            <label for="input-user-password-symbol" class="form-check-label">{{ text_password_symbol }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="input-user-password-length" class="col-sm-2 col-form-label">{{ entry_password_length }}</label>
+      <div class="col-sm-10">
+        <input type="text" name="config_user_password_length" value="{{ config_user_password_length }}" placeholder="{{ entry_password_length }}" id="input-user-password-length" class="form-control"/>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">{{ entry_shared }}</label>
+      <div class="col-sm-10">
+        <div class="form-check form-switch form-switch-lg">
+          <input type="hidden" name="config_shared" value="0"/>
+          <input type="checkbox" name="config_shared" value="1" id="input-shared" class="form-check-input"{% if config_shared %} checked{% endif %}/>
+        </div>
+        <div class="form-text">{{ help_shared }}</div>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>{{ text_upload }}</legend>
+    <div class="row mb-3 required">
+      <label for="input-file-max-size" class="col-sm-2 col-form-label">{{ entry_file_max_size }}</label>
+      <div class="col-sm-10">
+        <input type="text" name="config_file_max_size" value="{{ config_file_max_size }}" placeholder="{{ entry_file_max_size }}" id="input-file-max-size" class="form-control"/>
+        <div class="form-text">{{ help_file_max_size }}</div>
+        <div id="error-file-max-size" class="invalid-feedback"></div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="input-file-ext-allowed" class="col-sm-2 col-form-label">{{ entry_file_ext_allowed }}</label>
+      <div class="col-sm-10">
+        <textarea name="config_file_ext_allowed" rows="5" placeholder="{{ entry_file_ext_allowed }}" id="input-file-ext-allowed" class="form-control">{{ config_file_ext_allowed }}</textarea>
+        <div class="form-text">{{ help_file_ext_allowed }}</div>
+        <div id="error-file-ext-allowed" class="invalid-feedback"></div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="input-file-mime-allowed" class="col-sm-2 col-form-label">{{ entry_file_mime_allowed }}</label>
+      <div class="col-sm-10">
+        <textarea name="config_file_mime_allowed" rows="5" placeholder="{{ entry_file_mime_allowed }}" id="input-file-mime-allowed" class="form-control">{{ config_file_mime_allowed }}</textarea>
+        <div class="form-text">{{ help_file_mime_allowed }}</div>
+        <div id="error-file-mime-allowed" class="invalid-feedback"></div>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>{{ text_error }}</legend>
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">{{ entry_error_display }}</label>
+      <div class="col-sm-10">
+        <div class="form-check form-switch form-switch-lg">
+          <input type="hidden" name="config_error_display" value="0"/>
+          <input type="checkbox" name="config_error_display" value="1" id="input-error-display" class="form-check-input"{% if config_error_display %} checked{% endif %}/>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">{{ entry_error_log }}</label>
+      <div class="col-sm-10">
+        <div class="form-check form-switch form-switch-lg">
+          <input type="hidden" name="config_error_log" value="0"/>
+          <input type="checkbox" name="config_error_log" value="1" id="input-error-log" class="form-check-input"{% if config_error_log %} checked{% endif %}/>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3 required">
+      <label for="input-error-filename" class="col-sm-2 col-form-label">{{ entry_error_filename }}</label>
+      <div class="col-sm-10">
+        <input type="text" name="config_error_filename" value="{{ config_error_filename }}" placeholder="{{ entry_error_filename }}" id="input-error-filename" class="form-control"/>
+        <div id="error-error-filename" class="invalid-feedback"></div>
+      </div>
+    </div>
+  </fieldset>
+</div>

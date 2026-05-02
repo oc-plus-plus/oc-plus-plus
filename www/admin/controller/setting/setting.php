@@ -484,6 +484,14 @@ class Setting extends \Opencart\System\Engine\Controller {
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
+		$data['include_tab_general'] = $this->load->view('setting/setting_form/tab_general', $data);
+		$data['include_tab_store'] = $this->load->view('setting/setting_form/tab_store', $data);
+		$data['include_tab_local'] = $this->load->view('setting/setting_form/tab_local', $data);
+		$data['include_tab_option'] = $this->load->view('setting/setting_form/tab_option', $data);
+		$data['include_tab_image'] = $this->load->view('setting/setting_form/tab_image', $data);
+		$data['include_tab_mail'] = $this->load->view('setting/setting_form/tab_mail', $data);
+		$data['include_tab_server'] = $this->load->view('setting/setting_form/tab_server', $data);
+
 		$this->response->setOutput($this->load->view('setting/setting', $data));
 	}
 
