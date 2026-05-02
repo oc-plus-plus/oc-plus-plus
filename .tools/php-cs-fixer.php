@@ -3,7 +3,8 @@
 $config = new PhpCsFixer\Config();
 
 return $config
-    ->setFinder(PhpCsFixer\Finder::create()
+	->setCacheFile(__DIR__.'/.cache/php-cs-fixer.cache')
+	->setFinder(PhpCsFixer\Finder::create()
         ->in(__DIR__ . '/../www/')
         ->exclude(['system/storage/',]))
     ->setRiskyAllowed(true)

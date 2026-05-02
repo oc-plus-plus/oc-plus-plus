@@ -226,11 +226,11 @@ class Customer extends \Opencart\System\Engine\Model {
 		$sql = "SELECT *, CONCAT(`c`.`firstname`, ' ', `c`.`lastname`) AS `name`, `cgd`.`name` AS `customer_group` FROM `" . DB_PREFIX . "customer` `c` LEFT JOIN `" . DB_PREFIX . "customer_group_description` `cgd` ON (`c`.`customer_group_id` = `cgd`.`customer_group_id`) WHERE `cgd`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
-			$sql .= " AND LCASE(CONCAT(`c`.`firstname`, ' ', `c`.`lastname`)) LIKE '" . $this->db->escape('%' . oc_strtolower($data['filter_name']) . '%') . "'";
+			$sql .= " AND LCASE(CONCAT(`c`.`firstname`, ' ', `c`.`lastname`)) LIKE '%" . $this->db->escape(oc_strtolower($data['filter_name'])) . "%'";
 		}
 
 		if (!empty($data['filter_email'])) {
-			$sql .= " AND LCASE(`c`.`email`) LIKE '" . $this->db->escape(oc_strtolower($data['filter_email']) . '%') . "'";
+			$sql .= " AND LCASE(`c`.`email`) LIKE '%" . $this->db->escape(oc_strtolower($data['filter_email'])) . "%'";
 		}
 
 		if (isset($data['filter_newsletter']) && $data['filter_newsletter'] !== '') {
@@ -1374,15 +1374,14 @@ class Customer extends \Opencart\System\Engine\Model {
 	 * Get the record of the customer authorize record in the database.
 	 *
 	 * @param int $customer_authorize_id
-	 * @param int $user_authorize_id     primary key of the user authorize record
 	 *
-	 * @return array<string, mixed> authorize record that has user authorize ID
+	 * @return array<string, mixed> authorize record that has customer authorize ID
 	 *
 	 * @example
 	 *
-	 * $this->load->model('user/user');
+	 * $this->load->model('customer/customer');
 	 *
-	 * $authorize_info = $this->model_user_user->getAuthorize($user_authorize_id);
+	 * $authorize_info = $this->model_customer_customer->getAuthorize($customer_authorize_id);
 	 */
 	public function getAuthorize(int $customer_authorize_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_authorize` WHERE `customer_authorize_id` = '" . (int)$customer_authorize_id . "'");
@@ -1487,7 +1486,6 @@ class Customer extends \Opencart\System\Engine\Model {
 	 * Delete Token By Code
 	 *
 	 * @param string $code
-	 * @param int    $customer_id primary key of the customer record
 	 *
 	 * @return void
 	 *

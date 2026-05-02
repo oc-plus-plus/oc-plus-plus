@@ -57,7 +57,7 @@
                 <input type="date" name="filter_date_to" value="{{ filter_date_to }}" placeholder="{{ entry_date_to }}" id="input-date-to" class="form-control"/>
               </div>
               <div class="text-end">
-                <button type="submit" id="button-filter" class="btn btn-light"><i class="fa-solid fa-filter"></i> {{ button_filter }}</button>
+                <button type="submit" class="btn btn-light"><i class="fa-solid fa-filter"></i> {{ button_filter }}</button>
                 <button type="reset" data-bs-toggle="tooltip" title="{{ button_reset }}" class="btn btn-outline-secondary"><i class="fa-solid fa-filter-circle-xmark"></i></button>
               </div>
             </form>
@@ -74,42 +74,65 @@
   </div>
 </div>
 <script type="text/javascript">
-    initFilter('#form-filter', '#customer', 'customer/customer', '{{ user_token }}');
+  ocFilter({
+    formId: '#form-filter',
+    listId: '#customer',
+    route: 'customer/customer',
+    userToken: '{{ user_token }}'
+  });
 
-    initAutocomplete('#input-name', 'customer/customer.autocomplete', '{{ user_token }}', 'filter_name', 'customer_id', 'name');
-    initAutocomplete('#input-email', 'customer/customer.autocomplete', '{{ user_token }}', 'filter_email', 'customer_id', 'email');
+  ocAutocomplete({
+    inputSelector: '#input-name',
+    route: 'customer/customer.autocomplete',
+    userToken: '{{ user_token }}',
+    valueKey: 'customer_id',
+    labelKey: 'name',
+    onSelect: function (item) {
+      $('#input-name').val(decodeHTMLEntities(item.label));
+    }
+  });
 
-    $('#customer').on('click', 'thead a, .pagination a', function (e) {
-        e.preventDefault();
+  ocAutocomplete({
+    inputSelector: '#input-email',
+    route: 'customer/customer.autocomplete',
+    userToken: '{{ user_token }}',
+    valueKey: 'customer_id',
+    labelKey: 'email',
+    onSelect: function (item) {
+      $('#input-email').val(decodeHTMLEntities(item.label));
+    }
+  });
 
-        $('#customer').load(this.href);
+  $('#customer').on('click', 'thead a, .pagination a', function (e) {
+    e.preventDefault();
+    $('#customer').load(this.href);
+  });
+
+  $('#customer').on('click', '[data-oc-toggle=\'unlock\']', function (e) {
+    e.preventDefault();
+
+    var element = this;
+
+    $.ajax({
+      url: $(element).attr('href'),
+      dataType: 'json',
+      success: function (json) {
+        console.log(json);
+
+        $('.alert-dismissible').remove();
+
+        if (json['error']) {
+          $('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+        }
+
+        if (json['success']) {
+          $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-circle-check"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+        }
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+      }
     });
-
-    $('#customer').on('click', '[data-oc-toggle=\'unlock\']', function (e) {
-        e.preventDefault();
-
-        var element = this;
-
-        $.ajax({
-            url: $(element).attr('href'),
-            dataType: 'json',
-            success: function (json) {
-                console.log(json);
-
-                $('.alert-dismissible').remove();
-
-                if (json['error']) {
-                    $('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
-                }
-
-                if (json['success']) {
-                    $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-circle-check"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
-                }
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-            }
-        });
-    });
+  });
 </script>
 {{ footer }}

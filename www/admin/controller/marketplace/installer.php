@@ -29,7 +29,7 @@ class Installer extends \Opencart\System\Engine\Controller {
 		];
 
 		// Use the configuration option to get the max file size
-		$data['error_upload_size'] = sprintf($this->language->get('error_file_size'), ini_get('upload_max_filesize'));
+		$data['error_upload_size'] = sprintf($this->language->get('error_upload_size'), ini_get('upload_max_filesize'));
 
 		$data['config_file_max_size'] = ((int)preg_filter('/[^0-9]/', '', ini_get('upload_max_filesize')) * 1024 * 1024);
 
@@ -75,6 +75,18 @@ class Installer extends \Opencart\System\Engine\Controller {
 			$filter_extension_download_id = (int)$this->request->get['filter_extension_download_id'];
 		} else {
 			$filter_extension_download_id = '';
+		}
+
+		if (isset($this->request->get['sort'])) {
+			$sort = (string)$this->request->get['sort'];
+		} else {
+			$sort = 'name';
+		}
+
+		if (isset($this->request->get['order'])) {
+			$order = (string)$this->request->get['order'];
+		} else {
+			$order = 'ASC';
 		}
 
 		if (isset($this->request->get['page'])) {
@@ -143,6 +155,8 @@ class Installer extends \Opencart\System\Engine\Controller {
 
 		$filter_data = [
 			'filter_extension_download_id' => $filter_extension_download_id,
+			'sort'                         => $sort,
+			'order'                        => $order,
 			'start'                        => ($page - 1) * $this->config->get('config_pagination_admin'),
 			'limit'                        => $this->config->get('config_pagination_admin')
 		];
@@ -167,6 +181,22 @@ class Installer extends \Opencart\System\Engine\Controller {
 			] + $result;
 		}
 
+		$url = '';
+
+		if (isset($this->request->get['filter_extension_id'])) {
+			$url .= '&filter_extension_id=' . $this->request->get['filter_extension_id'];
+		}
+
+		if ($order == 'ASC') {
+			$url .= '&order=DESC';
+		} else {
+			$url .= '&order=ASC';
+		}
+
+		$data['sort_name'] = $this->url->link('marketplace/installer.list', 'user_token=' . $this->session->data['user_token'] . '&sort=name' . $url);
+		$data['sort_version'] = $this->url->link('marketplace/installer.list', 'user_token=' . $this->session->data['user_token'] . '&sort=version' . $url);
+		$data['sort_date_added'] = $this->url->link('marketplace/installer.list', 'user_token=' . $this->session->data['user_token'] . '&sort=date_added' . $url);
+
 		$extension_total = $this->model_setting_extension->getTotalInstalls($filter_data);
 
 		$data['pagination'] = $this->load->controller('common/pagination', [
@@ -177,6 +207,9 @@ class Installer extends \Opencart\System\Engine\Controller {
 		]);
 
 		$data['results'] = sprintf($this->language->get('text_pagination'), ($extension_total) ? (($page - 1) * $this->config->get('config_pagination_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_pagination_admin')) > ($extension_total - $this->config->get('config_pagination_admin'))) ? $extension_total : ((($page - 1) * $this->config->get('config_pagination_admin')) + $this->config->get('config_pagination_admin')), $extension_total, ceil($extension_total / $this->config->get('config_pagination_admin')));
+
+		$data['sort'] = $sort;
+		$data['order'] = $order;
 
 		return $this->load->view('marketplace/installer_extension', $data);
 	}
@@ -204,15 +237,15 @@ class Installer extends \Opencart\System\Engine\Controller {
 
 			// Zip error codes
 			$zip_errors = [
-				\ZipArchive::ER_EXISTS => $this->language->get('error_zip_exists'),
-				\ZipArchive::ER_INCONS => $this->language->get('error_zip_incons'),
-				\ZipArchive::ER_INVAL  => $this->language->get('error_zip_inval'),
-				\ZipArchive::ER_MEMORY => $this->language->get('error_zip_memory'),
-				\ZipArchive::ER_NOENT  => $this->language->get('error_zip_noent'),
-				\ZipArchive::ER_NOZIP  => $this->language->get('error_zip_nozip'),
-				\ZipArchive::ER_OPEN   => $this->language->get('error_zip_open'),
-				\ZipArchive::ER_READ   => $this->language->get('error_zip_read'),
-				\ZipArchive::ER_SEEK   => $this->language->get('error_zip_seek'),
+				\ZipArchive::ER_EXISTS => $this->language->get('zip_error_exists'),
+				\ZipArchive::ER_INCONS => $this->language->get('zip_error_incons'),
+				\ZipArchive::ER_INVAL  => $this->language->get('zip_error_inval'),
+				\ZipArchive::ER_MEMORY => $this->language->get('zip_error_memory'),
+				\ZipArchive::ER_NOENT  => $this->language->get('zip_error_noent'),
+				\ZipArchive::ER_NOZIP  => $this->language->get('zip_error_nozip'),
+				\ZipArchive::ER_OPEN   => $this->language->get('zip_error_open'),
+				\ZipArchive::ER_READ   => $this->language->get('zip_error_read'),
+				\ZipArchive::ER_SEEK   => $this->language->get('zip_error_seek'),
 			];
 
 			// Check if the zip is valid
@@ -594,36 +627,6 @@ class Installer extends \Opencart\System\Engine\Controller {
 		}
 
 		if (!$json) {
-			$json['text'] = $this->language->get('text_vendor');
-
-			$json['next'] = $this->url->link('marketplace/installer.vendor', 'user_token=' . $this->session->data['user_token'], true);
-		}
-
-		$this->response->addHeader('Content-Type: application/json');
-		$this->response->setOutput(json_encode($json));
-	}
-
-	/**
-	 * Vendor
-	 *
-	 * Generate new autoloader file
-	 *
-	 * @return void
-	 */
-	public function vendor(): void {
-		$this->load->language('marketplace/installer');
-
-		$json = [];
-
-		if (!$this->user->hasPermission('modify', 'marketplace/installer')) {
-			$json['error'] = $this->language->get('error_permission');
-		}
-
-		if (!$json) {
-			$this->load->helper('vendor');
-
-			oc_generate_vendor();
-
 			$json['success'] = $this->language->get('text_success');
 		}
 
@@ -749,15 +752,7 @@ class Installer extends \Opencart\System\Engine\Controller {
 
 			$this->model_setting_modification->deleteModificationsByExtensionInstallId($extension_install_id);
 
-			$json['text'] = $this->language->get('text_vendor');
-
-			$url = '';
-
-			if (isset($this->request->get['extension_install_id'])) {
-				$url .= '&extension_install_id=' . $this->request->get['extension_install_id'];
-			}
-
-			$json['next'] = $this->url->link('marketplace/installer.vendor', 'user_token=' . $this->session->data['user_token'] . $url, true);
+			$json['success'] = $this->language->get('text_success');
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

@@ -29,9 +29,9 @@
                 {% endif %}</td>
               <td class="text-end">
                 {% if product.quantity <= 0 %}
-                  <span class="badge bg-warning">{{ product.quantity }}</span>
-                {% elseif product.quantity <= 5 %}
                   <span class="badge bg-danger">{{ product.quantity }}</span>
+                {% elseif product.quantity <= 5 %}
+                  <span class="badge bg-warning">{{ product.quantity }}</span>
                 {% else %}
                   <span class="badge bg-success">{{ product.quantity }}</span>
                 {% endif %}</td>

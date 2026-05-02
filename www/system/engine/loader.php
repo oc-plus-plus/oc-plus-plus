@@ -69,8 +69,10 @@ class Loader {
 	public function controller(string $route, ...$args) {
 		// Sanitize the call
 		$route = preg_replace('/[^a-zA-Z0-9_|\/\.]/', '', str_replace('|', '.', $route));
-
 		$trigger = $route;
+
+		// Trigger the pre events
+		$this->event->trigger('controller/' . $trigger . '/before', [&$route, &$args]);
 
 		$pos = strrpos($route, '.');
 
@@ -83,7 +85,7 @@ class Loader {
 		}
 
 		// Stop any magical methods being called
-		if (substr($method, 0, 2) == '__') {
+		if (str_starts_with($method, '__')) {
 			return new \Exception('Error: Calls to magic methods are not allowed!');
 		}
 
@@ -106,9 +108,6 @@ class Loader {
 		$callable = [$object, $method];
 
 		if (is_callable($callable)) {
-			// Trigger the pre events
-			$this->event->trigger('controller/' . $trigger . '/before', [&$route, &$args]);
-
 			$output = $callable(...$args);
 
 			// Trigger the post events

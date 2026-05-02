@@ -29,6 +29,7 @@ RUN apk update && apk upgrade && apk add --no-cache \
     #php${PHP}-pdo_mysql \
     #php${PHP}-pdo_pgsql \
     #php${PHP}-pdo_sqlite \
+    php${PHP}-pecl-apcu \
     php${PHP}-pecl-xdebug \
     #php${PHP}-pgsql \
     #php${PHP}-phar \

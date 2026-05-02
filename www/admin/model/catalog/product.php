@@ -1033,11 +1033,11 @@ class Product extends \Opencart\System\Engine\Model {
 		}
 
 		if (!empty($data['filter_name'])) {
-			$sql .= " AND LCASE(`pd`.`name`) LIKE '" . $this->db->escape(oc_strtolower($data['filter_name']) . '%') . "'";
+			$sql .= " AND LCASE(`pd`.`name`) LIKE '%" . $this->db->escape(oc_strtolower($data['filter_name'])) . "%'";
 		}
 
 		if (!empty($data['filter_model'])) {
-			$sql .= " AND (LCASE(`p`.`model`) LIKE '" . $this->db->escape(oc_strtolower($data['filter_model']) . '%') . "' OR LCASE(`pc`.`value`) LIKE '" . $this->db->escape(oc_strtolower($data['filter_model']) . '%') . "')";
+			$sql .= " AND (LCASE(`p`.`model`) LIKE '%" . $this->db->escape(oc_strtolower($data['filter_model'])) . "%' OR LCASE(`pc`.`value`) LIKE '%" . $this->db->escape(oc_strtolower($data['filter_model'])) . "%')";
 		}
 
 		if (isset($data['filter_category_id']) && $data['filter_category_id'] !== '') {

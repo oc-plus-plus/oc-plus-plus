@@ -173,8 +173,10 @@ class Topic extends \Opencart\System\Engine\Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->document->addScript('view/javascript/ckeditor/ckeditor.js');
-		$this->document->addScript('view/javascript/ckeditor/adapters/jquery.js');
+		$this->document->addScript([
+			'view/javascript/ckeditor/ckeditor.js',
+			'view/javascript/ckeditor/adapters/jquery.js'
+		]);
 
 		$data['text_form'] = !isset($this->request->get['topic_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
 
@@ -210,7 +212,7 @@ class Topic extends \Opencart\System\Engine\Controller {
 		if (isset($this->request->get['topic_id'])) {
 			$this->load->model('cms/topic');
 
-			$topic_info = $this->model_cms_topic->getTopic($this->request->get['topic_id']);
+			$topic_info = $this->model_cms_topic->getTopic((int)$this->request->get['topic_id']);
 		}
 
 		if (!empty($topic_info)) {

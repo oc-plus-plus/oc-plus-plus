@@ -1,0 +1,46 @@
+<div id="tab-reward" class="tab-pane">
+  <fieldset>
+    <legend>{{ text_reward }}</legend>
+    <div class="row mb-3">
+      <label for="input-points" class="col-sm-2 col-form-label">{{ entry_points }}</label>
+      <div class="col-sm-10">
+        <div class="input-group">
+          <input type="text" name="points" value="{{ points }}" placeholder="{{ entry_points }}" id="input-points" class="form-control"/>
+          {% if master_id %}
+            <div class="input-group-text">
+              <div class="form-switch">
+                <input type="checkbox" name="override[points]" value="1" id="input-variant-points" data-oc-toggle="switch" data-oc-target="#input-points" class="form-check-input"{% if override.points %} checked{% endif %}/> <label for="input-variant-points" class="form-check-label"></label>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+        <div class="form-text">{{ help_points }}</div>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>{{ text_points }}</legend>
+    <div class="table-responsive">
+      <table id="product-reward" class="table table-bordered table-hover">
+        <thead>
+        <tr>
+          <th>{{ entry_customer_group }}</th>
+          <th class="text-end">{{ entry_reward }}&nbsp;&nbsp;{% if master_id %}
+            <div class="form-switch float-end">
+              <input type="checkbox" name="override[product_reward]" value="1" id="input-variant-product-reward" data-oc-toggle="switch" data-oc-target="#product-reward" class="form-check-input"{% if override.product_reward %} checked{% endif %}/> <label for="input-variant-product-reward" class="form-check-label"></label>
+            </div>
+            {% endif %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for customer_group in customer_groups %}
+          <tr>
+            <td>{{ customer_group.name }}</td>
+            <td class="text-end"><input type="text" name="product_reward[{{ customer_group.customer_group_id }}][points]" value="{{ product_reward[customer_group.customer_group_id] ? product_reward[customer_group.customer_group_id].points }}" class="form-control"/></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </fieldset>
+</div>

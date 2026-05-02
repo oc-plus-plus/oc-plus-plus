@@ -31,7 +31,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 - Nothing
 
 
-## [0.1.0] beta - 2026-04-19
+## [0.2.0 beta] - 2026-05-03
+
+#### Added
+- Remember the last directory in the file manager.
+
+#### Changed
+- Admin: SEO tab merged with General tab.
+- Admin: further improvements to the filter system.
+- Refactoring
+
+#### Removed
+- Legacy `cron.php`.
+
+#### Fixed
+- [#15381](https://github.com/opencart/opencart/pull/15381) - Fix category filter model.
+- [#15354](https://github.com/opencart/opencart/pull/15354) - Fixed the OCMOD functionality.
+- [#15333](https://github.com/opencart/opencart/pull/15333), [#15397](https://github.com/opencart/opencart/pull/15397) - A set of fixes from @plemondev (partially used)
+- [#15396](https://github.com/opencart/opencart/pull/15396) - Voiding the order here should only happen if it has already been confirmed.
+- _(introduced in Beta 1)_ Some pop-up messages contained HTML code instead of links.
+- When unloading extensions, archives with errors were not deleted, but remained in the `/marketplace` folder.
+- Various minor fixes...
+
+
+## [0.1.0 beta] - 2026-04-19
 
 ### Added
 - [#14857](https://github.com/opencart/opencart/pull/14857), [#14858](https://github.com/opencart/opencart/pull/14858), [#14859](https://github.com/opencart/opencart/pull/14859) - Add manufacturer filter
@@ -65,6 +88,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 - `scssphp/scssphp` package updated to version `2.1`
 - `twig/twig` package updated to version `3.24`
 - Monolithic `stylesheet.css` has been converted to a modular SCSS structure
+- `Opencart\System\Library::addScript()` - The list of scripts can be passed as an array
 - Reworked Autocomplete for the Admin panel:
   - The code has been reworked.
   - JS is separated into an include file that can be reused.
@@ -76,15 +100,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
   - Removed a large amount of duplicate and outdated code.
 
 ### Removed
-- Removed a large amount of outdated and duplicate code
-- Deprecated libraries replaced with current versions:
+- Removed a large amount of legacy and duplicate code
+- Deprecated libraries (replaced with current versions):
   - `Flot` (replaced with `Chart.js`).
   - `jQuery Vector Map` (replaced with `Jsvectormap`)
 - Deprecated PHP functions:
   - `imagedestroy`
   - `curl_close`
 - As unused:
-  - vendor-related functionality and references from the developer tools
+  - Legacy vendor-related functionality
   - `upload/system/helper/filter.php`
   - `aws/aws-sdk-php` package
   - `bootstrap-icons`
@@ -135,7 +159,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 - PHP Warning: unlink(): No such file or directory in /system/library/cache/file.php on line 37
 - Administrator password recovery
 - Display of sales statistics on the Dashboard Map
-- The 'Reset' button on the admin panel filters did not work correctly
 - SQL error on `admin/sale/subscription` filter
 - SQL error on `admin/sale/returns` filter
 - **Green Build** - Fixed various static analysis errors and comments
@@ -146,4 +169,5 @@ Based on [OpenCart 4.1.0.3](https://github.com/opencart/opencart/releases/tag/4.
 with the original source code imported as the foundation for all subsequent development within this project.
 
 [Unreleased]: https://github.com/oc-plus-plus/oc-plus-plus/compare/0.1.0...HEAD
-[0.1.0]: https://github.com/oc-plus-plus/oc-plus-plus/releases/tag/0.1.0
+[0.2.0 beta]: https://github.com/oc-plus-plus/oc-plus-plus/releases/tag/0.2.0
+[0.1.0 beta]: https://github.com/oc-plus-plus/oc-plus-plus/releases/tag/0.1.0

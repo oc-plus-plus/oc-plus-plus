@@ -36,7 +36,7 @@
             </select>
           </div>
           <div class="text-end">
-			<button type="submit" id="button-filter" class="btn btn-light"><i class="fa-solid fa-filter"></i>{{ button_filter }}</button>
+			<button type="submit" class="btn btn-light"><i class="fa-solid fa-filter"></i>{{ button_filter }}</button>
 			<button type="reset" data-bs-toggle="tooltip" title="{{ button_reset }}" class="btn btn-outline-secondary"><i class="fa-solid fa-filter-circle-xmark"></i></button>
           </div>
           </form>
@@ -53,14 +53,27 @@
  </div>
 </div>
 <script type="text/javascript">
-    initFilter('#form-filter', '#manufacturer', 'catalog/manufacturer', '{{ user_token }}');
+  ocFilter({
+    formId: '#form-filter',
+    listId: '#manufacturer',
+    route: 'catalog/manufacturer',
+    userToken: '{{ user_token }}'
+  });
 
-    initAutocomplete('#input-name', 'catalog/manufacturer.autocomplete', '{{ user_token }}', 'filter_name', 'manufacturer_id', 'name');
+  ocAutocomplete({
+    inputSelector: '#input-name',
+    route: 'catalog/manufacturer.autocomplete',
+    userToken: '{{ user_token }}',
+    valueKey: 'manufacturer_id',
+    labelKey: 'name',
+    onSelect: function (item) {
+      $('#input-name').val(decodeHTMLEntities(item.label));
+    }
+  });
 
-    $('#manufacturer').on('click', 'thead a, .pagination a', function (e) {
-        e.preventDefault();
-
-        $('#manufacturer').load(this.href);
-    });
+  $('#manufacturer').on('click', 'thead a, .pagination a', function (e) {
+    e.preventDefault();
+    $('#manufacturer').load(this.href);
+  });
 </script>
 {{ footer }}

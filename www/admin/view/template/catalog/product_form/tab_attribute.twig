@@ -1,0 +1,103 @@
+<div id="tab-attribute" class="tab-pane">
+  <div class="table-responsive">
+    <table id="product-attribute" class="table table-bordered table-hover">
+      <thead>
+      <tr>
+        <th>{{ entry_attribute }}</th>
+        <th>{{ entry_text }}</th>
+        <th>{% if master_id %}
+            <div class="form-switch float-end">
+              <input type="checkbox" name="override[product_attribute]" value="1" id="input-variant-product-attribute" data-oc-toggle="switch" data-oc-target="#product-attribute" class="form-check-input"{% if override.product_attribute %} checked{% endif %}/> <label for="input-variant-product-attribute" class="form-check-label"></label>
+            </div>
+          {% endif %}</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% set attribute_row = 0 %}
+      {% for product_attribute in product_attributes %}
+        <tr id="attribute-row-{{ attribute_row }}">
+          <td>
+            <input type="hidden" name="product_attribute[{{ attribute_row }}][attribute_id]" value="{{ product_attribute.attribute_id }}" id="input-attribute-id-{{ attribute_row }}"/> <input type="text" name="product_attribute[{{ attribute_row }}][name]" value="{{ product_attribute.name }}" placeholder="{{ entry_attribute }}" id="input-attribute-{{ attribute_row }}" data-oc-target="autocomplete-attribute-{{ attribute_row }}" class="form-control" autocomplete="new-password"/>
+            <ul id="autocomplete-attribute-{{ attribute_row }}" class="dropdown-menu"></ul>
+          </td>
+
+          <td>{% for language in languages %}
+              <div class="input-group mb-12">
+                <div class="input-group-text"><img src="{{ language.image }}" title="{{ language.name }}"/></div>
+                <textarea name="product_attribute[{{ attribute_row }}][product_attribute_description][{{ language.language_id }}][text]" rows="5" placeholder="{{ entry_text }}" id="input-text-{{ attribute_row }}-{{ language.language_id }}" class="form-control">{{ product_attribute.product_attribute_description[language.language_id] ? product_attribute.product_attribute_description[language.language_id].text }}</textarea>
+              </div>
+            {% endfor %}</td>
+          <td class="text-end">
+            <button type="button" onclick="$('#attribute-row-{{ attribute_row }}').remove();" data-bs-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button>
+          </td>
+        </tr>
+        {% set attribute_row = attribute_row + 1 %}
+      {% endfor %}
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="2"></td>
+        <td class="text-end">
+          <button type="button" id="button-attribute" data-bs-toggle="tooltip" title="{{ button_attribute_add }}" class="btn btn-primary"><i class="fa-solid fa-plus-circle"></i></button>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+<script type="text/javascript">
+  var attributeautocomplete = function (attribute_row) {
+    $('#input-attribute-' + attribute_row).autocomplete({
+      'source': function (request, response) {
+        $.ajax({
+          url: 'index.php?route=catalog/attribute.autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
+          dataType: 'json',
+          success: function (json) {
+            response($.map(json, function (item) {
+              return {
+                category: item.attribute_group,
+                label: item.name,
+                value: item.attribute_id
+              }
+            }));
+          }
+        });
+      },
+      'select': function (item) {
+        $('#input-attribute-' + attribute_row).val(decodeHTMLEntities(item['label']));
+        $('#input-attribute-id-' + attribute_row).val(item['value']);
+      }
+    });
+  }
+
+  var attribute_row = {{ attribute_row }};
+
+  $('#product-attribute tr').each(function (index) {
+    attributeautocomplete(index);
+  });
+
+  $('#button-attribute').on('click', function () {
+    html = '<tr id="attribute-row-' + attribute_row + '">';
+    html += '  <td>';
+    html += '    <input type="text" name="product_attribute[' + attribute_row + '][name]" value="" placeholder="{{ entry_attribute|escape('js') }}" id="input-attribute-' + attribute_row + '" data-oc-target="autocomplete-attribute-' + attribute_row + '" class="form-control" autocomplete="off"/>';
+    html += '    <input type="hidden" name="product_attribute[' + attribute_row + '][attribute_id]" value="" id="input-attribute-id-' + attribute_row + '"/>';
+    html += '    <ul id="autocomplete-attribute-' + attribute_row + '" class="dropdown-menu"></ul>';
+    html += '  </td>';
+    html += '  <td>';
+    {% for language in languages %}
+    html += '<div class="input-group">';
+    html += '  <div class="input-group-text"><img src="{{ language.image }}" title="{{ language.name|escape('js') }}" /></div>';
+    html += '  <textarea name="product_attribute[' + attribute_row + '][product_attribute_description][{{ language.language_id }}][text]" rows="5" placeholder="{{ entry_text|escape('js') }}" id="input-text-' + attribute_row + '-{{ language.language_id }}" class="form-control"></textarea>';
+    html += '</div>';
+    {% endfor %}
+    html += '  </td>';
+    html += '  <td class="text-end"><button type="button" onclick="$(\'#attribute-row-' + attribute_row + '\').remove();" data-bs-toggle="tooltip" title="{{ button_remove|escape('js') }}" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>';
+    html += '</tr>';
+
+    $('#product-attribute').append(html);
+
+    attributeautocomplete(attribute_row);
+
+    attribute_row++;
+  });
+</script>

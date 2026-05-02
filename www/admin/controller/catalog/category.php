@@ -159,7 +159,7 @@ class Category extends \Opencart\System\Engine\Controller {
 
 			$data['categories'][] = [
 				'image' => $this->model_tool_image->resize($image, 40, 40),
-				'edit'  => $this->url->link('catalog/category.form', 'user_token=' . $this->session->data['user_token'] . '&category_id=' . $result['category_id'] . $url . '&page=' . $page)
+				'edit'  => $this->url->link('catalog/category.form', 'user_token=' . $this->session->data['user_token'] . '&category_id=' . $result['category_id'] . $url)
 			] + $result;
 		}
 
@@ -182,8 +182,10 @@ class Category extends \Opencart\System\Engine\Controller {
 		$data['sort'] = $sort;
 		$data['order'] = $order;
 
-		$this->document->addScript('view/javascript/oc/filter.min.js');
-		$this->document->addScript('view/javascript/oc/autocomplete.min.js');
+		$this->document->addScript([
+			'view/javascript/oc/filter.min.js',
+			'view/javascript/oc/autocomplete.min.js'
+		]);
 
 		return $this->load->view('catalog/category_list', $data);
 	}
@@ -198,8 +200,11 @@ class Category extends \Opencart\System\Engine\Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->document->addScript('view/javascript/ckeditor/ckeditor.js');
-		$this->document->addScript('view/javascript/ckeditor/adapters/jquery.js');
+		$this->document->addScript([
+			'view/javascript/ckeditor/ckeditor.js',
+			'view/javascript/ckeditor/adapters/jquery.js',
+			'view/javascript/oc/autocomplete.min.js'
+		]);
 
 		$data['text_form'] = !isset($this->request->get['category_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
 
@@ -239,6 +244,8 @@ class Category extends \Opencart\System\Engine\Controller {
 
 		$data['save'] = $this->url->link('catalog/category.save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('catalog/category', 'user_token=' . $this->session->data['user_token'] . $url);
+
+		$category_info = [];
 
 		if (isset($this->request->get['category_id'])) {
 			$this->load->model('catalog/category');
@@ -544,7 +551,7 @@ class Category extends \Opencart\System\Engine\Controller {
 		$json = [];
 
 		if (isset($this->request->get['filter_name'])) {
-			$filter_name = '%' . $this->request->get['filter_name'] . '%';
+			$filter_name = $this->request->get['filter_name'];
 		} else {
 			$filter_name = '';
 		}
@@ -565,7 +572,8 @@ class Category extends \Opencart\System\Engine\Controller {
 			foreach ($results as $result) {
 				$json[] = [
 					'category_id' => $result['category_id'],
-					'name'        => $result['name']
+					'name'        => $result['name'],
+					'status'      => $result['status']
 				];
 			}
 		}

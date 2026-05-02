@@ -15,4 +15,4 @@ jobs:
           php-version: '8.2'
 
       - name: PHP PHP-CS-Fixer
-        run: php tools/php-cs-fixer-v3.phar fix --config=tools/php-cs-fixer.php --dry-run --diff
+        run: composer cs-check

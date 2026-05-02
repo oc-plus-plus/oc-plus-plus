@@ -58,7 +58,7 @@
                 <input type="date" name="filter_date_to" value="{{ filter_date_to }}" placeholder="{{ entry_date_to }}" id="input-date-to" class="form-control"/>
               </div>
               <div class="text-end">
-                <button type="submit" id="button-filter" class="btn btn-light"><i class="fa fa-filter"></i> {{ button_filter }}</button>
+                <button type="submit" class="btn btn-light"><i class="fa fa-filter"></i> {{ button_filter }}</button>
                 <button type="reset" data-bs-toggle="tooltip" title="{{ button_reset }}" class="btn btn-outline-secondary"><i class="fa-solid fa-filter-circle-xmark"></i></button>
               </div>
             </form>
@@ -77,96 +77,119 @@
   </div>
 </div>
 <script type="text/javascript">
-    initFilter('#form-filter', '#comment', 'cms/comment', '{{ user_token }}');
+  ocFilter({
+    formId: '#form-filter',
+    listId: '#comment',
+    route: 'cms/comment',
+    userToken: '{{ user_token }}'
+  });
 
-    initAutocomplete('#input-customer', 'customer/customer.autocomplete', '{{ user_token }}', 'filter_name', 'customer_id', 'name');
-    initAutocomplete('#input-email', 'customer/customer.autocomplete', '{{ user_token }}', 'filter_email', 'customer_id', 'email');
+  ocAutocomplete({
+    inputSelector: '#input-customer',
+    route: 'customer/customer.autocomplete',
+    userToken: '{{ user_token }}',
+    valueKey: 'customer_id',
+    labelKey: 'name',
+    onSelect: function (item) {
+      $('#input-customer').val(decodeHTMLEntities(item.label));
+    }
+  });
 
-    $('#comment').on('click', '.pagination a', function (e) {
-        e.preventDefault();
+  ocAutocomplete({
+    inputSelector: '#input-email',
+    route: 'customer/customer.autocomplete',
+    userToken: '{{ user_token }}',
+    valueKey: 'customer_id',
+    labelKey: 'email',
+    onSelect: function (item) {
+      $('#input-email').val(decodeHTMLEntities(item.label));
+    }
+  });
 
-        $('#comment').load(this.href);
-    });
+  $('#comment').on('click', '.pagination a', function (e) {
+    e.preventDefault();
+    $('#comment').load(this.href);
+  });
 
-    $('#comment').on('click', '.btn-success, .btn-warning, .btn-danger', function () {
-        var element = this;
+  $('#comment').on('click', '.btn-success, .btn-warning, .btn-danger', function () {
+    var element = this;
 
-        $.ajax({
-            url: $(element).val(),
-            dataType: 'json',
-            beforeSend: function () {
-                $(element).button('loading');
-            },
-            complete: function () {
-                $(element).button('reset');
-            },
-            success: function (json) {
-                $('.alert-dismissible').remove();
-
-                if (json['error']) {
-                    $('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-                }
-
-                if (json['success']) {
-                    $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fas fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-                }
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-            }
-        });
-    });
-
-    $('#button-rating').on('click', function () {
-        var element = this;
-
+    $.ajax({
+      url: $(element).val(),
+      dataType: 'json',
+      beforeSend: function () {
         $(element).button('loading');
+      },
+      complete: function () {
+        $(element).button('reset');
+      },
+      success: function (json) {
+        $('.alert-dismissible').remove();
 
-        var next = 'index.php?route=cms/comment.rating&user_token={{ user_token }}';
+        if (json['error']) {
+          $('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+        }
 
-        var rate = function () {
-            return $.ajax({
-                url: next,
-                dataType: 'json',
-                success: function (json) {
-                    console.log(json);
-
-                    $('.alert-dismissible').remove();
-                    $('.invalid-feedback').removeClass('d-block');
-
-                    if (json['error']) {
-                        $('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
-
-                        $(element).button('reset');
-                    }
-
-                    if (json['text']) {
-                        $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-check-circle-circle"></i> ' + json['text'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
-                    }
-
-                    if (json['success']) {
-                        $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-check-circle-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
-
-                        $(element).button('reset');
-
-                        $('#comment').load($('#form-comment').attr('data-oc-load'));
-                    }
-
-                    if (json['next']) {
-                        next = json['next'];
-
-                        chain.attach(rate);
-                    }
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-
-                    $(element).button('reset');
-                }
-            });
-        };
-
-        chain.attach(rate);
+        if (json['success']) {
+          $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fas fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+        }
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+      }
     });
+  });
+
+  $('#button-rating').on('click', function () {
+    var element = this;
+
+    $(element).button('loading');
+
+    var next = 'index.php?route=cms/comment.rating&user_token={{ user_token }}';
+
+    var rate = function () {
+      return $.ajax({
+        url: next,
+        dataType: 'json',
+        success: function (json) {
+          console.log(json);
+
+          $('.alert-dismissible').remove();
+          $('.invalid-feedback').removeClass('d-block');
+
+          if (json['error']) {
+            $('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+
+            $(element).button('reset');
+          }
+
+          if (json['text']) {
+            $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-check-circle-circle"></i> ' + json['text'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+          }
+
+          if (json['success']) {
+            $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-check-circle-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+
+            $(element).button('reset');
+
+            $('#comment').load($('#form-comment').attr('data-oc-load'));
+          }
+
+          if (json['next']) {
+            next = json['next'];
+
+            chain.attach(rate);
+          }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+          console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+
+          $(element).button('reset');
+        }
+      });
+    };
+
+    chain.attach(rate);
+  });
 </script>
 {{ footer }}

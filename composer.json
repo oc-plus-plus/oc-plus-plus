@@ -1,5 +1,5 @@
 {
-  "name": "opencart-fixes/oc4",
+  "name": "opencart/opencart",
   "description": "OpenCart",
   "type": "project",
   "license": "GPL-3.0-or-later",
@@ -31,7 +31,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tools\\PHPStan\\": "tools/phpstan/"
+      "Tools\\PHPStan\\": ".tools/phpstan/"
     }
   },
   "scripts": {
@@ -39,8 +39,8 @@
       "@cs-check",
       "@static-analysis"
     ],
-    "cs-fix": "php tools/php-cs-fixer-v3.phar fix --config=tools/php-cs-fixer.php",
-    "cs-check": "php tools/php-cs-fixer-v3.phar fix --config=tools/php-cs-fixer.php --dry-run --diff",
-    "static-analysis": "php tools/phpstan.phar analyze"
+    "cs-fix": "php .tools/php-cs-fixer-v3.phar fix --config=.tools/php-cs-fixer.php",
+    "cs-check": "php .tools/php-cs-fixer-v3.phar fix --config=.tools/php-cs-fixer.php --dry-run --diff",
+    "static-analysis": "php .tools/phpstan.phar analyze -c .tools/phpstan.neon"
   }
 }

@@ -122,8 +122,8 @@ $registry->set('request', $request);
 
 // Compatibility
 if (isset($request->get['route'])) {
+	$request->get['route'] = str_replace('%7C', '|', $request->get['route']);
 	$request->get['route'] = str_replace('|', '.', $request->get['route']);
-	$request->get['route'] = str_replace('%7C', '|', (string)$request->get['route']);
 }
 
 // Response
