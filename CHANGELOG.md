@@ -13,15 +13,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 ## [Unreleased]
 
 #### Added
+- Nothing
+
+#### Changed
+- Nothing
+
+#### Deprecated
+- Nothing
+
+#### Removed
+- Nothing
+
+#### Fixed
+- Nothing
+
+#### Security
+- Nothing
+
+
+## [0.2.0 beta] - 2026-05-03
+
+#### Added
 - Remember the last directory in the file manager.
 
 #### Changed
 - Admin: SEO tab merged with General tab.
 - Admin: further improvements to the filter system.
 - Refactoring
-
-#### Deprecated
-- Nothing
 
 #### Removed
 - Legacy `cron.php`.
@@ -35,11 +53,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 - When unloading extensions, archives with errors were not deleted, but remained in the `/marketplace` folder.
 - Various minor fixes...
 
-#### Security
-- Nothing
 
-
-## [0.1.0] beta - 2026-04-19
+## [0.1.0 beta] - 2026-04-19
 
 ### Added
 - [#14857](https://github.com/opencart/opencart/pull/14857), [#14858](https://github.com/opencart/opencart/pull/14858), [#14859](https://github.com/opencart/opencart/pull/14859) - Add manufacturer filter
@@ -154,4 +169,5 @@ Based on [OpenCart 4.1.0.3](https://github.com/opencart/opencart/releases/tag/4.
 with the original source code imported as the foundation for all subsequent development within this project.
 
 [Unreleased]: https://github.com/oc-plus-plus/oc-plus-plus/compare/0.1.0...HEAD
-[0.1.0]: https://github.com/oc-plus-plus/oc-plus-plus/releases/tag/0.1.0
+[0.2.0 beta]: https://github.com/oc-plus-plus/oc-plus-plus/releases/tag/0.2.0
+[0.1.0 beta]: https://github.com/oc-plus-plus/oc-plus-plus/releases/tag/0.1.0
