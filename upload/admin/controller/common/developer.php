@@ -65,7 +65,7 @@ class Developer extends \Opencart\System\Engine\Controller {
 		}
 
 		if (!$json) {
-			$this->cleanDirectory(DIR_CACHE);
+            $this->cleanDirectory(DIR_CACHE);
 			$json['success'] = $this->language->get('text_systemcache_success');
 		}
 
@@ -79,21 +79,21 @@ class Developer extends \Opencart\System\Engine\Controller {
 	 * @return void
 	 */
 	public function imagecache(): void {
-		$this->load->language('common/developer');
+        $this->load->language('common/developer');
 
-		$json = [];
+        $json = [];
 
-		if (!$this->user->hasPermission('modify', 'common/developer')) {
-			$json['error'] = $this->language->get('error_permission');
-		}
+        if (!$this->user->hasPermission('modify', 'common/developer')) {
+            $json['error'] = $this->language->get('error_permission');
+        }
 
-		if (!$json) {
-			$this->cleanDirectory(DIR_IMAGE . 'cache');
-			$json['success'] = $this->language->get('text_imagecache_success');
-		}
+        if (!$json) {
+            $this->cleanDirectory(DIR_IMAGE . 'cache');
+            $json['success'] = $this->language->get('text_imagecache_success');
+        }
 
-		$this->response->addHeader('Content-Type: application/json');
-		$this->response->setOutput(json_encode($json));
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
 	}
 
 	/**
@@ -111,32 +111,16 @@ class Developer extends \Opencart\System\Engine\Controller {
 		}
 
 		if (!$json) {
-			// Before we delete we need to make sure there is a sass file to regenerate the css
-			$file = DIR_APPLICATION . 'view/stylesheet/bootstrap.css';
+            $cssFiles = array_merge(
+                glob(DIR_APPLICATION . 'view/stylesheet/*.css'),
+                glob(DIR_CATALOG . 'view/stylesheet/*.css')
+            );
 
-			if (is_file($file) && is_file(DIR_APPLICATION . 'view/stylesheet/scss/bootstrap.scss')) {
-				unlink($file);
-			}
-
-			$files = glob(DIR_CATALOG . 'view/stylesheet/scss/bootstrap.scss');
-
-			foreach ($files as $file) {
-				$file = substr($file, 0, -20) . '/bootstrap.css';
-
-				if (is_file($file)) {
-					unlink($file);
-				}
-			}
-
-			$files = glob(DIR_CATALOG . 'view/stylesheet/stylesheet.scss');
-
-			foreach ($files as $file) {
-				$file = substr($file, 0, -16) . '/stylesheet.css';
-
-				if (is_file($file)) {
-					unlink($file);
-				}
-			}
+            foreach ($cssFiles as $file) {
+                if (is_file($file)) {
+                    unlink($file);
+                }
+            }
 
 			$json['success'] = $this->language->get('text_sass_success');
 		}
@@ -264,35 +248,37 @@ class Developer extends \Opencart\System\Engine\Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	private function cleanDirectory(string $dir): bool {
-		if (!is_dir($dir)) {
-			return false;
-		}
+    private function cleanDirectory(string $dir): bool
+    {
+        if (! is_dir($dir)) {
+            return false;
+        }
 
-		$dir = rtrim($dir, '/\\') . DIRECTORY_SEPARATOR;
-		$indexHtmlPath = $dir . 'index.html';
+        $dir = rtrim($dir, '/\\') . DIRECTORY_SEPARATOR;
+        $indexHtmlPath = $dir . 'index.html';
 
-		$iterator = new \RecursiveIteratorIterator(
-			new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS),
-			\RecursiveIteratorIterator::CHILD_FIRST
-		);
+        $iterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS),
+            \RecursiveIteratorIterator::CHILD_FIRST
+        );
 
-		foreach ($iterator as $file) {
-			/** @var \SplFileInfo $file */
-			$pathname = $file->getPathname();
+        foreach ($iterator as $file) {
+            /** @var \SplFileInfo $file */
 
-			// Пропускаем index.html только в корневой папке
-			if ($pathname === $indexHtmlPath) {
-				continue;
-			}
+            $pathname = $file->getPathname();
 
-			if ($file->isDir()) {
-				@rmdir($pathname);
-			} else {
-				@unlink($pathname);
-			}
-		}
+            // Пропускаем index.html только в корневой папке
+            if ($pathname === $indexHtmlPath) {
+                continue;
+            }
 
-		return true;
-	}
+            if ($file->isDir()) {
+                @rmdir($pathname);
+            } else {
+                @unlink($pathname);
+            }
+        }
+
+        return true;
+    }
 }
