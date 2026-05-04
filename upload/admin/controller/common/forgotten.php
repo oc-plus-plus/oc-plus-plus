@@ -59,11 +59,13 @@ class Forgotten extends \Opencart\System\Engine\Controller {
 		}
 
 		if (!$json) {
-			$post_info = ['email' => ''] + $this->request->post;
+			$email = isset($this->request->post['email'])
+				? filter_var($this->request->post('email'), FILTER_SANITIZE_EMAIL)
+				: '';
 
 			$this->load->model('user/user');
 
-			$user_info = $this->model_user_user->getUserByEmail((string)$post_info['email']);
+			$user_info = $this->model_user_user->getUserByEmail((string)$email);
 
 			if (!$user_info) {
 				$json['error'] = $this->language->get('error_email');
@@ -73,7 +75,7 @@ class Forgotten extends \Opencart\System\Engine\Controller {
 		if (!$json) {
 			$this->session->data['success'] = $this->language->get('text_success');
 
-			$this->model_user_user->addToken($user_info['customer_id'], 'password', oc_token(40));
+			$this->model_user_user->addToken($user_info['user_id'], 'password', oc_token(40));
 
 			$json['redirect'] = $this->url->link('common/login', '', true);
 		}
@@ -112,7 +114,7 @@ class Forgotten extends \Opencart\System\Engine\Controller {
 		$user_info = $this->model_user_user->getTokenByCode($code);
 
 		if (!$user_info || !$user_info['email'] || $user_info['email'] !== $email || $user_info['type'] != 'password') {
-			$this->model_account_customer->deleteTokenByCode($code);
+			$this->model_user_user->deleteTokenByCode($code);
 
 			$this->session->data['error'] = $this->language->get('error_code');
 
@@ -173,17 +175,17 @@ class Forgotten extends \Opencart\System\Engine\Controller {
 		if (!isset($this->request->get['reset_token']) || !isset($this->session->data['reset_token']) || ($this->session->data['reset_token'] != $this->request->get['reset_token'])) {
 			$this->session->data['error'] = $this->language->get('error_session');
 
-			$json['redirect'] = $this->url->link('account/forgotten', '', true);
+			$json['redirect'] = $this->url->link('common/forgotten', '', true);
 		}
 
 		// User
 		$this->load->model('user/user');
 
-		$user_info = $this->model_user_user->getUserByEmail($email);
+		$user_info = $this->model_user_user->getTokenByCode($code);
 
 		if (!$user_info || !$user_info['email'] || $user_info['email'] !== $email || $user_info['type'] != 'password') {
 			// Reset token
-			$this->model_account_customer->deleteTokenByCode($code);
+			$this->model_user_user->deleteTokenByCode($code);
 
 			$this->session->data['error'] = $this->language->get('error_code');
 
@@ -234,7 +236,7 @@ class Forgotten extends \Opencart\System\Engine\Controller {
 			// Remove for token
 			unset($this->session->data['reset_token']);
 
-			$this->model_account_customer->deleteTokenByCode($code);
+			$this->model_user_user->deleteTokenByCode($code);
 
 			$json['redirect'] = $this->url->link('common/login', '', true);
 		}
