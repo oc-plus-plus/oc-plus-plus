@@ -1,0 +1,101 @@
+/* ==========================================================================
+   PRODUCT CARD (Thumbnails, Rating, Price)
+   ========================================================================== */
+
+.product-thumb {
+  border: 1px solid #ddd;
+  position: relative;
+  height: 100%;
+
+  .image {
+    text-align: center;
+
+    a:hover {
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
+  }
+
+  .description {
+    padding: 15px;
+    margin-bottom: 45px;
+
+    h4 {
+      font-weight: bold;
+    }
+  }
+
+  // Блок кнопок (стили подтягиваются из _buttons.scss)
+  .button {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+  }
+}
+
+/* Rating */
+.rating {
+  .fa-stack {
+    width: 20px;
+  }
+
+  .fa-star {
+    font-size: 15px;
+    color: #999; // Цвет пустой звезды
+
+    // Цвет закрашенной звезды
+    &, + .fa-star {
+      color: #FC0;
+    }
+
+    // Специфический оттенок для последующих звезд
+    & + .fa-star {
+      color: #E69500;
+    }
+  }
+}
+
+/* Price */
+.price {
+  color: #444;
+
+  &-new {
+    font-weight: 600;
+  }
+
+  &-old {
+    color: #dc512c;
+    text-decoration: line-through;
+  }
+
+  &-tax {
+    color: #999;
+    font-size: 12px;
+    display: block;
+  }
+}
+
+/* Product List View (Адаптив для списка) */
+@media (min-width: 960px) {
+  .product-list .product-thumb {
+    display: flex;
+
+    .image {
+      flex-direction: column;
+      margin-bottom: 0;
+    }
+
+    .content {
+      flex-direction: column;
+      flex: 75%;
+      position: relative;
+    }
+
+    .button {
+      border-left: 1px solid #ddd;
+      width: calc(100% - 15px);
+      margin-left: 15px;
+    }
+  }
+}

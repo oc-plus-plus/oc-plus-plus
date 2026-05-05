@@ -1,0 +1,22 @@
+.blog-thumb {
+  border: 1px solid #ddd;
+  margin-bottom: 15px;
+
+  h4 {
+    font-weight: bold;
+  }
+
+  .image {
+    text-align: center;
+    margin-bottom: 15px;
+
+    a:hover {
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
+  }
+
+  .description {
+    padding: 15px;
+  }
+}

@@ -1,0 +1,44 @@
+legend {
+  padding: 7px 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+label {
+  font-size: 12px;
+  font-weight: normal;
+}
+
+// Required fields (red asterisk before text)
+div.required {
+  .col-form-label:before,
+  .form-label:before {
+    content: '* ';
+    color: #F00;
+    font-weight: bold;
+  }
+}
+
+// Enlarged switches (Switch)
+.form-switch-lg {
+  font-size: 20px;
+  min-height: 30px;
+  line-height: 30px;
+}
+
+.nav-tabs {
+  margin-bottom: 15px;
+}
+
+.form-check {
+  .form-check-input {
+    margin-top: 0.25rem;
+  }
+}
+
+// Adaptive form label alignment
+@media (min-width: 768px) {
+  .col-form-label {
+    text-align: right;
+  }
+}

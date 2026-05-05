@@ -1,1 +1,19 @@
 @import "stylesheet/stylesheet";
+
+// Theme Specific
+#cookie {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  z-index: 9999;
+  opacity: 0.95;
+  color: #ecf0f1;
+  background: #343a40;
+
+  div {
+    font-size: 16px;
+    color: #FFFFFF;
+  }
+}
