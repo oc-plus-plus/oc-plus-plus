@@ -16,28 +16,22 @@ class Manufacturer extends \Opencart\System\Engine\Controller {
 	public function index(): void {
 		$this->load->language('catalog/manufacturer');
 
+		$url = '';
+
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = (string)$this->request->get['filter_name'];
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		} else {
 			$filter_name = '';
 		}
 
 		if (isset($this->request->get['filter_store_id'])) {
 			$filter_store_id = (string)$this->request->get['filter_store_id'];
+			$url .= '&filter_store_id=' . urlencode(html_entity_decode($this->request->get['filter_store_id'], ENT_QUOTES, 'UTF-8'));
 		} else {
 			$filter_store_id = '';
-		}
-
-		$url = '';
-
-		if (isset($this->request->get['filter_name'])) {
-			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
-		}
-
-		if (isset($this->request->get['filter_store_id'])) {
-			$url .= '&filter_store_id=' . urlencode(html_entity_decode($this->request->get['filter_store_id'], ENT_QUOTES, 'UTF-8'));
 		}
 
 		if (isset($this->request->get['sort'])) {

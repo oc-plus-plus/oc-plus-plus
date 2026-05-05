@@ -210,11 +210,11 @@ class Review extends \Opencart\System\Engine\Model {
 		$sql = "SELECT `r`.`review_id`, `pd`.`name`, `r`.`author`, `r`.`rating`, `r`.`status`, `r`.`date_added` FROM `" . DB_PREFIX . "review` `r` LEFT JOIN `" . DB_PREFIX . "product_description` `pd` ON (`r`.`product_id` = `pd`.`product_id`) WHERE `pd`.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_product'])) {
-			$sql .= " AND LCASE(`pd`.`name`) LIKE '" . $this->db->escape(oc_strtolower($data['filter_product']) . '%') . "'";
+			$sql .= " AND LCASE(`pd`.`name`) LIKE '" . $this->db->escape(oc_strtolower('%' . $data['filter_product']) . '%') . "'";
 		}
 
 		if (!empty($data['filter_author'])) {
-			$sql .= " AND LCASE(`r`.`author`) LIKE '" . $this->db->escape(oc_strtolower($data['filter_author']) . '%') . "'";
+			$sql .= " AND LCASE(`r`.`author`) LIKE '" . $this->db->escape('%' . oc_strtolower($data['filter_author']) . '%') . "'";
 		}
 
 		if (isset($data['filter_status']) && $data['filter_status'] !== '') {

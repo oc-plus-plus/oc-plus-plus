@@ -14,69 +14,51 @@ class Subscription extends \Opencart\System\Engine\Controller {
 	public function index(): void {
 		$this->load->language('sale/subscription');
 
+		$url = '';
+
 		if (isset($this->request->get['filter_subscription_id'])) {
 			$filter_subscription_id = (int)$this->request->get['filter_subscription_id'];
+			$url .= '&filter_subscription_id=' . $this->request->get['filter_subscription_id'];
 		} else {
 			$filter_subscription_id = '';
 		}
 
 		if (isset($this->request->get['filter_order_id'])) {
 			$filter_order_id = $this->request->get['filter_order_id'];
+			$url .= '&filter_order_id=' . $this->request->get['filter_order_id'];
 		} else {
 			$filter_order_id = '';
 		}
 
 		if (isset($this->request->get['filter_customer'])) {
 			$filter_customer = $this->request->get['filter_customer'];
+			$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
 		} else {
 			$filter_customer = '';
 		}
 
 		if (isset($this->request->get['filter_subscription_status_id'])) {
 			$filter_subscription_status_id = (int)$this->request->get['filter_subscription_status_id'];
+			$url .= '&filter_subscription_status_id=' . $this->request->get['filter_subscription_status_id'];
 		} else {
 			$filter_subscription_status_id = '';
 		}
 
 		if (isset($this->request->get['filter_date_from'])) {
 			$filter_date_from = $this->request->get['filter_date_from'];
+			$url .= '&filter_date_from=' . $this->request->get['filter_date_from'];
 		} else {
 			$filter_date_from = '';
 		}
 
 		if (isset($this->request->get['filter_date_to'])) {
 			$filter_date_to = $this->request->get['filter_date_to'];
+			$url .= '&filter_date_to=' . $this->request->get['filter_date_to'];
 		} else {
 			$filter_date_to = '';
 		}
 
 		$this->document->setTitle($this->language->get('heading_title'));
-
-		$url = '';
-
-		if (isset($this->request->get['filter_subscription_id'])) {
-			$url .= '&filter_subscription_id=' . $this->request->get['filter_subscription_id'];
-		}
-
-		if (isset($this->request->get['filter_order_id'])) {
-			$url .= '&filter_order_id=' . $this->request->get['filter_order_id'];
-		}
-
-		if (isset($this->request->get['filter_customer'])) {
-			$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
-		}
-
-		if (isset($this->request->get['filter_subscription_status_id'])) {
-			$url .= '&filter_subscription_status_id=' . $this->request->get['filter_subscription_status_id'];
-		}
-
-		if (isset($this->request->get['filter_date_from'])) {
-			$url .= '&filter_date_from=' . $this->request->get['filter_date_from'];
-		}
-
-		if (isset($this->request->get['filter_date_to'])) {
-			$url .= '&filter_date_to=' . $this->request->get['filter_date_to'];
-		}
 
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];

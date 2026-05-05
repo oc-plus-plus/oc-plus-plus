@@ -16,111 +16,72 @@ class Product extends \Opencart\System\Engine\Controller {
 	public function index(): void {
 		$this->load->language('catalog/product');
 
+		$url = '';
+
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		} else {
 			$filter_name = '';
 		}
 
 		if (isset($this->request->get['filter_model'])) {
 			$filter_model = $this->request->get['filter_model'];
+			$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
 		} else {
 			$filter_model = '';
 		}
 
 		if (isset($this->request->get['filter_category_id'])) {
 			$filter_category_id = $this->request->get['filter_category_id'];
+			$url .= '&filter_category_id=' . $this->request->get['filter_category_id'];
 		} else {
 			$filter_category_id = '';
 		}
 
 		if (isset($this->request->get['filter_manufacturer_id'])) {
 			$filter_manufacturer_id = $this->request->get['filter_manufacturer_id'];
+			$url .= '&filter_manufacturer_id=' . $this->request->get['filter_manufacturer_id'];
 		} else {
 			$filter_manufacturer_id = '';
 		}
 
 		if (isset($this->request->get['filter_price_from'])) {
 			$filter_price_from = $this->request->get['filter_price_from'];
+			$url .= '&filter_price_from=' . $this->request->get['filter_price_from'];
 		} else {
 			$filter_price_from = '';
 		}
 
 		if (isset($this->request->get['filter_price_to'])) {
 			$filter_price_to = $this->request->get['filter_price_to'];
+			$url .= '&filter_price_to=' . $this->request->get['filter_price_to'];
 		} else {
 			$filter_price_to = '';
 		}
 
 		if (isset($this->request->get['filter_quantity_from'])) {
 			$filter_quantity_from = $this->request->get['filter_quantity_from'];
+			$url .= '&filter_quantity_from=' . $this->request->get['filter_quantity_from'];
 		} else {
 			$filter_quantity_from = '';
 		}
 
 		if (isset($this->request->get['filter_quantity_to'])) {
 			$filter_quantity_to = $this->request->get['filter_quantity_to'];
-		} else {
-			$filter_quantity_to = '';
-		}
-
-		if (isset($this->request->get['filter_quantity_from'])) {
-			$filter_quantity_from = $this->request->get['filter_quantity_from'];
-		} else {
-			$filter_quantity_from = '';
-		}
-
-		if (isset($this->request->get['filter_quantity_to'])) {
-			$filter_quantity_to = $this->request->get['filter_quantity_to'];
+			$url .= '&filter_quantity_to=' . $this->request->get['filter_quantity_to'];
 		} else {
 			$filter_quantity_to = '';
 		}
 
 		if (isset($this->request->get['filter_status'])) {
 			$filter_status = $this->request->get['filter_status'];
+			$url .= '&filter_status=' . $this->request->get['filter_status'];
 		} else {
 			$filter_status = '';
 		}
 
 		$this->document->setTitle($this->language->get('heading_title'));
-
-		$url = '';
-
-		if (isset($this->request->get['filter_name'])) {
-			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
-		}
-
-		if (isset($this->request->get['filter_model'])) {
-			$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
-		}
-
-		if (isset($this->request->get['filter_category_id'])) {
-			$url .= '&filter_category_id=' . $this->request->get['filter_category_id'];
-		}
-
-		if (isset($this->request->get['filter_manufacturer_id'])) {
-			$url .= '&filter_manufacturer_id=' . $this->request->get['filter_manufacturer_id'];
-		}
-
-		if (isset($this->request->get['filter_price_from'])) {
-			$url .= '&filter_price_from=' . $this->request->get['filter_price_from'];
-		}
-
-		if (isset($this->request->get['filter_price_to'])) {
-			$url .= '&filter_price_to=' . $this->request->get['filter_price_to'];
-		}
-
-		if (isset($this->request->get['filter_quantity_from'])) {
-			$url .= '&filter_quantity_from=' . $this->request->get['filter_quantity_from'];
-		}
-
-		if (isset($this->request->get['filter_quantity_to'])) {
-			$url .= '&filter_quantity_to=' . $this->request->get['filter_quantity_to'];
-		}
-
-		if (isset($this->request->get['filter_status'])) {
-			$url .= '&filter_status=' . $this->request->get['filter_status'];
-		}
 
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
