@@ -33,7 +33,7 @@ function initFilter(formId, listId, route, userToken) {
         $list.load(routePart + '.list' + (urlParams ? '&' + urlParams : '') + tokenPart);
     });
 
-    $('#button-reset').on('click', function () {
+    $form.on('reset', function () {
         location = routePart + tokenPart;
     });
 }

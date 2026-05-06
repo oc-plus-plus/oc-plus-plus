@@ -48,7 +48,7 @@
               </div>
               <div class="text-end">
                 <button type="submit" id="button-filter" class="btn btn-light"><i class="fa-solid fa-filter"></i> {{ button_filter }}</button>
-                <button type="button" id="button-reset" data-bs-toggle="tooltip" title="{{ button_reset }}" class="btn btn-outline-secondary"><i class="fa-solid fa-filter-circle-xmark"></i></button>
+                <button type="reset" data-bs-toggle="tooltip" title="{{ button_reset }}" class="btn btn-outline-secondary"><i class="fa-solid fa-filter-circle-xmark"></i></button>
               </div>
             </form>
           </div>
@@ -66,30 +66,12 @@
 <script type="text/javascript">
     initFilter('#form-filter', '#review', 'catalog/review', '{{ user_token }}');
 
+    initAutocomplete('#input-product', 'catalog/product.autocomplete', '{{ user_token }}', 'filter_name', 'product_id', 'name');
+
     $('#review').on('click', 'thead a, .pagination a', function (e) {
         e.preventDefault();
 
         $('#review').load(this.href);
-    });
-
-    $('#input-product').autocomplete({
-        'source': function (request, response) {
-            $.ajax({
-                url: 'index.php?route=catalog/product.autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
-                dataType: 'json',
-                success: function (json) {
-                    response($.map(json, function (item) {
-                        return {
-                            label: item['name'],
-                            value: item['product_id']
-                        }
-                    }));
-                }
-            });
-        },
-        'select': function (item) {
-            $('#input-product').val(decodeHTMLEntities(item['label']));
-        }
     });
 
     $('#button-rating').on('click', function () {

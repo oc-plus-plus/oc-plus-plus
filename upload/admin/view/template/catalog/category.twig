@@ -38,7 +38,7 @@
               </div>
               <div class="text-end">
                 <button type="submit" id="button-filter" class="btn btn-light"><i class="fa-solid fa-filter"></i> {{ button_filter }}</button>
-                <button type="button" id="button-reset" data-bs-toggle="tooltip" title="{{ button_reset }}" class="btn btn-outline-secondary"><i class="fa-solid fa-filter-circle-xmark"></i></button>
+                <button type="reset" data-bs-toggle="tooltip" title="{{ button_reset }}" class="btn btn-outline-secondary"><i class="fa-solid fa-filter-circle-xmark"></i></button>
               </div>
             </form>
           </div>
@@ -55,6 +55,8 @@
 </div>
 <script type="text/javascript">
     initFilter('#form-filter', '#category', 'catalog/category', '{{ user_token }}');
+
+    initAutocomplete('#input-name', 'catalog/category.autocomplete', '{{ user_token }}', 'filter_name', 'category_id', 'name');
 
     $('#category').on('click', 'thead a, .pagination a', function (e) {
         e.preventDefault();
@@ -91,35 +93,6 @@
                 console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
             }
         });
-    });
-
-    $('#input-name').autocomplete({
-        'source': function (request, response) {
-            $.ajax({
-                url: 'index.php?route=catalog/category.autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
-                dataType: 'json',
-                success: function (json) {
-                    json.unshift({
-                        name: '{{ text_none }}',
-                        category_id: '',
-                    });
-
-                    response($.map(json, function (item) {
-                        return {
-                            label: item['name'],
-                            value: item['category_id']
-                        }
-                    }));
-                }
-            });
-        },
-        'select': function (item) {
-            if (item['value']) {
-                $('#input-name').val(decodeHTMLEntities(item['label']));
-            } else {
-                $('#input-name').val('');
-            }
-        }
     });
 </script>
 {{ footer }}

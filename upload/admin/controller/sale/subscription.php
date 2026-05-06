@@ -336,6 +336,7 @@ class Subscription extends \Opencart\System\Engine\Controller {
 		$data['order'] = $order;
 
 		$this->document->addScript('view/javascript/oc/filter.min.js');
+		$this->document->addScript('view/javascript/oc/autocomplete.min.js');
 
 		return $this->load->view('sale/subscription_list', $data);
 	}
