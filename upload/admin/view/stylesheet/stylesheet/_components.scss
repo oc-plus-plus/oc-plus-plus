@@ -1,0 +1,262 @@
+// =============================================================================
+// Components
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Page header
+// -----------------------------------------------------------------------------
+
+.page-header {
+    vertical-align: middle;
+    margin: 20px 0 15px 0;
+    padding: 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid $color-page-header-border;
+
+    h1 {
+        font-family: $font-family-base;
+        font-weight: 300;
+        font-size: 30px;
+        color: $color-page-header-text;
+        display: inline-block;
+        margin-bottom: 15px;
+        text-shadow: 0 1px #fff;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Tabs
+// -----------------------------------------------------------------------------
+
+.nav-tabs {
+    margin-bottom: 25px;
+
+    > li > a {
+        color: #a5a5a5;
+
+        &:hover {
+            border-color: #eee #eee #ddd;
+        }
+    }
+
+    li.nav-item a.active {
+        color: #333;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Forms
+// -----------------------------------------------------------------------------
+
+.form-label,
+.col-form-label {
+    font-weight: bold;
+}
+
+.form-switch-lg {
+    font-size: 26px;
+    min-height: 36px;
+    line-height: 36px;
+}
+
+@media (min-width: $bp-md) {
+    .col-form-label {
+        text-align: right;
+    }
+}
+
+// Required field indicator
+div.required {
+    .col-form-label:not(span)::before,
+    .form-label::before {
+        content: '* ';
+        color: #F00;
+        font-weight: bold;
+    }
+}
+
+td.required::before {
+    content: '* ';
+    color: #F00;
+    font-weight: bold;
+}
+
+.image {
+    width: 12rem;
+}
+
+// -----------------------------------------------------------------------------
+// Tables
+// -----------------------------------------------------------------------------
+
+.table {
+    thead td span[data-toggle='tooltip']::after,
+    & ~ label.form-label span::after {
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 600;
+        content: "\f059";
+        color: #1E91CF;
+        margin-left: 4px;
+    }
+
+    a.asc::after {
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 600;
+        content: " \f106";
+    }
+
+    a.desc::after {
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 600;
+        content: " \f107";
+    }
+}
+
+label.form-label span::after {
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 600;
+    content: "\f059";
+    color: #1E91CF;
+    margin-left: 4px;
+}
+
+.table-responsive {
+    overflow: visible;
+}
+
+// -----------------------------------------------------------------------------
+// Pagination
+// -----------------------------------------------------------------------------
+
+.pagination {
+    margin: 0;
+}
+
+// -----------------------------------------------------------------------------
+// Cards
+// -----------------------------------------------------------------------------
+
+.card {
+    border-radius: 0;
+
+    &-header > i {
+        margin-right: 5px;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Tiles
+// -----------------------------------------------------------------------------
+
+.tile {
+    margin-bottom: 15px;
+    border-radius: 3px;
+    color: $color-white;
+    transition: $transition-slow;
+
+    &-primary { background-color: $color-tile-primary; }
+    &-success  { background-color: $color-tile-success; }
+    &-warning  { background-color: $color-tile-warning; }
+    &-danger   { background-color: $color-tile-danger; }
+
+    &:hover {
+        opacity: 0.95;
+    }
+
+    a {
+        color: $color-white;
+    }
+}
+
+.tile-heading {
+    padding: 5px 8px;
+    text-transform: uppercase;
+    color: $color-white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .4);
+    background-color: rgba(255, 255, 255, 0.1);
+
+    .pull-right {
+        transition: $transition-slow;
+        opacity: 0.7;
+    }
+
+    .tile:hover & .pull-right {
+        opacity: 1;
+    }
+}
+
+.tile-body {
+    padding: 15px;
+    color: $color-white;
+    line-height: 48px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .4);
+
+    i {
+        font-size: 50px;
+        opacity: 0.3;
+        transition: $transition-slow;
+    }
+
+    h2 {
+        font-size: 42px;
+    }
+
+    .tile:hover & i {
+        color: $color-white;
+        opacity: 1;
+    }
+}
+
+.tile-footer {
+    padding: 5px 8px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+// -----------------------------------------------------------------------------
+// Datetime picker
+// -----------------------------------------------------------------------------
+
+.bootstrap-datetimepicker-widget {
+    position: absolute;
+    float: right;
+    z-index: $z-datetimepicker;
+    height: 200px;
+    width: 250px;
+}
+
+// -----------------------------------------------------------------------------
+// JQVMap
+// -----------------------------------------------------------------------------
+
+.jqvmap-label {
+    z-index: $z-jqvmap;
+}
+
+.card-body {
+    .jqvmap-zoomin,
+    .jqvmap-zoomout {
+        padding: 0;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Checklist
+// -----------------------------------------------------------------------------
+
+.list-check {
+    list-style: none;
+
+    li::before {
+        font-family: 'Font Awesome 6 Solid';
+        content: "\f00c";
+        margin-left: -30px;
+        width: 29px;
+        display: inline-block;
+        color: $color-ext-check-green;
+    }
+
+    &.list-color-blue li::before {
+        color: $color-ext-check-blue;
+    }
+}

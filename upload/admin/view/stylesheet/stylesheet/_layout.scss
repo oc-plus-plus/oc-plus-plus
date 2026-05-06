@@ -1,0 +1,86 @@
+// =============================================================================
+// Layout
+// =============================================================================
+
+#container {
+    min-height: 100%;
+    width: 100%;
+    position: relative;
+    background: $color-bg;
+    overflow: clip;
+}
+
+.container-fluid {
+    padding: 0 20px;
+}
+
+// -----------------------------------------------------------------------------
+// Sidebar column
+// -----------------------------------------------------------------------------
+
+#column-left {
+    width: $sidebar-width;
+    height: 100%;
+    overflow: auto;
+    background-color: $color-sidebar-bg;
+    position: absolute;
+    top: 0;
+    left: -$sidebar-width;
+    padding-top: 60px;
+}
+
+// -----------------------------------------------------------------------------
+// Content & Footer transitions
+// -----------------------------------------------------------------------------
+
+#column-left,
+#content,
+#footer {
+    transition: $transition-base;
+}
+
+#column-left + #content,
+#column-left + #content + #footer {
+    position: relative;
+    left: 0;
+}
+
+#column-left.active {
+    left: 0;
+}
+
+#column-left.active + #content,
+#column-left.active + #content + #footer {
+    left: $sidebar-width;
+}
+
+@media (min-width: $bp-md) {
+    #column-left {
+        left: 0;
+    }
+
+    #column-left + #content,
+    #column-left + #content + #footer {
+        left: 0;
+        margin-left: $sidebar-width;
+    }
+
+    #column-left.active + #content,
+    #column-left.active + #content + #footer {
+        left: 0;
+        margin-left: $sidebar-width;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Content & Footer
+// -----------------------------------------------------------------------------
+
+#content {
+    padding-bottom: 40px;
+}
+
+#footer {
+    height: 100px;
+    text-align: center;
+}

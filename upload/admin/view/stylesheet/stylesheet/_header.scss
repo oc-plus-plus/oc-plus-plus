@@ -1,0 +1,129 @@
+// =============================================================================
+// Header & Top Navigation
+// =============================================================================
+
+#header {
+    border-bottom: 1px solid $color-border-header;
+    box-shadow: 0 0 3px $color-shadow-header;
+    z-index: $z-header;
+    margin: 0;
+    padding: 0;
+
+    .navbar-nav {
+        > li > .nav-link {
+            color: $color-nav-link;
+        }
+
+        li > .nav-link:hover,
+        li.show > .nav-link {
+            background: $color-nav-link-hover-bg;
+        }
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Menu toggle button
+// -----------------------------------------------------------------------------
+
+#button-menu {
+    font-size: 25px;
+    padding: 0 16px;
+    margin: 2px;
+    cursor: pointer;
+    color: $color-nav-link;
+
+    @media (min-width: $bp-md) {
+        padding: 10px 16px;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Notification
+// -----------------------------------------------------------------------------
+
+#nav-notification {
+    .nav-link {
+        padding-left: 15px;
+        padding-right: 15px;
+        line-height: 30px;
+        font-size: 24px;
+
+        @media (min-width: $bp-md) {
+            line-height: 50px;
+        }
+    }
+
+    > .nav-link .badge {
+        position: absolute;
+        top: 7px;
+        right: 12px;
+        padding: 3px 4px 2px 4px;
+        opacity: 0.8;
+        border-radius: 6px;
+
+        @media (min-width: $bp-md) {
+            top: 14px;
+            right: 11px;
+        }
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Language switcher
+// -----------------------------------------------------------------------------
+
+#nav-language {
+    .nav-link {
+        padding-left: 15px;
+        padding-right: 15px;
+        line-height: 30px;
+
+        @media (min-width: $bp-md) {
+            line-height: 50px;
+        }
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Profile
+// -----------------------------------------------------------------------------
+
+#nav-profile {
+    .nav-link {
+        padding-left: 15px;
+        padding-right: 15px;
+        line-height: 30px;
+
+        @media (min-width: $bp-md) {
+            padding-left: 10px;
+            padding-right: 10px;
+            line-height: 50px;
+        }
+    }
+
+    img {
+        max-width: 30px;
+
+        @media (min-width: $bp-md) {
+            max-width: 35px;
+        }
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Logout
+// -----------------------------------------------------------------------------
+
+#nav-logout {
+    > .nav-link {
+        padding-left: 15px;
+        padding-right: 15px;
+        line-height: 30px;
+
+        @media (min-width: $bp-md) {
+            padding-left: 10px;
+            padding-right: 10px;
+            line-height: 50px;
+        }
+    }
+}

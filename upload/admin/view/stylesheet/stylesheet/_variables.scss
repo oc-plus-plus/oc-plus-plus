@@ -1,0 +1,93 @@
+// =============================================================================
+// Variables
+// =============================================================================
+
+// Typography
+$font-family-base:        'Open Sans', sans-serif;
+$font-import-url:         '//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,greek-ext,vietnamese';
+
+// Colors — Base
+$color-text:              #545454;
+$color-bg:                #f6f6f6;
+$color-white:             #FFFFFF;
+$color-black:             #000000;
+
+// Colors — Borders & Shadows
+$color-border:            #e5e5e5;
+$color-border-header:     #d8d8d8;
+$color-shadow-header:     #CCCCCC;
+$color-border-section:    #ddd;
+
+// Colors — Header & Nav
+$color-nav-link:          #6D6D6D;
+$color-nav-link-hover-bg: #EEEEEE;
+
+// Colors — Sidebar
+$color-sidebar-bg:        #242d37;
+$color-sidebar-nav-bg:    #19222E;
+$color-sidebar-nav-text:  #FFFFFF;
+
+// Colors — Menu (1st level)
+$color-menu-border:       #2b3642;
+$color-menu-link:         #b3cbdd;
+$color-menu-link-hover-bg:#1B2127;
+$color-menu-active:       #0b91d2;
+$color-menu-active-bg:    #171b21;
+$color-menu-sub-bg:       #293141;
+
+// Colors — Menu (2nd level)
+$color-menu-sub-link:     #7f8a9b;
+$color-menu-sub-hover:    #FFFFFF;
+$color-menu-sub-hover-bg: #242d37;
+$color-menu-sub-active:   #0b91d2;
+
+// Colors — Stats block
+$color-stats-bg:          #2e3a47;
+$color-stats-text:        #808b9c;
+$color-stats-item-text:   #9d9d9d;
+$color-stats-border:      #373737;
+
+// Colors — Page header
+$color-page-header-border:#e9e9e9;
+$color-page-header-text:  #4c4d5a;
+
+// Colors — Tiles
+$color-tile-primary:      #1b80c2;
+$color-tile-success:      #53b953;
+$color-tile-warning:      #f3aa41;
+$color-tile-danger:       #e45847;
+
+// Colors — Extensions / Marketplace
+$color-ext-text:          #4b525d;
+$color-ext-border:        #ddd;
+$color-ext-highlight:     #1b80c2;
+$color-ext-icon:          #10b4e9;
+$color-ext-check-green:   #7ebd38;
+$color-ext-check-blue:    #02afe9;
+$color-ext-sales-icon:    #7ec239;
+
+// Sizing — Sidebar
+$sidebar-width:           235px;
+
+// Sizing — Alert
+$alert-width-sm:          400px;
+$alert-width-lg:          600px;
+
+// Breakpoints
+$bp-md:                   992px;
+$bp-lg:                   960px;
+$bp-xl:                   1140px;
+$bp-xxl:                  1320px;
+$bp-tablet-max:           767px;
+$bp-desktop-max:          1199px;
+
+// Transitions
+$transition-base:         all 0.3s;
+$transition-slow:         all 1s;
+$transition-medium:       all ease 0.5s;
+
+// Z-indexes
+$z-alert:                 9999;
+$z-header:                1000;
+$z-datetimepicker:        9999;
+$z-jqvmap:                999;
