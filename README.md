@@ -197,6 +197,8 @@ After these changes, the store will be accessible via http://localhost and http:
 
 ### Profiling with XDebug
 
+You can perform detailed profiling using XDebug to analyze the performance of all subsystems and identify bottlenecks.
+
 > [!NOTE]
 >
 > **Analysis Tools**  
