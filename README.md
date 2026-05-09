@@ -196,29 +196,37 @@ If you prefer to use standard HTTP, you can disable SSL by modifying the followi
 After these changes, the store will be accessible via http://localhost and http://localhost/admin.
 
 ### Profiling with XDebug
-You can perform detailed profiling using XDebug to analyze the performance of all subsystems and identify bottlenecks. To enable this, follow these steps:
 
-1. **Enable XDebug Settings**: uncomment lines 2-6 in the configuration file `.docker/web/config/xdebug.ini`.
-2. **Rebuild Container**: run the following command:
-   ```bash
-   make down && make build && make up
-   ```
-3. **Browser Extension**: you will need a browser extension to trigger profiling (e.g., [Xdebug Helper](https://chromewebstore.google.com/detail/xdebug-helper-by-jetbrain/aoelhdemabeimdhedkidlnbkfhnhgnhm) or similar).
-4. **Log Location**: detailed profiling logs will be saved in the `.docker/log/xdebug` folder
-5. **Analysis Tools**: To analyze the generated logs, use specialized software such as:  
-   [PhpStorm](https://www.jetbrains.com/phpstorm/), [PHP Profiler for VS Code](https://marketplace.visualstudio.com/items?itemName=DEVSENSE.profiler-php-vscode), [KCachegrind](https://kcachegrind.github.io/html/Home.html), [WinCacheGrind](https://sourceforge.net/projects/wincachegrind/), or similar tools.
+> [!NOTE]
+>
+> **Analysis Tools**  
+> To analyze the generated logs, use specialized software such as:  
+> [PhpStorm](https://www.jetbrains.com/phpstorm/), [PHP Profiler for VS Code](https://marketplace.visualstudio.com/items?itemName=DEVSENSE.profiler-php-vscode), [KCachegrind](https://kcachegrind.github.io/html/Home.html), [WinCacheGrind](https://sourceforge.net/projects/wincachegrind/),  
+> or similar tools.
 
-#### Step-by-Step Example
-Assuming the preparation steps above are completed...
-1. Open the desired page in your browser (e.g., Homepage: https://localhost).
-2. Refresh the page 2–3 times to "warm up" the cache.
-3. In your **Xdebug Helper** extension, select the "**Profile**" mode.
-4. **Profiling**: refresh the page **only once**.
-5. In the extension, switch back to "**Disable**".
-6. The detailed profiling log will be available at:  
-   `.docker/log/xdebug/cachegrind.out.XX.gz`
+> [!IMPORTANT]
+>
+> **Don't leave XDebug running in profiling mode** all the time!  
+> it negatively affects performance and generates a lot of LOG files, cluttering up your disk.
 
-You can now open this file in your preferred analysis tool to inspect the performance data.
+1. **Enable XDebug**
+   - **uncomment all lines** in the configuration file `.docker/web/config/xdebug.ini`  
+   - **rebuild container**: run the following command:
+     ```bash
+     make down && make build && make up
+     ```
+2. Sequentially open in your browser all the necessary pages on which you want to analyze performance  
+   (e.g., Homepage: https://localhost).
+3. **Disable XDebug**
+	- **comment all lines** (by `;`) in the configuration file `.docker/web/config/xdebug.ini`
+	- **rebuild container**: run the following command:
+	  ```bash
+	  make down && make build && make up
+	  ```
+4. **Done**: the detailed profiling log will be available at:  
+   `.docker/log/xdebug/cachegrind.out.XX.gz`  
+   You can now open this file in your preferred analysis tool to inspect the performance data.
+
 
 ## Code Quality
 To maintain high code quality and prevent hidden regressions, we use **PHPStan** for static analysis
