@@ -56,41 +56,41 @@
  */
 
 function ocAutocomplete(options) {
-    const inputSelector = options.inputSelector;
-    const url = 'index.php?route=' + options.route + '&user_token=' + options.userToken;
-    const valueKey = options.valueKey;
-    const labelKey = options.labelKey;
-    const prependNone = (options.prependNone !== undefined) ? options.prependNone : false;
-    const onSelect = options.onSelect;
+	const inputSelector = options.inputSelector;
+	const url = 'index.php?route=' + options.route + '&user_token=' + options.userToken;
+	const valueKey = options.valueKey;
+	const labelKey = options.labelKey;
+	const prependNone = (options.prependNone !== undefined) ? options.prependNone : false;
+	const onSelect = options.onSelect;
 
-    $(inputSelector).autocomplete({
-        'source': function (request, response) {
-            $.ajax({
-                url: url + '&filter_name=' + encodeURIComponent(request),
-                dataType: 'json',
-                success: function (json) {
-                    if (prependNone !== false) {
-                        let noneLabel = (typeof prependNone === 'string') ? prependNone : '';
-                        let noneItem = {};
-                        noneItem[valueKey] = '0';
-                        noneItem[labelKey] = noneLabel;
-                        json.unshift(noneItem);
-                    }
+	$(inputSelector).autocomplete({
+		'source': function (request, response) {
+			$.ajax({
+				url: url + '&filter_' + labelKey + '=' + encodeURIComponent(request),
+				dataType: 'json',
+				success: function (json) {
+					if (prependNone !== false) {
+						let noneLabel = (typeof prependNone === 'string') ? prependNone : '';
+						let noneItem = {};
+						noneItem[valueKey] = '0';
+						noneItem[labelKey] = noneLabel;
+						json.unshift(noneItem);
+					}
 
-                    response($.map(json, function (item) {
-                        return {
-                            value: item[valueKey],
-                            label: item[labelKey]
-                        };
-                    }));
-                }
-            });
-        },
+					response($.map(json, function (item) {
+						return {
+							value: item[valueKey],
+							label: item[labelKey]
+						};
+					}));
+				}
+			});
+		},
 
-        'select': function (item) {
-            if (typeof onSelect === 'function') {
-                onSelect(item);
-            }
-        }
-    });
+		'select': function (item) {
+			if (typeof onSelect === 'function') {
+				onSelect(item);
+			}
+		}
+	});
 }

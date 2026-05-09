@@ -23,7 +23,8 @@
           <div class="card-body">
             <form id="form-filter">
               <div class="mb-3">
-                <label class="form-label">{{ entry_username }}</label> <input type="text" name="filter_username" value="{{ filter_username }}" placeholder="{{ entry_username }}" id="input-username" data-oc-target="autocomplete-username" class="form-control" autocomplete="off"/>
+                <label class="form-label">{{ entry_username }}</label>
+                <input type="text" name="filter_username" value="{{ filter_username }}" placeholder="{{ entry_username }}" id="input-username" data-oc-target="autocomplete-username" class="form-control" autocomplete="off"/>
                 <ul id="autocomplete-username" class="dropdown-menu"></ul>
               </div>
               <div class="mb-3">
@@ -53,7 +54,7 @@
                 <label for="input-ip" class="form-label">{{ entry_ip }}</label> <input type="text" name="filter_ip" value="{{ filter_ip }}" placeholder="{{ entry_ip }}" id="input-ip" class="form-control"/>
               </div>
               <div class="text-end">
-                <button type="button" id="button-filter" class="btn btn-light"><i class="fa-solid fa-filter"></i> {{ button_filter }}</button>
+                <button type="submit" class="btn btn-light"><i class="fa-solid fa-filter"></i> {{ button_filter }}</button>
                 <button type="reset" data-bs-toggle="tooltip" title="{{ button_reset }}" class="btn btn-outline-secondary"><i class="fa-solid fa-filter-circle-xmark"></i></button>
               </div>
             </form>
@@ -69,115 +70,68 @@
     </div>
   </div>
 </div>
-<script type="text/javascript"><!--
-$('#user').on('click', 'thead a, .pagination a', function(e) {
+<script type="text/javascript">
+  ocFilter({
+    formId: '#form-filter',
+    listId: '#user',
+    route: 'user/user',
+    userToken: '{{ user_token }}'
+  });
+
+  ocAutocomplete({
+    inputSelector: '#input-username',
+    route: 'user/user.autocomplete',
+    userToken: '{{ user_token }}',
+    valueKey: 'user_id',
+    labelKey: 'username',
+    onSelect: function (item) {
+      $('#input-username').val(decodeHTMLEntities(item.label));
+    }
+  });
+
+  $('#user').on('click', 'thead a, .pagination a', function (e) {
     e.preventDefault();
-
     $('#user').load(this.href);
-});
+  });
 
-$('#button-filter').on('click', function() {
-    url = '';
-
-    var filter_username = $('#input-username').val();
-
-    if (filter_username) {
-        url += '&filter_username=' + encodeURIComponent(filter_username);
-    }
-
-    var filter_name = $('#input-name').val();
-
-    if (filter_name) {
-        url += '&filter_name=' + encodeURIComponent(filter_name);
-    }
-
-    var filter_email = $('#input-email').val();
-
-    if (filter_email) {
-        url += '&filter_email=' + encodeURIComponent(filter_email);
-    }
-
-    var filter_user_group_id = $('#input-user-group').val();
-
-    if (filter_user_group_id !== '') {
-        url += '&filter_user_group_id=' + filter_user_group_id;
-    }
-
-    var filter_status = $('#input-status').val();
-
-    if (filter_status !== '') {
-        url += '&filter_status=' + filter_status;
-    }
-
-    var filter_ip = $('#input-ip').val();
-
-    if (filter_ip) {
-        url += '&filter_ip=' + encodeURIComponent(filter_ip);
-    }
-
-    window.history.pushState({}, null, 'index.php?route=user/user&user_token={{ user_token }}' + url);
-
-    $('#user').load('index.php?route=user/user.list&user_token={{ user_token }}' + url);
-});
-
-$('#input-username').autocomplete({
-    'source': function(request, response) {
-        $.ajax({
-            url: 'index.php?route=user/user.autocomplete&user_token={{ user_token }}&filter_username=' + encodeURIComponent(request),
-            dataType: 'json',
-            success: function(json) {
-                response($.map(json, function(item) {
-                    return {
-                        label: item['username'],
-                        value: item['user_id']
-                    }
-                }));
+  $('#input-name').autocomplete({
+    'source': function (request, response) {
+      $.ajax({
+        url: 'index.php?route=user/user.autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
+        dataType: 'json',
+        success: function (json) {
+          response($.map(json, function (item) {
+            return {
+              label: item['name'],
+              value: item['user_id']
             }
-        });
+          }));
+        }
+      });
     },
-    'select': function(item) {
-        $('#input-username').val(decodeHTMLEntities(item['label']));
+    'select': function (item) {
+      $('#input-name').val(decodeHTMLEntities(item['label']));
     }
-});
+  });
 
-$('#input-name').autocomplete({
-    'source': function(request, response) {
-        $.ajax({
-            url: 'index.php?route=user/user.autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
-            dataType: 'json',
-            success: function(json) {
-                response($.map(json, function(item) {
-                    return {
-                        label: item['name'],
-                        value: item['user_id']
-                    }
-                }));
+  $('#input-email').autocomplete({
+    'source': function (request, response) {
+      $.ajax({
+        url: 'index.php?route=user/user.autocomplete&user_token={{ user_token }}&filter_email=' + encodeURIComponent(request),
+        dataType: 'json',
+        success: function (json) {
+          response($.map(json, function (item) {
+            return {
+              label: item['email'],
+              value: item['user_id']
             }
-        });
+          }));
+        }
+      });
     },
-    'select': function(item) {
-        $('#input-name').val(decodeHTMLEntities(item['label']));
+    'select': function (item) {
+      $('#input-email').val(decodeHTMLEntities(item['label']));
     }
-});
-
-$('#input-email').autocomplete({
-    'source': function(request, response) {
-        $.ajax({
-            url: 'index.php?route=user/user.autocomplete&user_token={{ user_token }}&filter_email=' + encodeURIComponent(request),
-            dataType: 'json',
-            success: function(json) {
-                response($.map(json, function(item) {
-                    return {
-                        label: item['email'],
-                        value: item['user_id']
-                    }
-                }));
-            }
-        });
-    },
-    'select': function(item) {
-        $('#input-email').val(decodeHTMLEntities(item['label']));
-    }
-});
-//--></script>
+  });
+</script>
 {{ footer }}
