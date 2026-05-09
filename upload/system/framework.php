@@ -5,6 +5,7 @@ $autoloader->register('Opencart\\' . APPLICATION, DIR_APPLICATION);
 $autoloader->register('Opencart\Extension', DIR_EXTENSION);
 $autoloader->register('Opencart\System', DIR_SYSTEM);
 
+// use additional 3rd-party vendor autoloaders
 if (defined('DIR_STORAGE') && is_file(DIR_STORAGE . 'vendor/autoload.php')) {
 	require_once(DIR_STORAGE . 'vendor/autoload.php');
 }
@@ -121,8 +122,8 @@ $registry->set('request', $request);
 
 // Compatibility
 if (isset($request->get['route'])) {
+	$request->get['route'] = str_replace('%7C', '|', $request->get['route']);
 	$request->get['route'] = str_replace('|', '.', $request->get['route']);
-	$request->get['route'] = str_replace('%7C', '|', (string)$request->get['route']);
 }
 
 // Response
