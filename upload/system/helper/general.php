@@ -22,17 +22,18 @@ function oc_get_ip(): string {
 	];
 
 	foreach ($headers as $header) {
-		if (array_key_exists($header, $_SERVER)) {
-			$ip = $_SERVER[$header];
+		if (!array_key_exists($header, $_SERVER)) {
+			continue;
+		}
 
-			// This line might or might not be used.
-			$ip = trim(explode(',', $ip)[0]);
+		$ip = trim(explode(',', $_SERVER[$header])[0]);
 
+		if ($ip !== '' && filter_var($ip, FILTER_VALIDATE_IP) !== false) {
 			return $ip;
 		}
 	}
 
-	return $_SERVER['REMOTE_ADDR'];
+	return $_SERVER['REMOTE_ADDR'] ?? '';
 }
 
 // Sting functions

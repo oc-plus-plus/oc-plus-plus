@@ -305,12 +305,11 @@ class Cart {
 	/**
 	 * Add
 	 *
-	 * @param int          $product_id           primary key of the product record
-	 * @param int          $quantity
-	 * @param array<mixed> $option
-	 * @param int          $subscription_plan_id primary key of the subscription plan record
-	 * @param array        $override
-	 * @param float        $price
+	 * @param int                  $product_id           primary key of the product record
+	 * @param int                  $quantity
+	 * @param array<string, mixed> $option
+	 * @param int                  $subscription_plan_id primary key of the subscription plan record
+	 * @param array<string, mixed> $override
 	 *
 	 * @return void
 	 *
@@ -587,7 +586,7 @@ class Cart {
 	 *
 	 * $cart = $this->cart->hasMinimum();
 	 */
-	public function hasMinimum() {
+	public function hasMinimum(): bool {
 		foreach ($this->getProducts() as $product) {
 			if (!$product['minimum_status']) {
 				return false;
