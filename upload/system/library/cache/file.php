@@ -84,6 +84,25 @@ class File {
 	}
 
 	/**
+	 * Clear
+	 *
+	 * Clear all cache
+	 *
+	 * @return void
+	 */
+	public function clear(): void {
+		$files = glob(DIR_CACHE . 'cache.*');
+
+		if ($files) {
+			foreach ($files as $file) {
+				if (is_file($file)) {
+					@unlink($file);
+				}
+			}
+		}
+	}
+
+	/**
 	 * Destructor
 	 */
 	public function __destruct() {

@@ -65,8 +65,9 @@ class Developer extends \Opencart\System\Engine\Controller {
 		}
 
 		if (!$json) {
+			$this->cache->clear();
 			$this->cleanDirectory(DIR_CACHE);
-			$json['success'] = $this->language->get('text_systemcache_success');
+			$json['success'] = $this->language->get('text_cache_success');
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
@@ -74,7 +75,7 @@ class Developer extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
-	 * Theme
+	 * Clear image cache
 	 *
 	 * @return void
 	 */

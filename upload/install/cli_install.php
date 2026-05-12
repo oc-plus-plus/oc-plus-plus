@@ -433,8 +433,15 @@ class CliInstall extends \Opencart\System\Engine\Controller {
 		}
 
 		if ($option['db_ssl_ca']) {
-			$output .= 'define(\'DB_SSL_CA\', \'' . addslashes($option['db_ssl_ca']) . '\');' . "\n";
+			$output .= 'define(\'DB_SSL_CA\', \'' . addslashes($option['db_ssl_ca']) . '\');' . PHP_EOL . PHP_EOL;
 		}
+
+		$output .= "// Cache" . PHP_EOL;
+		$output .= "define('CACHE_ENGINE', 'file'); // apc, file, mem, memcached or redis" . PHP_EOL;
+		$output .= "//define('CACHE_HOSTNAME', 'unix:///home/user/.system/redis.sock');" . PHP_EOL;
+		$output .= "//define('CACHE_PORT', 6379);" . PHP_EOL;
+		$output .= "//define('CACHE_PREFIX', 'oc_cache_');" . PHP_EOL;
+		$output .= "//define('CACHE_PASSWORD', 'secret');" . PHP_EOL;
 
 		$file = fopen(DIR_OPENCART . 'config.php', 'w');
 
@@ -486,8 +493,15 @@ class CliInstall extends \Opencart\System\Engine\Controller {
 		}
 
 		if ($option['db_ssl_ca']) {
-			$output .= 'define(\'DB_SSL_CA\', \'' . addslashes($option['db_ssl_ca']) . '\');' . "\n";
+			$output .= 'define(\'DB_SSL_CA\', \'' . addslashes($option['db_ssl_ca']) . '\');' . PHP_EOL . PHP_EOL;
 		}
+
+		$output .= "// Cache" . PHP_EOL;
+		$output .= "define('CACHE_ENGINE', 'file'); // apc, file, mem, memcached or redis" . PHP_EOL;
+		$output .= "//define('CACHE_HOSTNAME', 'unix:///home/user/.system/redis.sock');" . PHP_EOL;
+		$output .= "//define('CACHE_PORT', 6379);" . PHP_EOL;
+		$output .= "//define('CACHE_PREFIX', 'oc_cache_');" . PHP_EOL;
+		$output .= "//define('CACHE_PASSWORD', 'secret');" . PHP_EOL . PHP_EOL;
 
 		$output .= '// OpenCart API' . "\n";
 		$output .= 'define(\'OPENCART_SERVER\', \'https://www.opencart.com/\');';
