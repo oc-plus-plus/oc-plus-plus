@@ -14,7 +14,7 @@ class Basic extends \Opencart\System\Engine\Controller {
 	public function index(): string {
 		$this->load->language('extension/opencart/captcha/basic');
 
-		$data['route'] = (string)$this->request->get['route'];
+		$data['route'] = isset($this->request->get['route']) ? (string)$this->request->get['route'] : '';
 
 		$this->session->data['captcha'] = substr(oc_token(100), mt_rand(0, 94), 6);
 
@@ -70,6 +70,7 @@ class Basic extends \Opencart\System\Engine\Controller {
 
 		imagejpeg($image);
 
+		unset($image);
 		exit();
 	}
 }
