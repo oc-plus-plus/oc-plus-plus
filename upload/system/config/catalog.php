@@ -14,11 +14,6 @@ $_['db_port']            = DB_PORT;
 //$_['db_ssl_cert']        = DB_SSL_CERT;
 //$_['db_ssl_ca']          = DB_SSL_CA;
 
-// Cache
-if (defined('CACHE_ENGINE')) {
-	$_['cache_engine'] = CACHE_ENGINE;
-}
-
 // Session
 $_['session_autostart']  = false;
 $_['session_engine']     = 'db'; // db or file
