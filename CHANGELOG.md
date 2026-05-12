@@ -25,9 +25,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 - Nothing
 
 ### Fixed
+- [#15367](https://github.com/opencart/opencart/pull/15367) - Added fixes for integrating various caching engines
 - [#15404](https://github.com/opencart/opencart/pull/15404) - Catalog and Extensions Fixed
 - [#15409](https://github.com/opencart/opencart/pull/15409) - A set of improvements and fixes from @plemondev (partially used)
 - [#15412](https://github.com/opencart/opencart/pull/15412) - Missing user's name in activity on checkout register
+- [#15415](https://github.com/opencart/opencart/pull/15415) - Add variant to cart adding master instead
 
 ### Security
 - Nothing
