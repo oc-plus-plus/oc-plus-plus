@@ -11,6 +11,7 @@
   ],
   "homepage": "https://www.opencart.com/",
   "support": {
+	"source": "https://github.com/opencart/opencart/releases",
     "issues": "https://github.com/opencart/opencart/issues",
     "forum": "https://forum.opencart.com/",
     "wiki": "https://github.com/opencart/opencart/wiki",
@@ -18,7 +19,7 @@
   },
   "config": {
     "optimize-autoloader": true,
-    "vendor-dir": "www/system/storage/vendor/",
+    "vendor-dir": "upload/system/storage/vendor/",
     "platform": {
       "php": "8.1"
     }

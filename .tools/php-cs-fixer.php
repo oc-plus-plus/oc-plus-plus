@@ -5,7 +5,7 @@ $config = new PhpCsFixer\Config();
 return $config
 	->setCacheFile(__DIR__.'/.cache/php-cs-fixer.cache')
 	->setFinder(PhpCsFixer\Finder::create()
-        ->in(__DIR__ . '/../www/')
+        ->in(__DIR__ . '/../upload/')
         ->exclude(['system/storage/',]))
     ->setRiskyAllowed(true)
     ->setIndent("\t")

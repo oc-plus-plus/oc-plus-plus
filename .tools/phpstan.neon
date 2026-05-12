@@ -6,11 +6,11 @@ services:
 parameters:
     level: 1
     paths:
-        - ../www/
+        - ../upload/
     excludePaths:
         - ./phpstan/
-        - ../www/system/storage/vendor/
-        - ../www/system/storage/cache/
+        - ../upload/system/storage/vendor/
+        - ../upload/system/storage/cache/
     tmpDir: .cache
     ignoreErrors:
         - '#^Constant [A-Z_]+ not found\.$#'

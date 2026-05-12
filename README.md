@@ -206,7 +206,7 @@ You can perform detailed profiling using XDebug to analyze the performance of al
 > [PhpStorm](https://www.jetbrains.com/phpstorm/), [PHP Profiler for VS Code](https://marketplace.visualstudio.com/items?itemName=DEVSENSE.profiler-php-vscode), [KCachegrind](https://kcachegrind.github.io/html/Home.html), [WinCacheGrind](https://sourceforge.net/projects/wincachegrind/),  
 > or similar tools.
 
-> [!IMPORTANT]
+> [!CAUTION]
 >
 > **Don't leave XDebug running in profiling mode** all the time!  
 > it negatively affects performance and generates a lot of LOG files, cluttering up your disk.
