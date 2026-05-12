@@ -323,8 +323,20 @@ class Product extends \Opencart\System\Engine\Controller {
 
 			foreach ($product_discounts as $product_discount) {
 				if (($product_discount['date_start'] == '0000-00-00' || strtotime($product_discount['date_start']) < time()) && ($product_discount['date_end'] == '0000-00-00' || strtotime($product_discount['date_end']) > time())) {
-					$special = $this->currency->format($product_discount['price'], $this->config->get('config_currency'));
+					switch ($product_discount['type']) {
+						case 'P':
+							$price = $result['price'] - ($result['price'] * ($product_discount['price'] / 100));
+							break;
+						case 'S':
+							$price = $result['price'] - $product_discount['price'];
+							break;
+						case 'F':
+						default:
+							$price = $product_discount['price'];
+							break;
+					}
 
+					$special = $this->currency->format($price, $this->config->get('config_currency'));
 					break;
 				}
 			}
@@ -1311,7 +1323,7 @@ class Product extends \Opencart\System\Engine\Controller {
 			$this->load->model('catalog/product');
 
 			foreach ($selected as $product_id) {
-				$this->model_catalog_product->deleteProduct($product_id);
+				$this->model_catalog_product->deleteProduct((int)$product_id);
 			}
 
 			$json['success'] = $this->language->get('text_success');
