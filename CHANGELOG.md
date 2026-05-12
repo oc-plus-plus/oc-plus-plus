@@ -12,39 +12,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 
 ## [Unreleased]
 
-#### Added
+### Added
 - Nothing
 
-#### Changed
+### Changed
 - Nothing
 
-#### Deprecated
+### Deprecated
 - Nothing
 
-#### Removed
+### Removed
 - Nothing
 
-#### Fixed
-- Nothing
+### Fixed
+- [#15404](https://github.com/opencart/opencart/pull/15404) - Catalog and Extensions Fixed
+- [#15409](https://github.com/opencart/opencart/pull/15409) - A set of improvements and fixes from @plemondev (partially used)
+- [#15412](https://github.com/opencart/opencart/pull/15412) - Missing user's name in activity on checkout register
 
-#### Security
+### Security
 - Nothing
 
 
 ## [0.2.0 beta] - 2026-05-03
 
-#### Added
+### Added
 - Remember the last directory in the file manager.
 
-#### Changed
+### Changed
 - Admin: SEO tab merged with General tab.
 - Admin: further improvements to the filter system.
 - Refactoring
 
-#### Removed
+### Removed
 - Legacy `cron.php`.
 
-#### Fixed
+### Fixed
 - [#15381](https://github.com/opencart/opencart/pull/15381) - Fix category filter model.
 - [#15354](https://github.com/opencart/opencart/pull/15354) - Fixed the OCMOD functionality.
 - [#15333](https://github.com/opencart/opencart/pull/15333), [#15397](https://github.com/opencart/opencart/pull/15397) - A set of fixes from @plemondev (partially used)
