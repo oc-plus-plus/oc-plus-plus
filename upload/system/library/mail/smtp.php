@@ -189,13 +189,6 @@ class Smtp {
 
 				$this->handleReply($handle, 220, 'Error: STARTTLS not accepted from server!');
 
-				$context = stream_context_get_default();
-
-				stream_context_set_option($context, 'ssl', 'verify_peer', true);
-				stream_context_set_option($context, 'ssl', 'verify_peer_name', true);
-				stream_context_set_option($context, 'ssl', 'allow_self_signed', false);
-				stream_context_set_option($context, 'ssl', 'peer_name', $hostname);
-
 				if (stream_socket_enable_crypto($handle, true, STREAM_CRYPTO_METHOD_TLS_CLIENT) !== true) {
 					throw new \Exception('Error: TLS could not be established!');
 				}
