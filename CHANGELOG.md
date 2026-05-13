@@ -32,6 +32,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 - [#15415](https://github.com/opencart/opencart/pull/15415) - Add variant to cart adding master instead.
 - [#15418](https://github.com/opencart/opencart/pull/15418) - Keep variant's code override on master update.
 - [#15420](https://github.com/opencart/opencart/pull/15420) - Fix admin product list wrong discount value
+- [#15428](https://github.com/opencart/opencart/pull/15428) - Multiple issues in checkout's register component
+
 
 ### Security
 - Nothing

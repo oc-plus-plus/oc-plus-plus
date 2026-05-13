@@ -914,6 +914,12 @@ class Order extends \Opencart\System\Engine\Controller {
 			$data['shipping_custom_field'] = [];
 		}
 
+		if ($data['payment_country_id'] == $data['shipping_country_id']) {
+			$data['shipping_zones'] = $data['payment_zones'];
+		} else {
+			$data['shipping_zones'] = $this->model_localisation_zone->getZonesByCountryId($data['shipping_country_id']);
+		}
+
 		// Shipping Method
 		if (!empty($order_info['shipping_method'])) {
 			$data['shipping_method_name'] = $order_info['shipping_method']['name'];
