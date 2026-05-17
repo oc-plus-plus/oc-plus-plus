@@ -5,12 +5,69 @@ Detailed changes can see in the [repository log](https://github.com/oc-plus-plus
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 
+## Note regarding sources
+- Entries accompanied by a reference link indicate code borrowed or adapted from external sources.  
+- Entries without a reference link were developed exclusively within [this repository](https://github.com/oc-plus-plus/oc-plus-plus).
 
-## 4.1.1.0 - Unreleased
+
+## [Unreleased]
 
 ### Added
-- [#14857](https://github.com/opencart/opencart/pull/14857) - Add manufacturer filter
+- Nothing
+
+### Changed
+- Nothing
+
+### Deprecated
+- Nothing
+
+### Removed
+- Nothing
+
+### Fixed
+- [#15367](https://github.com/opencart/opencart/pull/15367) - Added fixes for integrating various caching engines.
+- [#15404](https://github.com/opencart/opencart/pull/15404) - Catalog and Extensions Fixed.
+- [#15409](https://github.com/opencart/opencart/pull/15409) - A set of improvements and fixes from @plemondev (partially used).
+- [#15412](https://github.com/opencart/opencart/pull/15412) - Missing user's name in activity on checkout register.
+- [#15415](https://github.com/opencart/opencart/pull/15415) - Add variant to cart adding master instead.
+- [#15418](https://github.com/opencart/opencart/pull/15418) - Keep variant's code override on master update.
+- [#15420](https://github.com/opencart/opencart/pull/15420) - Fix admin product list wrong discount value
+- [#15428](https://github.com/opencart/opencart/pull/15428) - Multiple issues in checkout's register component
+- [#15436](https://github.com/opencart/opencart/pull/15436) - Keep order's status on admin update
+- [#15447](https://github.com/opencart/opencart/pull/15447) - Fix install open_basedir validation
+
+
+### Security
+- Nothing
+
+
+## [0.2.0 beta] - 2026-05-03
+
+### Added
 - Remember the last directory in the file manager.
+
+### Changed
+- Admin: SEO tab merged with General tab.
+- Admin: further improvements to the filter system.
+- Refactoring
+
+### Removed
+- Legacy `cron.php`.
+
+### Fixed
+- [#15381](https://github.com/opencart/opencart/pull/15381) - Fix category filter model.
+- [#15354](https://github.com/opencart/opencart/pull/15354) - Fixed the OCMOD functionality.
+- [#15333](https://github.com/opencart/opencart/pull/15333), [#15397](https://github.com/opencart/opencart/pull/15397) - A set of fixes from @plemondev (partially used)
+- [#15396](https://github.com/opencart/opencart/pull/15396) - Voiding the order here should only happen if it has already been confirmed.
+- _(introduced in Beta 1)_ Some pop-up messages contained HTML code instead of links.
+- When unloading extensions, archives with errors were not deleted, but remained in the `/marketplace` folder.
+- Various minor fixes...
+
+
+## [0.1.0 beta] - 2026-04-19
+
+### Added
+- [#14857](https://github.com/opencart/opencart/pull/14857), [#14858](https://github.com/opencart/opencart/pull/14858), [#14859](https://github.com/opencart/opencart/pull/14859) - Add manufacturer filter
 - Emulation of `GLOB_BRACE` for Alpine/musl environments:  
   introduced a custom `oc_glob()` helper function to emulate native glob functionality.
 - The `date_added` field has been added to the product form.
@@ -34,7 +91,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 - Improved session handler.
 - Improved cache cleanup.
 - Improved .css refresh.
-- Admin: SEO tab merged with General tab.
 - `admin/view/javascript/common.js` fixed and improved _(revision using Claude LLM)_.
 - `catalog/view/javascript/common.js` fixed and improved _(revision using Claude LLM)_.
 - Bootstrap CSS and JS libraries updated to version `5.3.8`
@@ -44,32 +100,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 - Monolithic `stylesheet.css` has been converted to a modular SCSS structure
 - `Opencart\System\Library::addScript()` - The list of scripts can be passed as an array
 - Reworked Autocomplete for the Admin panel:
-	- The code has been reworked.
-	- JS is separated into an include file that can be reused.
-	- Removed a large amount of duplicate and outdated code.
+  - The code has been reworked.
+  - JS is separated into an include file that can be reused.
+  - Removed a large amount of duplicate and outdated code.
 - Reworked Filters for the Admin panel:
-	- The code has been reworked.
-	- JS is separated into an include file that can be reused.
-	- Clean URLs are generated, without empty selectors.
-	- Removed a large amount of duplicate and outdated code.
-- Refactoring
+  - The code has been reworked.
+  - JS is separated into an include file that can be reused.
+  - Clean URLs are generated, without empty selectors.
+  - Removed a large amount of duplicate and outdated code.
 
 ### Removed
 - Removed a large amount of legacy and duplicate code
-- Legacy `cron.php`.
 - Deprecated libraries (replaced with current versions):
-	- `Flot` (replaced with `Chart.js`).
-	- `jQuery Vector Map` (replaced with `Jsvectormap`)
+  - `Flot` (replaced with `Chart.js`).
+  - `jQuery Vector Map` (replaced with `Jsvectormap`)
 - Deprecated PHP functions:
-	- `imagedestroy`
-	- `curl_close`
+  - `imagedestroy`
+  - `curl_close`
 - As unused:
-	- Legacy vendor-related functionality
-	- `upload/system/helper/filter.php`
-	- `aws/aws-sdk-php` package
-	- `bootstrap-icons`
-	- `nunjucks-slim.js` library
-	- `jquery-ui`
+  - Legacy vendor-related functionality
+  - `upload/system/helper/filter.php`
+  - `aws/aws-sdk-php` package
+  - `bootstrap-icons`
+  - `nunjucks-slim.js` library
+  - `jquery-ui`
 
 ### Fixed
 - [#14438](https://github.com/opencart/opencart/issues/14438) - WYSIWYG misconfiguration in ADMIN page for product edit.
@@ -101,19 +155,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 - [#15185](https://github.com/opencart/opencart/pull/15185) - Fix viewing embedded Youtube video.
 - [#15363](https://github.com/opencart/opencart/pull/15363) - Fixed Category Filter
 - [#forum](https://forum.opencart.com/viewtopic.php?t=235946#p880856) - Error when deleting a product from Wishlist.
-- [#15333](https://github.com/opencart/opencart/pull/15333), [#15397](https://github.com/opencart/opencart/pull/15397) - A set of fixes from @plemondev (partially used)
-- [#15354](https://github.com/opencart/opencart/pull/15354) - Fixed the OCMOD functionality.
-- [#15367](https://github.com/opencart/opencart/pull/15367) - Added fixes for integrating various caching engines.
-- [#15381](https://github.com/opencart/opencart/pull/15381) - Fix category filter model.
-- [#15396](https://github.com/opencart/opencart/pull/15396) - Voiding the order here should only happen if it has already been confirmed.
-- [#15404](https://github.com/opencart/opencart/pull/15404) - Catalog and Extensions Fixed.
-- [#15409](https://github.com/opencart/opencart/pull/15409) - A set of improvements and fixes from @plemondev (partially used).
-- [#15412](https://github.com/opencart/opencart/pull/15412) - Missing user's name in activity on checkout register.
-- [#15415](https://github.com/opencart/opencart/pull/15415) - Add variant to cart adding master instead.
-- [#15418](https://github.com/opencart/opencart/pull/15418) - Keep variant's code override on master update.
-- [#15420](https://github.com/opencart/opencart/pull/15420) - Fix admin product list wrong discount value
-- [#15428](https://github.com/opencart/opencart/pull/15428) - Multiple issues in checkout's register component
-- When unloading extensions, archives with errors were not deleted, but remained in the `/marketplace` folder.
 - The zone name was not displayed in the list
 - The password recovery link in the email was visible as plain text
 - Undefined array key "author" in catalog/controller/product/review.php on line 161
@@ -130,12 +171,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 - Display of sales statistics on the Dashboard Map
 - SQL error on `admin/sale/subscription` filter
 - SQL error on `admin/sale/returns` filter
-- Various minor fixes...
 - **Green Build** - Fixed various static analysis errors and comments
-
-### Security
-- Nothing
 
 
 ## Soure Code
-Based on [OpenCart 4.1.0.3](https://github.com/opencart/opencart/releases/tag/4.1.0.3) as the foundation for all subsequent development within this branch.
+Based on [OpenCart 4.1.0.3](https://github.com/opencart/opencart/releases/tag/4.1.0.3),
+with the original source code imported as the foundation for all subsequent development within this project.
+
+[Unreleased]: https://github.com/oc-plus-plus/oc-plus-plus/compare/0.1.0...HEAD
+[0.2.0 beta]: https://github.com/oc-plus-plus/oc-plus-plus/releases/tag/0.2.0
+[0.1.0 beta]: https://github.com/oc-plus-plus/oc-plus-plus/releases/tag/0.1.0

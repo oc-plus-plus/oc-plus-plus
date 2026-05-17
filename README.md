@@ -1,15 +1,18 @@
-# OpenCart
+# OC++
 
-[![GitHub License](https://img.shields.io/github/license/oc-plus-plus/opencart?color=green)](https://github.com/oc-plus-plus/opencart/blob/main/LICENSE)
-[![coding standards](https://github.com/oc-plus-plus/opencart/actions/workflows/coding-standards.yml/badge.svg)](https://github.com/oc-plus-plus/opencart/actions/workflows/coding-standards.yml)
-[![static analysis](https://github.com/oc-plus-plus/opencart/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/oc-plus-plus/opencart/actions/workflows/static-analysis.yml)
+[![GitHub License](https://img.shields.io/github/license/oc-plus-plus/oc-plus-plus?color=green)](https://github.com/oc-plus-plus/oc-plus-plus/blob/main/LICENSE)
+[![coding standards](https://github.com/oc-plus-plus/oc-plus-plus/actions/workflows/coding-standards.yml/badge.svg)](https://github.com/oc-plus-plus/oc-plus-plus/actions/workflows/coding-standards.yml)
+[![static analysis](https://github.com/oc-plus-plus/oc-plus-plus/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/oc-plus-plus/oc-plus-plus/actions/workflows/static-analysis.yml)
+[![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/oc-plus-plus/oc-plus-plus)](https://github.com/oc-plus-plus/oc-plus-plus/issues)
 
 
 ## Contents
 - [About](#about)
+- [Compatibility Guarantee](#compatibility-guarantee)
 - [System Requirements](#system-requirements)
 - [Installation](#installation)
-- [Upgrade](#upgrade) 
+- [Upgrade](#upgrade)
+- [Uninstallation: How to Revert to OpenCart 4.1.0.3](#uninstallation-how-to-revert-to-opencart-4103)
 - [Local Development with Docker](#local-development-with-docker)
   - [Using Make](#using-make)
   - [Using Docker CLI](#or-using-docker-cli)
@@ -23,14 +26,42 @@
 
 
 ## About
-**OpenCart** is a free open source ecommerce platform for online merchants. OpenCart provides a professional and reliable foundation to build a successful online store.
+This project is a collection of improvements and fixes, based on [OpenCart 4.1.0.3].  
+The [CHANGELOG] file contains a comprehensive list of all modifications, including direct links to original sources, pull requests, and issue reports.
+
+### Why this repository exists
+To provide a stable, production-ready environment by backporting essential fixes while strictly avoiding the breaking changes found in the official development branches.
+
+### Why the "++" in the name?
+The OC++ designation signifies that this repository is a "plus-plus" edition of the original OpenCart 4.1.0.3 release:
+- The first + represents fixes for bugs and issues identified after the official 4.1.0.3 release.
+- The second + stands for additional enhancements and optimizations that strictly maintain full backward compatibility.
+
+This ensures a robust, production-ready core that remains a drop-in replacement for any 4.1.0.3-compatible environment.
+
+## Compatibility Guarantee
+This project are strictly developed to maintain **full backward compatibility with [OpenCart 4.1.0.3]**.
+All included fixes and improvements have been extensively tested on live production sites.
+They are fully compatible with major frameworks and heavy-duty extensions,
+including **[Journal 3.2.8.7](https://themeforest.net/item/journal-advanced-opencart-theme/4260361)**
+and **[MazaEngine 1.13.10](https://themeforest.net/item/poco-advanced-opencart-theme/29855890)**.
+
+Most importantly, the `error.log` on these production environments has remained clean for a long period, confirming the stability and reliability of this build.
+
+> Of course, if errors appear, they will be fixed if possible :)
+
+### Production Example
+For a real-world example in action, you can visit small multilanguage website: https://isoap.ge
+- Core: **OC++** from this repository.
+- Framework: Running flawlessly on Journal v.3.2.9.
+- Stability: Zero errors in the logs.
 
 
 ## System Requirements
 - **Web Server**: Apache 2.x.x.  
   While operation on Nginx + PHP-FPM is theoretically possible, it has not been tested yet.
 - **Database Server**: Current versions of MariaDB or MySQL.  
-  We have not yet tested with other database systems, and compatibility is not guaranteed.
+   OC++ has not been tested with other database systems, and compatibility is not guaranteed.
 - **PHP**: 8.1 – 8.5 _(PHP 8.4 is recommended)_.
 - **PHP Settings**:
   - `max_execution_time` = 150 
@@ -46,7 +77,7 @@
    - Create a new empty database.
    - Assign (or create) a database user with full privileges (CREATE, DROP, etc.) for this database.
    - Note down your database credentials: Hostname (or IP), Username, Password, and Database Name.
-3. **Upload Files**: Extract the downloaded `link_to_full_installation_archive` archive into the root directory of your virtual web host (the folder accessible via the Internet at your domain address).
+3. **Upload Files**: Extract the downloaded [oc.0.2.0.zip](https://github.com/oc-plus-plus/oc-plus-plus/releases/download/0.2.0/oc.0.2.0.zip) archive into the root directory of your virtual web host (the folder accessible via the Internet at your domain address).
 4. **Run Installer**: Open your web browser and navigate to https://your-domain.com.
 5. **Follow Instructions**: The web installer will launch automatically; follow the on-screen steps to complete the setup.
 6. **Post-Installation**: Once the installation is finished, manually **delete the /install folder** for security reasons.
@@ -58,7 +89,7 @@
 >
 > ### ATTENTION! Please read carefully before proceeding with the upgrade!
 
-1. **Version Compatibility**: upgrade package is designed **strictly for OpenCart 4.1.0.3**.
+1. **Version Compatibility**: This upgrade package is designed **strictly for OpenCart 4.1.0.3** or **OC++**.
 2. **Unsupported Versions**: upgrade package is incompatible with any other versions of OpenCart, including the official `master` branch or any other `4.x.x.x` releases.
 3. **Pre-requisite**: If you are running an older version of OpenCart, you must first upgrade to version 4.1.0.3 before applying this upgrade package.
 4. **BETA Software Warning**: This is a BETA release. While it has been tested on live stores, bugs may still exist.
@@ -76,12 +107,12 @@
 
 ### Quick Upgrade Guide
 
-1. **Extract Core Files**: Unpack the `link_to_upgrade_archive` archive directly into your
+1. **Extract Core Files**: Unpack the [update-opencart-4.1.0.3-oc.0.2.0.zip](https://github.com/oc-plus-plus/oc-plus-plus/releases/download/0.2.0/update-opencart-4.1.0.3-oc.0.2.0.zip) archive directly into your
    web host's root directory, overwriting all existing OpenCart 4.1.0.3 files.
 2. **Handle Storage/Vendor Files**: Since OpenCart 4 requires moving the `/system/storage` folder after the
    initial installation, the updated vendor libraries are provided as a separate part of the package.
 3. **Update Vendor Directory**: Locate your current `/storage` folder (wherever you moved it during setup).
-   Extract the contents of the `link_to_upgrade_vendor_archive` update package into this folder,
+   Extract the contents of the [update-vendor-oc-plus-plus.0.1.0.zip](https://github.com/oc-plus-plus/oc-plus-plus/releases/download/0.1.0/update-vendor-oc-plus-plus.0.1.0.zip) update package into this folder,
    ensuring all files within the existing `/vendor` directory are overwritten.
 4. **Clear Caches**: Log in to your Admin Panel. Go to Dashboard -> Developer Settings
    (the gear icon in the top right corner) and refresh/clear: System Cache, Image Cache, and SASS.
@@ -91,6 +122,13 @@
 **Note on Database**: The database structure remains unchanged and is fully compatible with OpenCart 4.1.0.3. No update scripts are required—simply replace the files, and you are ready to go.
 
 **Troubleshooting**: If critical issues occur (e.g., the site becomes inaccessible) and you cannot identify the cause, restore your site using the backup you created before starting the upgrade.
+
+
+## Uninstallation: How to Revert to OpenCart 4.1.0.3
+**OC++ does not make any changes to the database structure**.  
+Because of this, reverting back to stock OpenCart 4.1.0.3 is entirely risk-free and straightforward:
+simply replace all the files in your website's root directory with the files from the official OpenCart 4.1.0.3
+distribution, and you are good to go.
 
 
 ## Local Development with Docker
@@ -186,7 +224,7 @@ You can perform detailed profiling using XDebug to analyze the performance of al
 > [PhpStorm](https://www.jetbrains.com/phpstorm/), [PHP Profiler for VS Code](https://marketplace.visualstudio.com/items?itemName=DEVSENSE.profiler-php-vscode), [KCachegrind](https://kcachegrind.github.io/html/Home.html), [WinCacheGrind](https://sourceforge.net/projects/wincachegrind/),  
 > or similar tools.
 
-> [!IMPORTANT]
+> [!CAUTION]
 >
 > **Don't leave XDebug running in profiling mode** all the time!  
 > it negatively affects performance and generates a lot of LOG files, cluttering up your disk.
@@ -250,5 +288,5 @@ Modifications without a specific link were developed within this repository.
 
 
 [OpenCart 4.1.0.3]: https://github.com/opencart/opencart/releases/tag/4.1.0.3
-[CHANGELOG]: https://github.com/oc-plus-plus/oc-plus-plus/blob/main/CHANGELOG.md
-[GNU General Public License v.3]: https://github.com/opencart-lts/oc4/blob/main/LICENSE
+[CHANGELOG]: https://github.com/oc-plus-plus/oc-plus-plus/blob/opencart/CHANGELOG.md
+[GNU General Public License v.3]: https://github.com/oc-plus-plus/oc-plus-plus/blob/opencart/LICENSE
